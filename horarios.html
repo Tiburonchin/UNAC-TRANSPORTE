@@ -1,127 +1,79 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horarios - Movilidad UNAC</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="bg-light">
-    <nav class="navbar dark-nav">
-        <div class="logo">
-            <img src="logo_unac.png" alt="UNAC" class="unac-img"> <div>
-                UNIVERSIDAD NACIONAL DEL CALLAO<br>
-                <span>MOVILIDAD UNIVERSITARIA</span>
-            </div>
-        </div>
-        <div class="menu">
-            <a href="index.html">Inicio</a>
-            <a href="horarios.html" class="active">Horarios</a>
-            <a href="#">Rutas</a>
-            <a href="#">Noticias</a>
-            <a href="#">Consultas</a>
-        </div>
-    </nav>
+<div class="btns" style="justify-content: center; margin-bottom: 30px;">
+    <button id="btn-ida" class="btn-fill" onclick="cambiarVista('ida')">➔ Ventanilla → UNAC</button>
+    <button id="btn-line" class="btn-line" onclick="cambiarVista('vuelta')" style="cursor: pointer;">← UNAC → Ventanilla</button>
+</div>
 
-    <main class="container-schedule">
-        <p class="top-tag">PLANIFICA TU VIAJE</p>
-        <h1 class="main-title">Horarios de la Ruta Ventanilla</h1>
-        <p class="main-desc">Consulta los horarios actualizados del servicio de transporte universitario para el semestre 2026-I. Los horarios pueden variar en días festivos.</p>
+<div id="tabla-ida" class="table-container">
+    <div style="background: #1e293b; padding: 15px; font-weight: bold;">
+        🚌 Servicio: Ventanilla → Campus UNAC Bellavista
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>HORA DE SALIDA</th>
+                <th>PUNTO DE PARTIDA</th>
+                <th>DESTINO</th>
+                <th>TIPO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>05:15 AM</strong></td>
+                <td>Sede UNAC</td>
+                <td>Campus UNAC – Bellavista</td>
+                <td><span style="color: #22c55e;">Regular</span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
-        <div class="route-switch">
-            <button id="btn-ida" class="switch-btn active" onclick="mostrarRuta('ida')">
-                ➔ Ventanilla → UNAC
-            </button>
-            <button id="btn-vuelta" class="switch-btn" onclick="mostrarRuta('vuelta')">
-                ← UNAC → Ventanilla
-            </button>
-        </div>
+<div id="tabla-vuelta" class="table-container" style="display: none;">
+    <div style="background: #1e293b; padding: 15px; font-weight: bold;">
+        🚌 Servicio: Campus UNAC Bellavista → Ventanilla
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>HORA DE SALIDA</th>
+                <th>PUNTO DE PARTIDA</th>
+                <th>DESTINO</th>
+                <th>TIPO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>06:00 PM</strong></td>
+                <td>Campus UNAC – Bellavista</td>
+                <td>Plaza Principal Ventanilla</td>
+                <td><span style="color: #22c55e;">Regular</span></td>
+            </tr>
+            <tr>
+                <td><strong>02:30 PM</strong></td>
+                <td>Campus UNAC – Bellavista</td>
+                <td>Plaza Principal Ventanilla</td>
+                <td><span style="color: #ef4444;">Previo Comunicado</span></td>
+            </tr>
+            <tr>
+                <td><strong>10:15 PM</strong></td>
+                <td>Campus UNAC – Bellavista</td>
+                <td>Plaza Principal Ventanilla</td>
+                <td><span style="color: #ef4444;">Previo Comunicado</span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
-        <div id="tabla-ida" class="table-card">
-            <div class="card-header">
-                <span>🚌 Servicio: Ventanilla → Campus UNAC Bellavista</span>
-            </div>
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>HORA DE SALIDA</th>
-                            <th>PUNTO DE PARTIDA</th>
-                            <th>DESTINO</th>
-                            <th>DÍAS</th>
-                            <th>TIPO</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="time-cell">05:15 AM</td>
-                            <td>Sede UNAC</td>
-                            <td>Campus UNAC – Bellavista</td>
-                            <td>Lunes a Viernes</td>
-                            <td><span class="badge-reg">Regular</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div id="tabla-vuelta" class="table-card" style="display:none;">
-            <div class="card-header">
-                <span>🚌 Servicio: Campus UNAC Bellavista → Ventanilla</span>
-            </div>
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>HORA DE SALIDA</th>
-                            <th>PUNTO DE PARTIDA</th>
-                            <th>DESTINO</th>
-                            <th>DÍAS</th>
-                            <th>TIPO</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="time-cell">06:00 PM</td>
-                            <td>Campus UNAC – Bellavista</td>
-                            <td>Plaza Principal de Ventanilla</td>
-                            <td>Lunes a Viernes</td>
-                            <td><span class="badge-reg">Regular</span></td>
-                        </tr>
-                        <tr>
-                            <td class="time-cell">02:30 PM</td>
-                            <td>Campus UNAC – Bellavista</td>
-                            <td>Plaza Principal de Ventanilla</td>
-                            <td>Lunes a Viernes</td>
-                            <td><span class="badge-warn">Previo Comunicado</span></td>
-                        </tr>
-                        <tr>
-                            <td class="time-cell">10:15 PM</td>
-                            <td>Campus UNAC – Bellavista</td>
-                            <td>Plaza Principal de Ventanilla</td>
-                            <td>Lunes a Viernes</td>
-                            <td><span class="badge-warn">Previo Comunicado</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="info-alert">
-            <strong>Importante:</strong> Los horarios pueden modificarse en semanas de exámenes, feriados o por disposición institucional. Sigue nuestras actualizaciones en esta página o contáctanos para mayor información.
-        </div>
-
-        <h2 class="section-title">Tarifas del Servicio</h2>
-    </main>
-
-    <script>
-        function mostrarRuta(ruta) {
-            document.getElementById('tabla-ida').style.display = ruta === 'ida' ? 'block' : 'none';
-            document.getElementById('tabla-vuelta').style.display = ruta === 'vuelta' ? 'block' : 'none';
-            
-            document.getElementById('btn-ida').classList.toggle('active', ruta === 'ida');
-            document.getElementById('btn-vuelta').classList.toggle('active', ruta === 'vuelta');
-        }
-    </script>
-</body>
-</html>
+<script>
+function cambiarVista(ruta) {
+    const tIda = document.getElementById('tabla-ida');
+    const tVuelta = document.getElementById('tabla-vuelta');
+    
+    if(ruta === 'ida') {
+        tIda.style.display = 'block';
+        tVuelta.style.display = 'none';
+    } else {
+        tIda.style.display = 'none';
+        tVuelta.style.display = 'block';
+    }
+}
+</script>
