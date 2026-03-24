@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background-color: #030712; color: white; font-family: 'Inter', sans-serif; }
+
+.main-container {
+    min-height: 100vh;
+    /* IMPORTANTE: Si subes tu foto a GitHub con el nombre 'fondo.jpg', usa este código: */
+    background: linear-gradient(rgba(3,7,18,0.8), rgba(3,7,18,0.8)), url('fondo.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar { display: flex; justify-content: space-between; padding: 30px 8%; align-items: center; }
+.logo { font-size: 13px; font-weight: 900; }
+.logo span { color: #ffb400; font-size: 11px; }
+.menu a { color: #94a3b8; text-decoration: none; margin-left: 20px; font-size: 13px; }
+.menu .active { background: #ffb400; color: black; padding: 8px 15px; border-radius: 4px; font-weight: bold; }
+
+.hero { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 8%; }
+.badge { border: 1px solid #ffb400; color: #ffb400; padding: 5px 15px; border-radius: 20px; font-size: 11px; margin-bottom: 20px; width: fit-content; }
+h1 { font-family: 'Archivo Black', sans-serif; font-size: 70px; line-height: 0.9; text-transform: uppercase; }
+.yellow { color: #ffb400; }
+.ruta-txt { font-size: 24px; font-weight: bold; margin: 15px 0; }
+.desc { color: #cbd5e1; max-width: 500px; line-height: 1.6; margin-bottom: 30px; }
+
+.btns { display: flex; gap: 15px; }
+.btn-fill { background: #ffb400; color: black; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; }
+.btn-line { border: 1px solid #475569; color: white; padding: 15px 30px; border-radius: 8px; text-decoration: none; }
+
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); background: rgba(0,0,0,0.8); padding: 30px 0; border-top: 1px solid rgba(255,255,255,0.1); }
+.item { text-align: center; }
+.item strong { display: block; font-size: 20px; color: #ffb400; }
+.item p { font-size: 10px; color: #94a3b8; text-transform: uppercase; }
