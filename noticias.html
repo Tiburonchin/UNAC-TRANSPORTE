@@ -1,101 +1,40 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noticias - Movilidad UNAC</title>
-    <style>
-        /* Contenedor principal con el fondo gris oscuro tal como lo tenías */
-        .contenedor-noticias-unac {
-            position: relative;
-            width: 100%;
-            min-height: 550px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 30px;
-            padding: 50px 20px;
-            box-sizing: border-box;
-            background-color: #2c3e50; /* Fondo gris oscuro de seguridad */
-            
-            /* --- RUTA CORREGIDA: USANDO EL ARCHIVO .JPG --- */
-            /* He quitado el código Base64. Ahora el navegador buscará este archivo */
-            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                              url('486135019_1066064098880646_4598676692904469015_n.jpg');
-            /* ----------------------------------------------- */
-            
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        /* Estilo para las tarjetas informativas blancas */
-        .tarjeta-informativa {
-            background: #ffffff;
-            flex: 1;
-            max-width: 480px;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            border-top: 6px solid #0056b3;
-            text-align: left;
-        }
-
-        .tarjeta-informativa h2 {
-            color: #0056b3;
-            margin: 0 0 15px 0;
-            font-size: 1.6rem;
-        }
-
-        .tarjeta-informativa p {
-            color: #333;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        /* Estilo para los botones azules */
-        .btn-accion {
-            display: inline-block;
-            padding: 12px 25px;
-            background-color: #0056b3;
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-
-        .btn-accion:hover {
-            background-color: #004494;
-        }
-
-        /* Responsive: En celular se ponen una debajo de otra */
-        @media (max-width: 800px) {
-            .contenedor-noticias-unac {
-                flex-direction: column;
-                gap: 20px;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <section class="contenedor-noticias-unac">
+<div class="tarjeta-informativa" style="max-width: 850px; margin: 20px auto;">
+    <div style="padding: 10px;">
+        <span style="color: #ffb400; font-weight: bold; font-size: 0.8rem;">25 MARZO, 2026</span>
+        <h2 style="color: #0056b3; margin-top: 10px;">📢 REPORTE DE GESTIÓN: RESULTADOS RUMBO AL CICLO 2026-A 🚌💨</h2>
         
-        <article class="tarjeta-informativa">
-            <h2>Actualización del Padrón 2026-A</h2>
-            <p>Se informa que el plazo máximo para la inscripción y actualización de datos es el 29 de marzo. Asegura tu vacante para la ruta de Ventanilla a tiempo.</p>
-            <a href="#" class="btn-accion">Ver Registro</a>
-        </article>
+        <div style="text-align: left; font-size: 0.9rem; line-height: 1.6; color: #333; margin-top: 15px;">
+            <p>¡Hola, comunidad de la Ruta Ventanilla! 👋 😊 Tal como lo prometimos, la transparencia es la base de nuestra organización. Tras el cierre del formulario de <b>Actualización Obligatoria de Datos</b>, compartimos con ustedes los resultados que respaldan nuestras próximas gestiones ante las autoridades para este inicio de clases el <b>1 de abril</b>. 📍 📊</p>
+            
+            <p>📊 <b>Lo que dicen nuestros datos:</b></p>
+            <ul style="list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 10px;">▪️ <b>Respaldo Contundente:</b> ¡Gracias por la confianza! Contamos con un <b>94.3% de aprobación</b> a la gestión actual. Este voto de confianza nos motiva a seguir luchando por un servicio de calidad. ✅ 🤝</li>
+                <li style="margin-bottom: 10px;">▪️ <b>Demanda de Horarios:</b> Hemos identificado que el turno <b>Tarde-Noche (6:00 PM)</b> y el de la <b>Mañana (5:15 AM)</b> son los más críticos. Usaremos estos números para exigir que las unidades cubran la capacidad necesaria. ⏳ 🚍</li>
+                <li style="margin-bottom: 10px;">▪️ <b>Participación Total:</b> Estudiantes de todas las facultades, liderados por <b>FCE, FCC y FCA</b>, ya están registrados. ¡Somos una sola comunidad universitaria! 🏛️ 👥</li>
+            </ul>
 
-        <article class="tarjeta-informativa">
-            <h2>Nuevos Paraderos en Ventanilla</h2>
-            <p>Se han habilitado nuevos puntos estratégicos para mejorar la fluidez del servicio. Revisa el mapa actualizado para ubicar tu paradero más cercano.</p>
-            <a href="#" class="btn-accion">Ver Mapa</a>
-        </article>
+            <p>⚠️ <b>RECORDATORIO FINAL:</b> El padrón oficial ha sido actualizado. Como se avisó, este registro es <b>VITAL</b> para garantizar tu cupo y seguridad en la ruta. El verano se acaba, pero nuestro compromiso por una movilidad segura y organizada para este <b>2026-A</b> está más fuerte que nunca. ☀️ 🔵</p>
+            
+            <p style="font-style: italic; margin-top: 15px;">Atentamente, <b>Delegado Sebastian – Movilidad Ventanilla</b> 👦🏻 🚌</p>
+        </div>
 
-    </section>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 25px; border-top: 1px solid #eee; padding-top: 20px;">
+            <div style="flex: 1; min-width: 220px; max-width: 260px;">
+                <h3 style="font-size: 11px; text-align: center; color: #666;">FACULTAD</h3>
+                <canvas id="chartFacultad"></canvas>
+            </div>
+            <div style="flex: 1; min-width: 220px; max-width: 260px;">
+                <h3 style="font-size: 11px; text-align: center; color: #666;">HORARIOS SOLICITADOS</h3>
+                <canvas id="chartHorarios"></canvas>
+            </div>
+            <div style="flex: 1; min-width: 220px; max-width: 260px;">
+                <h3 style="font-size: 11px; text-align: center; color: #666;">VOTO DE CONFIANZA</h3>
+                <canvas id="chartVoto"></canvas>
+            </div>
+        </div>
 
-</body>
-</html>
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="#" class="btn-accion" style="background-color: #0056b3; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; display: inline-block;">Ver Resultados Detallados</a>
+        </div>
+    </div>
+</div>
