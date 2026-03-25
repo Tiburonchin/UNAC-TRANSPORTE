@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horarios - Movilidad UNAC</title>
+    <title>Horarios de la Ruta Ventanilla - UNAC</title>
     <link rel="stylesheet" href="style.css">
     <style>
         /* --- BASE --- */
@@ -15,89 +15,97 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            align-items: center; /* CENTRADO HORIZONTAL BODY */
         }
 
-        /* --- NAVBAR (ARRIBA) --- */
+        /* --- NAVBAR (ARRIBA - VISIBLE EN CELULAR) --- */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 5%;
+            padding: 20px 5%;
             background: #0a0a0a;
             border-bottom: 1px solid #222;
+            width: 100%;
+            z-index: 1000;
         }
-        .logo { font-weight: bold; font-size: 0.75rem; line-height: 1.2; }
+        .logo { font-weight: bold; font-size: 0.8rem; line-height: 1.2; }
         .logo span { color: #ffb400; }
         .menu { display: flex; gap: 15px; }
         .menu a { color: #fff; text-decoration: none; font-size: 0.85rem; }
-        .menu a.active { color: #ffb400; font-weight: bold; }
+        .menu a.active { color: #ffb400; border-bottom: 2px solid #ffb400; }
 
-        /* --- CONTENIDO --- */
+        /* --- SECCIÓN HERO (CENTRADO TOTAL) --- */
         .hero {
-            flex: 1;
+            width: 100%;
+            max-width: 1100px; /* Expandido como la imagen 2 */
+            padding: 50px 20px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 30px 15px;
+            align-items: center; /* CENTRA TEXTOS Y RECUADROS */
             text-align: center;
+            flex: 1;
         }
 
-        h1 { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 800; margin-bottom: 10px; line-height: 1.1; }
-        .subtitle { color: #888; margin-bottom: 30px; font-size: 0.9rem; max-width: 600px; }
+        h1 { font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 800; margin-bottom: 15px; line-height: 1.1; }
+        .super-title { color: #ffb400; font-weight: bold; letter-spacing: 2px; margin-bottom: 10px; font-size: 0.9rem; }
+        .subtitle { color: #888; margin-bottom: 40px; max-width: 800px; }
 
-        /* --- RECUADRO NEGRO --- */
+        /* --- RECUADRO NEGRO (CORREGIDO SEGÚN IMAGEN 2) --- */
         .info-panel, .table-wrap {
             background: #0a0a0a;
             border: 1px solid #222;
-            border-radius: 15px;
-            width: 100%;
-            max-width: 900px; /* Centrado en laptop */
-            padding: 20px;
-            margin-bottom: 20px;
-            text-align: left;
+            border-radius: 20px;
+            width: 100%; /* Ocupa el ancho del hero */
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: left; /* Texto interno a la izquierda para lectura */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* --- SWITCH --- */
+        /* --- SWITCH DE BOTONES --- */
         .switch-container {
             display: flex;
             background: #1a1a1a;
             border-radius: 50px;
-            padding: 4px;
-            margin-bottom: 25px;
+            padding: 6px;
+            margin-bottom: 30px;
             cursor: pointer;
-            width: fit-content;
+            width: fit-content; /* Se centra por el align-items del hero */
         }
-        .switch-btn { padding: 10px 18px; border-radius: 50px; font-weight: 600; font-size: 0.8rem; transition: 0.3s; }
+        .switch-btn { padding: 12px 28px; border-radius: 50px; font-weight: 600; font-size: 0.9rem; transition: 0.4s; }
         .going .btn-going, .return .btn-return { background: #ffb400; color: #000; }
         .going .btn-return, .return .btn-going { color: #666; }
 
         /* --- TABLAS --- */
         .schedule-table { display: none; width: 100%; border-collapse: collapse; }
         .active-table { display: table; }
-        th { color: #ffb400; text-align: left; padding: 10px; border-bottom: 1px solid #222; font-size: 0.7rem; text-transform: uppercase; }
-        td { padding: 12px 10px; border-bottom: 1px solid #111; font-size: 0.85rem; }
+        th { color: #ffb400; text-align: left; padding: 15px; border-bottom: 1px solid #222; font-size: 0.8rem; text-transform: uppercase; }
+        td { padding: 15px; border-bottom: 1px solid #111; font-size: 0.95rem; }
         .time { font-weight: bold; color: #fff; }
 
-        /* --- STATS (ABAJO - CORREGIDO) --- */
+        /* --- STATS ABAJO (CORREGIDO) --- */
         .stats {
             background: #0a0a0a;
             display: flex;
             justify-content: space-around;
-            padding: 20px 5%;
+            padding: 30px 5%;
             border-top: 1px solid #222;
             width: 100%;
         }
         .item { text-align: center; }
-        .item strong { display: block; color: #ffb400; font-size: 1rem; }
-        .item p { font-size: 0.65rem; color: #666; margin-top: 3px; text-transform: uppercase; }
+        .item strong { display: block; color: #ffb400; font-size: 1.2rem; }
+        .item p { font-size: 0.7rem; color: #666; margin-top: 5px; text-transform: uppercase; }
 
-        /* --- AJUSTES MÓVIL --- */
+        /* --- AJUSTES CELULAR --- */
         @media (max-width: 768px) {
-            .navbar { flex-direction: column; gap: 10px; padding: 10px; }
+            .navbar { padding: 15px 5%; }
+            .logo { font-size: 0.7rem; }
             .menu { gap: 10px; }
-            .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 15px; }
-            .item { text-align: center; border: 1px solid #111; padding: 10px; border-radius: 8px; }
-            .table-wrap { overflow-x: auto; } /* Scroll para tabla si es muy ancha */
+            .menu a { font-size: 0.75rem; }
+            h1 { font-size: 1.8rem; }
+            .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px; }
+            .item { border-bottom: 1px solid #111; padding-bottom: 10px; }
         }
     </style>
 </head>
@@ -115,12 +123,13 @@
     </nav>
 
     <section class="hero">
-        <p style="color: #ffb400; font-weight: bold; font-size: 0.8rem;">PLANIFICA TU VIAJE</p>
-        <h1>Horarios de la<br>Ruta Ventanilla</h1>
+        <p class="super-title">PLANIFICA TU VIAJE</p>
+        <h1>Horarios de la Ruta Ventanilla</h1>
+        <p class="subtitle">Programación oficial semestre 2026-A.</p>
         
         <div class="info-panel">
-            <p><strong>🚍 Servicio UNAC 📍</strong></p>
-            <p style="color: #888; font-size: 0.85rem; margin-top: 5px;">Horarios vigentes Ciclo 2026-A. Sujetos a cambios según evaluación académica.</p>
+            <p><strong>🚍 Servicio de Movilidad Universitaria 📍</strong></p><br>
+            <p>Comprometidos con tu puntualidad académica, presentamos la programación vigente. Recuerda estar en el paradero 5 minutos antes de la hora indicada. ✨</p>
         </div>
 
         <div class="switch-container going" id="mainSwitch">
@@ -130,9 +139,9 @@
 
         <div class="table-wrap">
             <table class="schedule-table active-table" id="tableGoing">
-                <thead><tr><th>Hora</th><th>Paradero</th><th>Días</th></tr></thead>
+                <thead><tr><th>Hora</th><th>Partida</th><th>Destino</th><th>Días</th></tr></thead>
                 <tbody>
-                    <tr><td class="time">05:15 AM</td><td>Ventanilla (Metro)</td><td>L-V</td></tr>
+                    <tr><td class="time">05:15 AM</td><td>Ventanilla (Metro)</td><td>Campus UNAC</td><td>L-V</td></tr>
                 </tbody>
             </table>
             <table class="schedule-table" id="tableReturn">
@@ -147,9 +156,9 @@
     </section>
 
     <footer class="stats">
-        <div class="item"><strong>L-V</strong><p>Frecuencia</p></div>
-        <div class="item"><strong>Activo</strong><p>Estado</p></div>
-        <div class="item"><strong>40</strong><p>Cupos</p></div>
+        <div class="item"><strong>Lunes a Viernes</strong><p>Frecuencia</p></div>
+        <div class="item"><strong>En Servicio</strong><p>Estado</p></div>
+        <div class="item"><strong>40 Cupos</strong><p>Capacidad</p></div>
         <div class="item"><strong>Directa</strong><p>Ruta</p></div>
     </footer>
 
