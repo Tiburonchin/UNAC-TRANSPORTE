@@ -7,7 +7,7 @@
         .contenedor-noticias-unac {
             position: relative;
             width: 100%;
-            min-height: 600px;
+            min-height: 550px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -15,9 +15,11 @@
             padding: 50px 20px;
             box-sizing: border-box;
             
-            /* --- RUTA DIRECTA CORREGIDA --- */
+            /* --- RUTA CORREGIDA: USANDO EL ARCHIVO .JPG --- */
+            /* No uses el código Base64. Usa el nombre de tu imagen aquí */
             background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
                               url('486135019_1066064098880646_4598676692904469015_n.jpg');
+            /* ----------------------------------------------- */
             
             background-size: cover;
             background-position: center;
@@ -59,11 +61,7 @@
         }
 
         @media (max-width: 800px) {
-            .contenedor-noticias-unac { 
-                flex-direction: column; 
-                min-height: auto;
-            }
-            .tarjeta-informativa { max-width: 100%; }
+            .contenedor-noticias-unac { flex-direction: column; }
         }
     </style>
 </head>
@@ -78,7 +76,7 @@
 
         <article class="tarjeta-informativa">
             <h2>Nuevos Paraderos en Ventanilla</h2>
-            <p>A partir del 20 de marzo se han habilitado nuevos puntos estratégicos para mejorar la fluidez del servicio. Revisa el mapa actualizado aquí.</p>
+            <p>Se han habilitado nuevos puntos estratégicos para mejorar la fluidez del servicio. Revisa el mapa actualizado aquí.</p>
             <a href="#" class="btn-accion">Ver Mapa</a>
         </article>
     </section>
