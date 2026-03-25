@@ -3,30 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horarios de la Ruta Ventanilla - UNAC</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Horarios Ruta Ventanilla - UNAC</title>
     <style>
-        /* --- BASE --- */
+        /* --- RESET Y CENTRADO GLOBAL --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body { 
             background-color: #000; 
             color: #fff; 
-            font-family: 'Segoe UI', sans-serif;
-            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
-            align-items: center; /* CENTRADO HORIZONTAL BODY */
+            align-items: center; /* ESTO CENTRA TODO EL CONTENIDO */
+            min-height: 100vh;
         }
 
-        /* --- NAVBAR (ARRIBA - VISIBLE EN CELULAR) --- */
+        /* --- NAVBAR: VISIBLE Y FIJA --- */
         .navbar {
+            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
+            padding: 15px 5%;
             background: #0a0a0a;
             border-bottom: 1px solid #222;
-            width: 100%;
+            position: sticky;
+            top: 0;
             z-index: 1000;
         }
         .logo { font-weight: bold; font-size: 0.8rem; line-height: 1.2; }
@@ -35,35 +37,34 @@
         .menu a { color: #fff; text-decoration: none; font-size: 0.85rem; }
         .menu a.active { color: #ffb400; border-bottom: 2px solid #ffb400; }
 
-        /* --- SECCIÓN HERO (CENTRADO TOTAL) --- */
+        /* --- CONTENEDOR HERO --- */
         .hero {
             width: 100%;
-            max-width: 1100px; /* Expandido como la imagen 2 */
-            padding: 50px 20px;
+            max-width: 1100px; /* CUADRO ANCHO COMO LA IMAGEN 2 */
+            padding: 40px 20px;
             display: flex;
             flex-direction: column;
-            align-items: center; /* CENTRA TEXTOS Y RECUADROS */
+            align-items: center; /* CENTRA TÍTULOS Y BOTONES */
             text-align: center;
-            flex: 1;
         }
 
-        h1 { font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 800; margin-bottom: 15px; line-height: 1.1; }
         .super-title { color: #ffb400; font-weight: bold; letter-spacing: 2px; margin-bottom: 10px; font-size: 0.9rem; }
+        h1 { font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 800; margin-bottom: 10px; }
         .subtitle { color: #888; margin-bottom: 40px; max-width: 800px; }
 
-        /* --- RECUADRO NEGRO (CORREGIDO SEGÚN IMAGEN 2) --- */
+        /* --- CUADRO NEGRO (IMAGEN 2) --- */
         .info-panel, .table-wrap {
             background: #0a0a0a;
             border: 1px solid #222;
             border-radius: 20px;
-            width: 100%; /* Ocupa el ancho del hero */
+            width: 100%; /* OCUPA TODO EL ANCHO DEL HERO */
             padding: 30px;
             margin-bottom: 30px;
-            text-align: left; /* Texto interno a la izquierda para lectura */
+            text-align: left;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* --- SWITCH DE BOTONES --- */
+        /* --- BOTONES SWITCH --- */
         .switch-container {
             display: flex;
             background: #1a1a1a;
@@ -71,7 +72,7 @@
             padding: 6px;
             margin-bottom: 30px;
             cursor: pointer;
-            width: fit-content; /* Se centra por el align-items del hero */
+            width: fit-content;
         }
         .switch-btn { padding: 12px 28px; border-radius: 50px; font-weight: 600; font-size: 0.9rem; transition: 0.4s; }
         .going .btn-going, .return .btn-return { background: #ffb400; color: #000; }
@@ -80,11 +81,11 @@
         /* --- TABLAS --- */
         .schedule-table { display: none; width: 100%; border-collapse: collapse; }
         .active-table { display: table; }
-        th { color: #ffb400; text-align: left; padding: 15px; border-bottom: 1px solid #222; font-size: 0.8rem; text-transform: uppercase; }
+        th { color: #ffb400; text-align: left; padding: 15px; border-bottom: 1px solid #222; font-size: 0.8rem; }
         td { padding: 15px; border-bottom: 1px solid #111; font-size: 0.95rem; }
         .time { font-weight: bold; color: #fff; }
 
-        /* --- STATS ABAJO (CORREGIDO) --- */
+        /* --- FOOTER STATS (FRECUENCIA) --- */
         .stats {
             background: #0a0a0a;
             display: flex;
@@ -92,20 +93,24 @@
             padding: 30px 5%;
             border-top: 1px solid #222;
             width: 100%;
+            margin-top: auto;
         }
         .item { text-align: center; }
-        .item strong { display: block; color: #ffb400; font-size: 1.2rem; }
+        .item strong { display: block; color: #ffb400; font-size: 1.1rem; }
         .item p { font-size: 0.7rem; color: #666; margin-top: 5px; text-transform: uppercase; }
 
-        /* --- AJUSTES CELULAR --- */
+        /* --- RESPONSIVE CELULAR --- */
         @media (max-width: 768px) {
-            .navbar { padding: 15px 5%; }
-            .logo { font-size: 0.7rem; }
-            .menu { gap: 10px; }
-            .menu a { font-size: 0.75rem; }
+            .navbar { padding: 15px 3%; }
+            .logo { font-size: 0.65rem; }
+            .menu { gap: 8px; }
+            .menu a { font-size: 0.7rem; }
+            
+            .hero { padding: 30px 15px; }
             h1 { font-size: 1.8rem; }
-            .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px; }
-            .item { border-bottom: 1px solid #111; padding-bottom: 10px; }
+            
+            .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+            .info-panel, .table-wrap { padding: 20px; }
         }
     </style>
 </head>
@@ -118,7 +123,6 @@
             <a href="horarios.html" class="active">Horarios</a>
             <a href="rutas.html">Rutas</a>
             <a href="noticias.html">Noticias</a>
-            <a href="consultas.html">Consultas</a>
         </div>
     </nav>
 
@@ -129,7 +133,7 @@
         
         <div class="info-panel">
             <p><strong>🚍 Servicio de Movilidad Universitaria 📍</strong></p><br>
-            <p>Comprometidos con tu puntualidad académica, presentamos la programación vigente. Recuerda estar en el paradero 5 minutos antes de la hora indicada. ✨</p>
+            <p>Horarios actualizados para la comunidad estudiantil. Se recomienda estar en el punto de partida 5 minutos antes.</p>
         </div>
 
         <div class="switch-container going" id="mainSwitch">
@@ -141,7 +145,7 @@
             <table class="schedule-table active-table" id="tableGoing">
                 <thead><tr><th>Hora</th><th>Partida</th><th>Destino</th><th>Días</th></tr></thead>
                 <tbody>
-                    <tr><td class="time">05:15 AM</td><td>Ventanilla (Metro)</td><td>Campus UNAC</td><td>L-V</td></tr>
+                    <tr><td class="time">05:15 AM</td><td>Ventanilla</td><td>Campus UNAC</td><td>L-V</td></tr>
                 </tbody>
             </table>
             <table class="schedule-table" id="tableReturn">
