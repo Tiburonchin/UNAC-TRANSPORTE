@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias - Movilidad UNAC</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: #000; color: #fff; font-family: 'Segoe UI', sans-serif; }
+
+        /* NAVBAR (Mantenemos tu estilo) */
+        .navbar { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: #0a0a0a; border-bottom: 1px solid #222; sticky: top; }
+        .logo span { color: #ffb400; }
+        .menu a { color: #fff; text-decoration: none; margin-left: 15px; font-size: 0.9rem; }
+        .menu a.active { color: #ffb400; font-weight: bold; }
+
+        .container { max-width: 1000px; margin: 50px auto; padding: 0 20px; }
+        h1 { font-size: 2.5rem; margin-bottom: 30px; text-align: center; }
+
+        /* GRID DE NOTICIAS */
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+
+        .news-card { 
+            background: #111; 
+            border: 1px solid #222; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            cursor: pointer; 
+            transition: 0.3s; 
+        }
+        .news-card:hover { border-color: #ffb400; transform: translateY(-5px); }
+        .news-content { padding: 20px; }
+        .news-date { color: #ffb400; font-size: 0.8rem; font-weight: bold; }
+        .news-title { font-size: 1.2rem; margin: 10px 0; }
+        .news-excerpt { color: #888; font-size: 0.9rem; line-height: 1.4; }
+
+        /* MODALES (LAS VENTANAS QUE SE ABREN) */
+        .modal {
+            display: none; /* Escondido por defecto */
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: #111;
+            width: 90%;
+            max-width: 700px;
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid #333;
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .close-btn {
+            position: absolute;
+            top: 20px; right: 20px;
+            font-size: 2rem;
+            color: #ffb400;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">UNIVERSIDAD NACIONAL DEL CALLAO<br><span>MOVILIDAD UNIVERSITARIA</span></div>
+        <div class="menu">
+            <a href="index.html">Inicio</a>
+            <a href="horarios.html">Horarios</a>
+            <a href="rutas.html">Rutas</a>
+            <a href="noticias.html" class="active">Noticias</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Últimas Noticias</h1>
+        
+        <div class="news-grid">
+            <div class="news-card" onclick="openModal('modal1')">
+                <div class="news-content">
+                    <p class="news-date">29 MARZO, 2026</p>
+                    <h3 class="news-title">Actualización del Padrón 2026-A</h3>
+                    <p class="news-excerpt">Información importante sobre el cierre de inscripciones para el nuevo ciclo académico...</p>
+                </div>
+            </div>
+
+            <div class="news-card" onclick="openModal('modal2')">
+                <div class="news-content">
+                    <p class="news-date">20 MARZO, 2026</p>
+                    <h3 class="news-title">Nuevos Paraderos en Ventanilla</h3>
+                    <p class="news-excerpt">Se han habilitado nuevos puntos de recojo estratégicos para mejorar la fluidez...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
+            <p style="color: #ffb400;">29 MARZO, 2026</p>
+            <h2 style="margin: 15px 0;">Actualización del Padrón 2026-A</h2>
+            <hr style="border: 0; border-top: 1px solid #333; margin-bottom: 20px;">
+            <p style="line-height: 1.6; color: #ccc;">
+                Estimados estudiantes, se les comunica que el proceso de inscripción para el padrón de movilidad del ciclo 2026-A finaliza hoy. <br><br>
+                Es obligatorio haber completado el formulario digital para que se les asigne un número de asiento y reciban su correo de confirmación. Los resultados finales se enviarán directamente a sus correos institucionales.
+            </p>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal2')">&times;</span>
+            <p style="color: #ffb400;">20 MARZO, 2026</p>
+            <h2 style="margin: 15px 0;">Nuevos Paraderos en Ventanilla</h2>
+            <p style="line-height: 1.6; color: #ccc;">
+                Tras las gestiones realizadas, se confirma que el bus tendrá paradas adicionales en puntos estratégicos para evitar que caminen tramos largos. Recuerden estar 5 minutos antes en su paradero correspondiente.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
+        }
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+        // Cerrar si hacen clic fuera de la caja
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
