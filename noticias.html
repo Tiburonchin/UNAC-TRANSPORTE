@@ -73,8 +73,8 @@
             padding: 30px;
             margin-bottom: 40px;
         }
-        .news-tag { color: #ffb400; font-weight: bold; font-size: 0.9rem; margin-bottom: 10px; display: block; }
-        .news-title { font-size: 1.5rem; margin-bottom: 20px; border-bottom: 2px solid #ffb400; padding-bottom: 10px; }
+        .news-tag { color: #ffb400; font-weight: bold; font-size: 0.8rem; margin-bottom: 10px; display: block; text-transform: uppercase; }
+        .news-title { font-size: 1.5rem; margin-bottom: 20px; border-bottom: 2px solid #ffb400; padding-bottom: 10px; line-height: 1.3; }
         
         /* DASHBOARD */
         .dashboard-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin: 30px 0; }
@@ -86,12 +86,12 @@
         .sub-title { color: #ffb400; font-weight: bold; margin-bottom: 15px; display: block; }
         .item { margin-bottom: 15px; padding-left: 15px; border-left: 2px solid #ffb400; }
         
-        .status-box { padding: 15px; border-radius: 8px; margin: 15px 0; }
+        .status-box { padding: 15px; border-radius: 8px; margin: 15px 0; font-size: 0.95rem; }
         .green { background: rgba(45, 164, 78, 0.15); border: 1px solid #2da44e; }
         .red { background: rgba(248, 81, 73, 0.15); border: 1px solid #f85149; }
 
-        .footer-sig { margin-top: 30px; font-weight: bold; color: #ffb400; text-align: right; }
-        .thanks-footer { text-align: center; font-weight: bold; font-size: 1.1rem; margin-top: 20px; color: #fff; }
+        .footer-sig { margin-top: 30px; font-weight: bold; color: #ffb400; text-align: right; font-size: 0.95rem; }
+        .thanks-footer { text-align: center; font-weight: bold; font-size: 1.1rem; margin-top: 25px; color: #fff; }
     </style>
 </head>
 <body onload="renderCharts()">
@@ -119,9 +119,9 @@
     <div class="container">
 
         <div class="news-card">
-            <span class="news-tag">25 MARZO, 2026</span>
+            <span class="news-tag">Reporte Oficial</span>
             <h2 class="news-title">📢 REPORTE DE GESTIÓN: RESULTADOS RUMBO AL CICLO 2026-A 🚌💨</h2>
-            <p>¡Hola, comunidad de la Ruta Ventanilla! 👋 😊 Tal como lo prometimos, la transparencia es la base de nuestra organización. Tras el cierre del formulario de <b>Actualización Obligatoria de Datos</b>, compartimos con ustedes los resultados que respaldan nuestras próximas gestiones ante las autoridades para este inicio de clases el <b>1 de abril</b>. 📍🗺️</p>
+            <p>¡Hola, comunidad de la Ruta Ventanilla! 👋😊 Tal como lo prometimos, la transparencia es la base de nuestra organización. Tras el cierre del formulario de Actualización Obligatoria de Datos, compartimos con ustedes los resultados que respaldan nuestras próximas gestiones ante las autoridades para este inicio de clases el 1 de abril. 🎓📚</p>
             
             <div class="dashboard-grid">
                 <div class="chart-card"><h3>FACULTAD</h3><canvas id="chartFacultad"></canvas></div>
@@ -129,37 +129,56 @@
                 <div class="chart-card"><h3>VOTO DE CONFIANZA</h3><canvas id="chartVoto"></canvas></div>
             </div>
 
+            <span class="sub-title">📊 Lo que dicen nuestros datos:</span>
             <div class="item"><b>Respaldo Contundente:</b> ¡Gracias por la confianza! Contamos con un <b>94.3% de aprobación</b> a la gestión actual. ✅🤝</div>
-            <div class="item"><b>Demanda de Horarios:</b> Turnos <b>Tarde-Noche (6:00 PM)</b> y <b>Mañana (5:15 AM)</b> son los más críticos. ⏳🚌</div>
+            <div class="item"><b>Demanda de Horarios:</b> El turno <b>Tarde-Noche (6:00 PM)</b> y el de la <b>Mañana (5:15 AM)</b> son los más críticos. Usaremos estos números para exigir capacidad necesaria. ⏳🚍</div>
+            <div class="item"><b>Participación Total:</b> Liderados por <b>FCE, FCC y FCA</b>, ¡somos una sola comunidad! 🏛️👥</div>
             
-            <p style="margin-top: 20px; font-size: 0.9rem; color: #ffb400;">⚠️ <b>RECORDATORIO FINAL:</b> El padrón ha sido actualizado. Este registro es <b>VITAL</b> para garantizar tu cupo en este <b>2026-A</b>. ☀️🛡️</p>
+            <p style="margin-top: 20px; font-size: 0.95rem; background: rgba(255, 180, 0, 0.1); padding: 15px; border-radius: 8px;">
+                ⚠️ <b>RECORDATORIO FINAL:</b> El padrón oficial ha sido actualizado. Este registro es VITAL para garantizar tu cupo y seguridad. El compromiso por una movilidad organizada para este 2026-A está más fuerte que nunca. ☀️🛡️
+            </p>
             
-            <p class="footer-sig">Atentamente, Delegado Sebastian – Movilidad Ventanilla 👦🏻🚌</p>
-            <p class="thanks-footer">¡Gracias por ser parte del cambio! Nos vemos en la ruta este 30 de abril. 🗺️🙌</p>
+            <p class="footer-sig">Atentamente, Delegado Sebastian – Movilidad Ventanilla 🫡🚌</p>
+            <p class="thanks-footer">¡Gracias por ser parte del cambio! Nos vemos en la ruta este 30 de marzo. 🛣️🙌</p>
         </div>
 
         <div class="news-card">
-            <span class="news-tag">NUEVA LOGÍSTICA</span>
+            <span class="news-tag">Innovación y Logística</span>
             <h2 class="news-title">🚀 ¡INNOVACIÓN TECNOLÓGICA Y ORDEN EN LA RUTA! 🚌📲</h2>
             
-            <p>¡Hola de nuevo! Seguimos modernizando nuestra gestión para que este <b>30 de abril</b> todo sea más eficiente. Presentamos la nueva logística digital para eliminar colas:</p>
+            <p>¡Hola de nuevo, compañeros y compañeras! 👋😊 Seguimos modernizando nuestra gestión para que este 30 de abril todo sea más eficiente. Como su delegado 🫡, les presento la nueva logística digital diseñada para eliminar las colas y asegurar el orden:</p>
 
             <div class="sub-section">
                 <span class="sub-title">✅ ASÍ SERÁ EL NUEVO PROCESO DE ACCESO:</span>
+                <p style="margin-bottom: 10px;">Al completar el formulario, el sistema validará tus datos automáticamente y enviará una respuesta inmediata a tu Gmail:</p>
                 <div class="status-box green">
-                    <b>¡VERIFICACIÓN CORRECTA! (Pase Verde):</b> Recibirás tu correo con tu <b>NÚMERO DE ASIENTO OFICIAL</b> (40 asientos disponibles). 💺🔢
+                    <b>¡VERIFICACIÓN CORRECTA! (Pase Verde):</b> Si tus datos son válidos, recibirás tu correo con tu <b>NÚMERO DE ASIENTO OFICIAL</b> (Cupos limitados a 40). 💺🔢
                 </div>
                 <div class="status-box red">
-                    <b>VERIFICACIÓN INCORRECTA (Aviso Rojo):</b> Si los datos son erróneos, NO se asignará asiento ya que el registro no será válido pal padrón. ❌⚠️
+                    <b>VERIFICACIÓN INCORRECTA (Aviso Rojo):</b> Si el DNI o Código están mal, el sistema rechazará la solicitud. Sin verificación NO se asignará asiento. ❌⚠️
                 </div>
             </div>
 
             <div class="sub-section">
                 <span class="sub-title">⏳ LOGÍSTICA EN TIEMPO REAL:</span>
-                <div class="item"><b>Cierre de Padrón:</b> El sistema envía respuesta automática al completar el formulario. 🙃</div>
-                <div class="item"><b>Abordaje Rápido:</b> ¡Olvídate de listas manuales! Solo muestra el correo de verificación desde tu celular. 🤳✅</div>
+                <div class="item"><b>Cierre de Padrón:</b> El formulario se procesa y envía automáticamente una vez hayas completado el registro 🙃.</div>
+                <div class="item"><b>Llegada del Bus:</b> Estará en el punto de partida a las <b>6:00 PM (puntualidad)</b>. 🚍</div>
+                <div class="item"><b>Abordaje Rápido:</b> ¡Olvídate de colas! Solo acércate con tu celular y muestra el correo de verificación. ✅🤳</div>
             </div>
 
+            <div class="sub-section">
+                <span class="sub-title">⚠️ SOBRE LOS ASIENTOS (ACUERDO GENERAL):</span>
+                <div class="item"><b>🏆 Con Registro Válido:</b> Tienen su asiento asegurado y numerado.</div>
+                <div class="item"><b>🚶 Sin Registro o Incorrectos:</b> Podrás subir a la unidad, pero viajarás sin asiento asignado. ¡La movilidad es GRATUITA PARA TODOS! 🟢💺</div>
+            </div>
+
+            <div class="sub-section">
+                <span class="sub-title">💡 RECOMENDACIONES:</span>
+                <p>🔋 <b>Batería cargada:</b> Ten tu celular listo al subir.<br>
+                ⏱️ <b>Puntualidad:</b> Ten el correo abierto antes de llegar a la puerta.</p>
+            </div>
+
+            <p style="margin-top: 20px; text-align: center;">Estamos usando la tecnología para que tu viaje sea seguro y organizado. ¡Nos vemos en la ruta! 🎓📚</p>
             <p class="footer-sig">Atentamente, Delegado Sebastian – Innovación y Movilidad Ventanilla 🫡🚌</p>
         </div>
     </div>
