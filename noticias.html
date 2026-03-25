@@ -37,8 +37,33 @@
         .menu a:hover, .menu a.active { color: #ffb400; }
         .btn-consultas { border: 1px solid #ffb400; padding: 6px 15px; border-radius: 5px; }
 
-        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-        .main-title { text-align: center; font-size: 3rem; font-weight: 800; margin-bottom: 40px; }
+        /* CABECERA SEGÚN IMAGEN */
+        .hero-header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background-color: #0d1117;
+        }
+        .hero-header .mantente {
+            color: #ffb400;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        .hero-header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .hero-header p.desc {
+            color: #ccc;
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1rem;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
 
         /* CARDS DE NOTICIAS */
         .news-card {
@@ -66,6 +91,7 @@
         .red { background: rgba(248, 81, 73, 0.15); border: 1px solid #f85149; }
 
         .footer-sig { margin-top: 30px; font-weight: bold; color: #ffb400; text-align: right; }
+        .thanks-footer { text-align: center; font-weight: bold; font-size: 1.1rem; margin-top: 20px; color: #fff; }
     </style>
 </head>
 <body onload="renderCharts()">
@@ -84,13 +110,18 @@
         </div>
     </nav>
 
+    <header class="hero-header">
+        <p class="mantente">Mantente informado</p>
+        <h1>Noticias y Avisos</h1>
+        <p class="desc">Entérate de las últimas novedades, cambios en horarios, campañas y comunicados oficiales de la Oficina de Movilidad Universitaria.</p>
+    </header>
+
     <div class="container">
-        <h1 class="main-title">Centro de Noticias</h1>
 
         <div class="news-card">
             <span class="news-tag">25 MARZO, 2026</span>
             <h2 class="news-title">📢 REPORTE DE GESTIÓN: RESULTADOS RUMBO AL CICLO 2026-A 🚌💨</h2>
-            <p>¡Hola, comunidad de la Ruta Ventanilla! 👋 😊 Compartimos los resultados que respaldan nuestras gestiones para este inicio de clases el <b>1 de abril</b>.</p>
+            <p>¡Hola, comunidad de la Ruta Ventanilla! 👋 😊 Tal como lo prometimos, la transparencia es la base de nuestra organización. Tras el cierre del formulario de <b>Actualización Obligatoria de Datos</b>, compartimos con ustedes los resultados que respaldan nuestras próximas gestiones ante las autoridades para este inicio de clases el <b>1 de abril</b>. 📍🗺️</p>
             
             <div class="dashboard-grid">
                 <div class="chart-card"><h3>FACULTAD</h3><canvas id="chartFacultad"></canvas></div>
@@ -98,34 +129,35 @@
                 <div class="chart-card"><h3>VOTO DE CONFIANZA</h3><canvas id="chartVoto"></canvas></div>
             </div>
 
-            <div class="item"><b>Respaldo:</b> 94.3% de aprobación a la gestión actual. ✅</div>
+            <div class="item"><b>Respaldo Contundente:</b> ¡Gracias por la confianza! Contamos con un <b>94.3% de aprobación</b> a la gestión actual. ✅🤝</div>
+            <div class="item"><b>Demanda de Horarios:</b> Turnos <b>Tarde-Noche (6:00 PM)</b> y <b>Mañana (5:15 AM)</b> son los más críticos. ⏳🚌</div>
+            
+            <p style="margin-top: 20px; font-size: 0.9rem; color: #ffb400;">⚠️ <b>RECORDATORIO FINAL:</b> El padrón ha sido actualizado. Este registro es <b>VITAL</b> para garantizar tu cupo en este <b>2026-A</b>. ☀️🛡️</p>
+            
+            <p class="footer-sig">Atentamente, Delegado Sebastian – Movilidad Ventanilla 👦🏻🚌</p>
+            <p class="thanks-footer">¡Gracias por ser parte del cambio! Nos vemos en la ruta este 30 de abril. 🗺️🙌</p>
         </div>
 
         <div class="news-card">
-            <span class="news-tag">ACTUALIZACIÓN RECIENTE</span>
+            <span class="news-tag">NUEVA LOGÍSTICA</span>
             <h2 class="news-title">🚀 ¡INNOVACIÓN TECNOLÓGICA Y ORDEN EN LA RUTA! 🚌📲</h2>
             
-            <p>¡Hola de nuevo, compañeros! Seguimos modernizando nuestra gestión para que este <b>30 de abril</b> todo sea más eficiente. Presentamos la nueva logística digital diseñada para eliminar las colas:</p>
+            <p>¡Hola de nuevo! Seguimos modernizando nuestra gestión para que este <b>30 de abril</b> todo sea más eficiente. Presentamos la nueva logística digital para eliminar colas:</p>
 
             <div class="sub-section">
                 <span class="sub-title">✅ ASÍ SERÁ EL NUEVO PROCESO DE ACCESO:</span>
                 <div class="status-box green">
-                    <b>¡VERIFICACIÓN CORRECTA! (Pase Verde):</b> Recibirás tu correo con tu <b>NÚMERO DE ASIENTO OFICIAL</b> (Cupos limitados a 40). 💺🔢
+                    <b>¡VERIFICACIÓN CORRECTA! (Pase Verde):</b> Recibirás tu correo con tu <b>NÚMERO DE ASIENTO OFICIAL</b> (40 asientos disponibles). 💺🔢
                 </div>
                 <div class="status-box red">
-                    <b>VERIFICACIÓN INCORRECTA (Aviso Rojo):</b> Si los datos son erróneos, el sistema rechazará la solicitud y NO se asignará asiento. ❌⚠️
+                    <b>VERIFICACIÓN INCORRECTA (Aviso Rojo):</b> Si los datos son erróneos, NO se asignará asiento ya que el registro no será válido pal padrón. ❌⚠️
                 </div>
             </div>
 
             <div class="sub-section">
                 <span class="sub-title">⏳ LOGÍSTICA EN TIEMPO REAL:</span>
-                <div class="item"><b>Cierre de Padrón:</b> El sistema envía la respuesta automáticamente al completar el formulario. 🙃</div>
-                <div class="item"><b>Abordaje Rápido:</b> ¡Sin colas ni listas manuales! Solo muestra tu celular con el correo de verificación. 🤳✅</div>
-            </div>
-
-            <div class="sub-section">
-                <span class="sub-title">⚠️ SOBRE LOS ASIENTOS (ACUERDO GENERAL):</span>
-                <p>Prioridad para quienes tengan <b>Registro Válido</b> (asiento asegurado). Quienes no tengan registro podrán subir, pero viajarán sin asiento asignado. ¡La movilidad es GRATUITA! 🟢💺</p>
+                <div class="item"><b>Cierre de Padrón:</b> El sistema envía respuesta automática al completar el formulario. 🙃</div>
+                <div class="item"><b>Abordaje Rápido:</b> ¡Olvídate de listas manuales! Solo muestra el correo de verificación desde tu celular. 🤳✅</div>
             </div>
 
             <p class="footer-sig">Atentamente, Delegado Sebastian – Innovación y Movilidad Ventanilla 🫡🚌</p>
@@ -136,6 +168,7 @@
         Chart.register(ChartDataLabels);
         function renderCharts() {
             const commonOptions = { plugins: { datalabels: { color: '#fff', font: { weight: 'bold', size: 10 }, formatter: (v) => v + '%' } } };
+            
             new Chart(document.getElementById('chartFacultad'), {
                 type: 'pie',
                 data: {
