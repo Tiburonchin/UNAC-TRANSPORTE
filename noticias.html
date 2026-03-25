@@ -6,61 +6,100 @@
     <title>Noticias - Movilidad UNAC</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: #000; color: #fff; font-family: 'Segoe UI', sans-serif; }
+        body { 
+            background-color: #000; 
+            color: #fff; 
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-        /* NAVBAR (Mantenemos tu estilo) */
-        .navbar { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: #0a0a0a; border-bottom: 1px solid #222; sticky: top; }
+        /* NAVBAR UNIFICADA */
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: #0a0a0a;
+            border-bottom: 1px solid #222;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo { font-weight: bold; font-size: 0.8rem; line-height: 1.2; text-align: left; }
         .logo span { color: #ffb400; }
-        .menu a { color: #fff; text-decoration: none; margin-left: 15px; font-size: 0.9rem; }
+        
+        .menu { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+        .menu a { color: #fff; text-decoration: none; font-size: 0.75rem; padding: 5px; }
         .menu a.active { color: #ffb400; font-weight: bold; }
+        .menu a.consultas { color: #fff; border: 1px solid #ffb400; border-radius: 4px; padding: 4px 8px; }
 
-        .container { max-width: 1000px; margin: 50px auto; padding: 0 20px; }
-        h1 { font-size: 2.5rem; margin-bottom: 30px; text-align: center; }
+        .container { width: 100%; max-width: 1100px; padding: 40px 20px; }
+        h1 { font-size: 2.5rem; margin-bottom: 40px; text-align: center; font-weight: 800; }
 
-        /* GRID DE NOTICIAS */
-        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        /* GRID DE NOTICIAS (6 CUADRADOS) */
+        .news-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 25px; 
+        }
 
         .news-card { 
-            background: #111; 
+            background: #0a0a0a; 
             border: 1px solid #222; 
             border-radius: 12px; 
             overflow: hidden; 
             cursor: pointer; 
-            transition: 0.3s; 
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
         }
-        .news-card:hover { border-color: #ffb400; transform: translateY(-5px); }
-        .news-content { padding: 20px; }
-        .news-date { color: #ffb400; font-size: 0.8rem; font-weight: bold; }
-        .news-title { font-size: 1.2rem; margin: 10px 0; }
-        .news-excerpt { color: #888; font-size: 0.9rem; line-height: 1.4; }
+        .news-card:hover { border-color: #ffb400; transform: translateY(-5px); background: #111; }
+        
+        .news-content { padding: 25px; }
+        .news-date { color: #ffb400; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .news-title { font-size: 1.25rem; margin: 12px 0; font-weight: 700; line-height: 1.3; }
+        .news-excerpt { color: #888; font-size: 0.9rem; line-height: 1.5; }
 
-        /* MODALES (LAS VENTANAS QUE SE ABREN) */
+        /* MODALES */
         .modal {
-            display: none; /* Escondido por defecto */
+            display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.95);
             z-index: 2000;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
         .modal-content {
-            background: #111;
-            width: 90%;
-            max-width: 700px;
+            background: #0a0a0a;
+            width: 100%;
+            max-width: 600px;
             padding: 40px;
             border-radius: 15px;
             border: 1px solid #333;
             position: relative;
-            max-height: 80vh;
+            max-height: 85vh;
             overflow-y: auto;
         }
         .close-btn {
             position: absolute;
-            top: 20px; right: 20px;
+            top: 15px; right: 20px;
             font-size: 2rem;
             color: #ffb400;
             cursor: pointer;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; gap: 10px; text-align: center; }
+            .menu { justify-content: center; width: 100%; }
+            h1 { font-size: 2rem; }
+            .news-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -73,6 +112,7 @@
             <a href="horarios.html">Horarios</a>
             <a href="rutas.html">Rutas</a>
             <a href="noticias.html" class="active">Noticias</a>
+            <a href="#" class="consultas">Consultas</a>
         </div>
     </nav>
 
@@ -92,7 +132,39 @@
                 <div class="news-content">
                     <p class="news-date">20 MARZO, 2026</p>
                     <h3 class="news-title">Nuevos Paraderos en Ventanilla</h3>
-                    <p class="news-excerpt">Se han habilitado nuevos puntos de recojo estratégicos para mejorar la fluidez...</p>
+                    <p class="news-excerpt">Se han habilitado nuevos puntos de recojo estratégicos para mejorar la fluidez del servicio...</p>
+                </div>
+            </div>
+
+            <div class="news-card" onclick="openModal('modal3')">
+                <div class="news-content">
+                    <p class="news-date">Fecha, 2026</p>
+                    <h3 class="news-title">Título de la Noticia 3</h3>
+                    <p class="news-excerpt">Breve descripción o resumen de lo que trata esta noticia para captar la atención...</p>
+                </div>
+            </div>
+
+            <div class="news-card" onclick="openModal('modal4')">
+                <div class="news-content">
+                    <p class="news-date">Fecha, 2026</p>
+                    <h3 class="news-title">Título de la Noticia 4</h3>
+                    <p class="news-excerpt">Breve descripción o resumen de lo que trata esta noticia para captar la atención...</p>
+                </div>
+            </div>
+
+            <div class="news-card" onclick="openModal('modal5')">
+                <div class="news-content">
+                    <p class="news-date">Fecha, 2026</p>
+                    <h3 class="news-title">Título de la Noticia 5</h3>
+                    <p class="news-excerpt">Breve descripción o resumen de lo que trata esta noticia para captar la atención...</p>
+                </div>
+            </div>
+
+            <div class="news-card" onclick="openModal('modal6')">
+                <div class="news-content">
+                    <p class="news-date">Fecha, 2026</p>
+                    <h3 class="news-title">Título de la Noticia 6</h3>
+                    <p class="news-excerpt">Breve descripción o resumen de lo que trata esta noticia para captar la atención...</p>
                 </div>
             </div>
         </div>
@@ -101,12 +173,12 @@
     <div id="modal1" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
-            <p style="color: #ffb400;">29 MARZO, 2026</p>
+            <p style="color: #ffb400; font-weight: bold;">29 MARZO, 2026</p>
             <h2 style="margin: 15px 0;">Actualización del Padrón 2026-A</h2>
             <hr style="border: 0; border-top: 1px solid #333; margin-bottom: 20px;">
             <p style="line-height: 1.6; color: #ccc;">
                 Estimados estudiantes, se les comunica que el proceso de inscripción para el padrón de movilidad del ciclo 2026-A finaliza hoy. <br><br>
-                Es obligatorio haber completado el formulario digital para que se les asigne un número de asiento y reciban su correo de confirmación. Los resultados finales se enviarán directamente a sus correos institucionales.
+                Es obligatorio haber completado el formulario digital para que se les asigne un número de asiento y reciban su correo de confirmación.
             </p>
         </div>
     </div>
@@ -114,10 +186,10 @@
     <div id="modal2" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('modal2')">&times;</span>
-            <p style="color: #ffb400;">20 MARZO, 2026</p>
+            <p style="color: #ffb400; font-weight: bold;">20 MARZO, 2026</p>
             <h2 style="margin: 15px 0;">Nuevos Paraderos en Ventanilla</h2>
             <p style="line-height: 1.6; color: #ccc;">
-                Tras las gestiones realizadas, se confirma que el bus tendrá paradas adicionales en puntos estratégicos para evitar que caminen tramos largos. Recuerden estar 5 minutos antes en su paradero correspondiente.
+                Se han habilitado nuevos puntos estratégicos para mejorar la fluidez del servicio. Revisa el mapa actualizado para ubicar tu paradero más cercano.
             </p>
         </div>
     </div>
@@ -125,14 +197,16 @@
     <script>
         function openModal(id) {
             document.getElementById(id).style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Bloquea el scroll al abrir
         }
         function closeModal(id) {
             document.getElementById(id).style.display = 'none';
+            document.body.style.overflow = 'auto'; // Devuelve el scroll
         }
-        // Cerrar si hacen clic fuera de la caja
         window.onclick = function(event) {
             if (event.target.className === 'modal') {
                 event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
             }
         }
     </script>
