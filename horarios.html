@@ -6,53 +6,103 @@
     <title>Horarios - Movilidad UNAC</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        /* --- BASE --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: #000; color: #fff; font-family: 'Segoe UI', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+        body { 
+            background-color: #000; 
+            color: #fff; 
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-        /* NAVBAR (Imagen 2) */
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 7%; background: rgba(10, 10, 10, 0.95); border-bottom: 1px solid #222; }
-        .logo { font-weight: bold; font-size: 0.8rem; line-height: 1.2; }
+        /* --- NAVBAR (ARRIBA) --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: #0a0a0a;
+            border-bottom: 1px solid #222;
+        }
+        .logo { font-weight: bold; font-size: 0.75rem; line-height: 1.2; }
         .logo span { color: #ffb400; }
-        .menu { display: flex; gap: 20px; }
-        .menu a { color: #fff; text-decoration: none; font-size: 0.9rem; }
-        .menu a.active { color: #ffb400; border-bottom: 2px solid #ffb400; padding-bottom: 5px; }
+        .menu { display: flex; gap: 15px; }
+        .menu a { color: #fff; text-decoration: none; font-size: 0.85rem; }
+        .menu a.active { color: #ffb400; font-weight: bold; }
 
-        /* CONTENIDO CENTRADO */
-        .hero { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 50px 20px; text-align: center; }
-        h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 800; margin-bottom: 10px; }
-        .subtitle { color: #888; margin-bottom: 40px; max-width: 700px; }
+        /* --- CONTENIDO --- */
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 15px;
+            text-align: center;
+        }
 
-        /* RECUADRO NEGRO */
-        .info-panel, .table-wrap { background: #0a0a0a; border: 1px solid #222; border-radius: 20px; width: 100%; max-width: 1000px; padding: 30px; margin-bottom: 25px; text-align: left; }
+        h1 { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 800; margin-bottom: 10px; line-height: 1.1; }
+        .subtitle { color: #888; margin-bottom: 30px; font-size: 0.9rem; max-width: 600px; }
 
-        /* SWITCH */
-        .switch-container { display: flex; background: #1a1a1a; border-radius: 50px; padding: 5px; margin-bottom: 30px; cursor: pointer; width: fit-content; }
-        .switch-btn { padding: 12px 25px; border-radius: 50px; font-weight: 600; font-size: 0.85rem; transition: 0.3s; }
+        /* --- RECUADRO NEGRO --- */
+        .info-panel, .table-wrap {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 900px; /* Centrado en laptop */
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        /* --- SWITCH --- */
+        .switch-container {
+            display: flex;
+            background: #1a1a1a;
+            border-radius: 50px;
+            padding: 4px;
+            margin-bottom: 25px;
+            cursor: pointer;
+            width: fit-content;
+        }
+        .switch-btn { padding: 10px 18px; border-radius: 50px; font-weight: 600; font-size: 0.8rem; transition: 0.3s; }
         .going .btn-going, .return .btn-return { background: #ffb400; color: #000; }
         .going .btn-return, .return .btn-going { color: #666; }
 
-        /* TABLAS CON TODAS LAS RUTAS */
+        /* --- TABLAS --- */
         .schedule-table { display: none; width: 100%; border-collapse: collapse; }
         .active-table { display: table; }
-        th { color: #ffb400; text-align: left; padding: 15px; border-bottom: 1px solid #222; font-size: 0.75rem; text-transform: uppercase; }
-        td { padding: 15px; border-bottom: 1px solid #111; font-size: 0.9rem; }
+        th { color: #ffb400; text-align: left; padding: 10px; border-bottom: 1px solid #222; font-size: 0.7rem; text-transform: uppercase; }
+        td { padding: 12px 10px; border-bottom: 1px solid #111; font-size: 0.85rem; }
         .time { font-weight: bold; color: #fff; }
 
-        /* STATS (Imagen 3) */
-        .stats { background: #0a0a0a; display: flex; justify-content: space-around; padding: 30px 5%; border-top: 1px solid #222; width: 100%; }
+        /* --- STATS (ABAJO - CORREGIDO) --- */
+        .stats {
+            background: #0a0a0a;
+            display: flex;
+            justify-content: space-around;
+            padding: 20px 5%;
+            border-top: 1px solid #222;
+            width: 100%;
+        }
         .item { text-align: center; }
-        .item strong { display: block; color: #ffb400; font-size: 1.1rem; }
-        .item p { font-size: 0.75rem; color: #666; margin-top: 5px; text-transform: uppercase; }
+        .item strong { display: block; color: #ffb400; font-size: 1rem; }
+        .item p { font-size: 0.65rem; color: #666; margin-top: 3px; text-transform: uppercase; }
 
+        /* --- AJUSTES MÓVIL --- */
         @media (max-width: 768px) {
-            .menu { display: none; }
-            .stats { flex-wrap: wrap; gap: 20px; }
-            .item { flex: 1 1 40%; }
-            .table-wrap { overflow-x: auto; }
+            .navbar { flex-direction: column; gap: 10px; padding: 10px; }
+            .menu { gap: 10px; }
+            .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 15px; }
+            .item { text-align: center; border: 1px solid #111; padding: 10px; border-radius: 8px; }
+            .table-wrap { overflow-x: auto; } /* Scroll para tabla si es muy ancha */
         }
     </style>
 </head>
 <body>
+
     <nav class="navbar">
         <div class="logo">UNIVERSIDAD NACIONAL DEL CALLAO<br><span>MOVILIDAD UNIVERSITARIA</span></div>
         <div class="menu">
@@ -65,11 +115,12 @@
     </nav>
 
     <section class="hero">
-        <p style="color: #ffb400; font-weight: bold;">PLANIFICA TU VIAJE</p>
-        <h1>Horarios de la Ruta Ventanilla</h1>
+        <p style="color: #ffb400; font-weight: bold; font-size: 0.8rem;">PLANIFICA TU VIAJE</p>
+        <h1>Horarios de la<br>Ruta Ventanilla</h1>
+        
         <div class="info-panel">
-            <p><strong>🚍 Servicio de Movilidad Universitaria 📍</strong></p><br>
-            <p>Horarios vigentes para el ciclo 2026-A.</p>
+            <p><strong>🚍 Servicio UNAC 📍</strong></p>
+            <p style="color: #888; font-size: 0.85rem; margin-top: 5px;">Horarios vigentes Ciclo 2026-A. Sujetos a cambios según evaluación académica.</p>
         </div>
 
         <div class="switch-container going" id="mainSwitch">
@@ -79,26 +130,26 @@
 
         <div class="table-wrap">
             <table class="schedule-table active-table" id="tableGoing">
-                <thead><tr><th>Hora</th><th>Partida</th><th>Destino</th><th>Días</th></tr></thead>
+                <thead><tr><th>Hora</th><th>Paradero</th><th>Días</th></tr></thead>
                 <tbody>
-                    <tr><td class="time">05:15 AM</td><td>Ventanilla</td><td>Campus UNAC</td><td>L-V</td></tr>
+                    <tr><td class="time">05:15 AM</td><td>Ventanilla (Metro)</td><td>L-V</td></tr>
                 </tbody>
             </table>
             <table class="schedule-table" id="tableReturn">
-                <thead><tr><th>Hora</th><th>Partida</th><th>Destino</th><th>Días</th></tr></thead>
+                <thead><tr><th>Hora</th><th>Destino</th><th>Días</th></tr></thead>
                 <tbody>
-                    <tr><td class="time">02:30 PM</td><td>Campus UNAC</td><td>INKA COLA</td><td>L-V</td></tr>
-                    <tr><td class="time">06:00 PM</td><td>Campus UNAC</td><td>Ventanilla</td><td>L-V</td></tr>
-                    <tr><td class="time">10:15 PM</td><td>Campus UNAC</td><td>TELÉFONO</td><td>L-V</td></tr>
+                    <tr><td class="time">02:30 PM</td><td>INKA COLA</td><td>L-V</td></tr>
+                    <tr><td class="time">06:00 PM</td><td>VENTANILLA</td><td>L-V</td></tr>
+                    <tr><td class="time">10:15 PM</td><td>TELÉFONO</td><td>L-V</td></tr>
                 </tbody>
             </table>
         </div>
     </section>
 
     <footer class="stats">
-        <div class="item"><strong>Lunes a Viernes</strong><p>Frecuencia</p></div>
-        <div class="item"><strong>En Servicio</strong><p>Estado</p></div>
-        <div class="item"><strong>40 Cupos</strong><p>Capacidad</p></div>
+        <div class="item"><strong>L-V</strong><p>Frecuencia</p></div>
+        <div class="item"><strong>Activo</strong><p>Estado</p></div>
+        <div class="item"><strong>40</strong><p>Cupos</p></div>
         <div class="item"><strong>Directa</strong><p>Ruta</p></div>
     </footer>
 
@@ -106,6 +157,7 @@
         const sw = document.getElementById('mainSwitch');
         const t1 = document.getElementById('tableGoing');
         const t2 = document.getElementById('tableReturn');
+
         sw.addEventListener('click', () => {
             sw.classList.toggle('going');
             sw.classList.toggle('return');
