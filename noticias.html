@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movilidad UNAC - Reporte</title>
+    <title>Noticias - Movilidad UNAC</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.1.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <style>
@@ -18,105 +18,171 @@
             min-height: 100vh;
         }
 
-        /* NAVBAR SIMPLE */
+        /* NAVBAR */
         .navbar {
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 5%;
-            background: #000;
+            background: #0a0a0a;
             border-bottom: 1px solid #222;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         .logo { font-weight: bold; font-size: 0.8rem; line-height: 1.2; }
         .logo span { color: #ffb400; }
-        .menu a { color: #fff; text-decoration: none; font-size: 0.75rem; margin-left: 15px; }
+        .menu a { color: #fff; text-decoration: none; font-size: 0.75rem; padding: 5px; margin-left: 10px; }
+        .menu a.active { color: #ffb400; font-weight: bold; }
 
-        /* SECCIÓN PRINCIPAL CENTRADA */
-        .main-container {
+        .container { width: 100%; max-width: 1100px; padding: 40px 20px; }
+        h1 { font-size: 2.5rem; margin-bottom: 40px; text-align: center; font-weight: 800; }
+
+        /* GRID */
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .news-card { 
+            background: #0a0a0a; border: 1px solid #222; border-radius: 12px; 
+            padding: 25px; cursor: pointer; transition: 0.3s;
+        }
+        .news-card:hover { border-color: #ffb400; transform: translateY(-5px); }
+        .news-date { color: #ffb400; font-size: 0.75rem; font-weight: bold; }
+        .news-title { font-size: 1.25rem; margin: 12px 0; font-weight: 700; }
+
+        /* MODAL ESTILO IMAGEN REPORTE */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.98);
+            z-index: 2000;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+            overflow-y: auto;
+        }
+        .modal-content {
             width: 100%;
-            max-width: 1000px;
-            padding: 60px 20px;
-            text-align: center;
+            max-width: 900px;
+            text-align: center; /* Centrado como en la imagen */
+            position: relative;
+        }
+        .close-btn {
+            position: fixed;
+            top: 20px; right: 30px;
+            font-size: 2.5rem; color: #ffb400; cursor: pointer; z-index: 2100;
         }
 
-        .tagline { color: #ffb400; font-size: 0.9rem; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; }
-        .main-title { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -1px; }
-        .description { color: #ccc; font-size: 1.1rem; max-width: 800px; margin: 0 auto 50px; line-height: 1.6; }
-
-        /* BLOQUE DE REPORTE */
-        .report-section {
-            text-align: left;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid #222;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 40px;
-        }
-        .report-section h3 { margin-bottom: 20px; font-size: 1.3rem; color: #ffb400; }
-        .data-item { margin-bottom: 15px; border-left: 3px solid #ffb400; padding-left: 15px; color: #ddd; }
+        /* DISEÑO INTERNO DEL REPORTE (Basado en imagen) */
+        .report-header { color: #ffb400; font-size: 0.9rem; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; }
+        .report-main-title { font-size: 3rem; margin-bottom: 20px; font-weight: 800; letter-spacing: -1px; }
+        .report-subtitle { color: #aaa; font-size: 1rem; margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto; }
+        
+        .report-section-title { font-size: 1.5rem; font-weight: bold; margin: 40px 0 20px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        
+        .data-list { text-align: left; max-width: 800px; margin: 0 auto 40px; line-height: 1.8; color: #ccc; }
+        .data-item { margin-bottom: 15px; border-left: 3px solid #ffb400; padding-left: 15px; }
+        .data-item b { color: #fff; }
 
         /* CONTENEDOR DE GRÁFICAS */
         .dashboard-container { 
-            display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 20px;
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 50px; padding-bottom: 50px;
         }
         .chart-card { 
             background: #fff; border-radius: 8px; padding: 20px; flex: 1 1 280px; 
-            max-width: 320px; color: #000;
+            max-width: 320px; border-top: 5px solid #1a73e8; color: #000;
         }
-        .chart-card h3 { font-size: 11px; margin-bottom: 15px; color: #202124; font-weight: bold; text-align: center; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .chart-card h3 { font-size: 11px; margin-bottom: 15px; color: #202124; font-weight: bold; text-align: center; }
 
         @media (max-width: 768px) {
-            .main-title { font-size: 2.2rem; }
+            .report-main-title { font-size: 2rem; }
+            .chart-card { max-width: 100%; }
         }
     </style>
 </head>
-<body onload="renderCharts()">
+<body>
 
     <nav class="navbar">
         <div class="logo">UNIVERSIDAD NACIONAL DEL CALLAO<br><span>MOVILIDAD UNIVERSITARIA</span></div>
         <div class="menu">
             <a href="#">Inicio</a>
-            <a href="#">Horarios</a>
-            <a href="#">Rutas</a>
+            <a href="#" class="active">Noticias</a>
             <a href="#">Consultas</a>
         </div>
     </nav>
 
-    <div class="main-container">
-        <p class="tagline">Mantente informado</p>
-        <h1 class="main-title">Noticias y Avisos</h1>
-        <p class="description">
-            Entérate de las últimas novedades, cambios en horarios, campañas y comunicados oficiales de la Oficina de Movilidad Universitaria.
-        </p>
-
-        <div class="report-section">
-            <h3>📢 REPORTE DE GESTIÓN: RESULTADOS 2026-A</h3>
-            <div class="data-item"><b>Respaldo:</b> 94.3% de aprobación a la gestión actual.</div>
-            <div class="data-item"><b>Horarios:</b> Mañana (5:15 AM) y Tarde-Noche (6:00 PM) con mayor demanda.</div>
-            <div class="data-item"><b>Facultades:</b> Alta participación de FCE, FCC y FCA.</div>
-        </div>
-
-        <div class="dashboard-container">
-            <div class="chart-card">
-                <h3>FACULTAD (OBLIGATORIO)</h3>
-                <canvas id="chartFacultad"></canvas>
-            </div>
-            <div class="chart-card">
-                <h3>HORARIOS DE MOVILIDAD</h3>
-                <canvas id="chartHorarios"></canvas>
-            </div>
-            <div class="chart-card">
-                <h3>VOTO DE CONFIANZA</h3>
-                <canvas id="chartVoto"></canvas>
+    <div class="container">
+        <h1>Últimas Noticias</h1>
+        <div class="news-grid">
+            <div class="news-card" onclick="openModal('modalReporte')">
+                <p class="news-date">25 MARZO, 2026</p>
+                <h3 class="news-title">📢 Reporte de Gestión: Resultados Rumbo al Ciclo 2026-A</h3>
+                <p style="color: #888; font-size: 0.9rem;">Haz clic para ver el balance de la actualización de datos y el respaldo de la ruta.</p>
             </div>
         </div>
+    </div>
 
-        <p style="margin-top: 60px; color: #666; font-size: 0.9rem;">Atentamente, Delegado Sebastian – Movilidad Ventanilla 👦🏻🚌</p>
+    <div id="modalReporte" class="modal">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        
+        <div class="modal-content">
+            <p class="report-header">Mantente informado</p>
+            <h2 class="report-main-title">Noticias y Avisos</h2>
+            <p class="report-subtitle">Entérate de las últimas novedades, cambios en horarios, campañas y comunicados oficiales de la Oficina de Movilidad Universitaria.</p>
+
+            <h3 class="report-section-title">📢 REPORTE DE GESTIÓN: RESULTADOS 2026-A 🚌💨</h3>
+            
+            <div class="data-list">
+                <p style="margin-bottom: 20px;">¡Hola, comunidad de la Ruta Ventanilla! 👋 Tal como lo prometimos, la transparencia es la base de nuestra organización. Tras el cierre del formulario, compartimos los resultados que respaldan nuestras gestiones para el inicio de clases el <b>1 de abril</b>. 📍</p>
+                
+                <div class="data-item">
+                    <b>Respaldo Contundente:</b> ¡Gracias por la confianza! Contamos con un <b>94.3% de aprobación</b> a la gestión actual. ✅
+                </div>
+                <div class="data-item">
+                    <b>Demanda de Horarios:</b> El turno <b>Tarde-Noche (6:00 PM)</b> y el de la <b>Mañana (5:15 AM)</b> son los más críticos. ⏳
+                </div>
+                <div class="data-item">
+                    <b>Participación Total:</b> Estudiantes de todas las facultades, liderados por <b>FCE, FCC y FCA</b>, ya están registrados. 🏛️
+                </div>
+                
+                <p style="background: rgba(255,180,0,0.1); padding: 15px; border-radius: 8px; font-size: 0.85rem; border: 1px dashed #ffb400;">
+                    ⚠️ <b>RECORDATORIO FINAL:</b> El padrón oficial ha sido actualizado. Este registro es VITAL para garantizar tu cupo y seguridad. El verano se acaba, pero nuestro compromiso sigue firme. ☀️
+                </p>
+                <p style="text-align: center; margin-top: 25px; font-weight: bold; color: #ffb400;">Atentamente, Delegado Sebastian – Movilidad Ventanilla 👦🏻🚌</p>
+            </div>
+
+            <div class="dashboard-container">
+                <div class="chart-card">
+                    <h3>FACULTAD (OBLIGATORIO)</h3>
+                    <canvas id="chartFacultad"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>HORARIOS QUE TOMABA LA MOVILIDAD</h3>
+                    <canvas id="chartHorarios"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>RATIFICACIÓN Y VOTO DE CONFIANZA</h3>
+                    <canvas id="chartVoto"></canvas>
+                </div>
+            </div>
+            
+            <p style="margin-bottom: 40px; font-weight: bold;">¡Gracias por ser parte del cambio! Nos vemos en la ruta este 1 de abril. 🗺️🙌</p>
+        </div>
     </div>
 
     <script>
         Chart.register(ChartDataLabels);
+
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            renderCharts();
+        }
+
+        function closeModal() {
+            document.getElementById('modalReporte').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
 
         function renderCharts() {
             const commonOptions = {
@@ -129,6 +195,7 @@
                 }
             };
 
+            // 1. Facultad
             new Chart(document.getElementById('chartFacultad'), {
                 type: 'pie',
                 data: {
@@ -146,6 +213,7 @@
                 }
             });
 
+            // 2. Horarios
             new Chart(document.getElementById('chartHorarios'), {
                 type: 'bar',
                 data: {
@@ -160,11 +228,12 @@
                     scales: { x: { display: false }, y: { ticks: { font: { size: 8 } } } },
                     plugins: {
                         legend: { display: false },
-                        datalabels: { anchor: 'end', align: 'start', color: '#444', font: { weight: 'bold' }, formatter: (v) => v + '%' }
+                        datalabels: { anchor: 'end', align: 'start', color: '#444', font: { weight: 'bold', size: 10 }, formatter: (v) => v + '%' }
                     }
                 }
             });
 
+            // 3. Voto
             new Chart(document.getElementById('chartVoto'), {
                 type: 'pie',
                 data: {
@@ -176,7 +245,7 @@
                 },
                 options: {
                     plugins: {
-                        legend: { position: 'bottom' },
+                        legend: { position: 'bottom', labels: { font: { size: 9 } } },
                         datalabels: commonOptions.plugins.datalabels
                     }
                 }
