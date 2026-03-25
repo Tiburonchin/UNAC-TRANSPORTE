@@ -3,131 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reporte de Gestión - Movilidad UNAC</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.1.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            background-color: #000; 
-            color: #fff; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #000; color: #fff; }
+        
+        /* NAVBAR SIMPLE */
+        .navbar {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            min-height: 100vh;
+            padding: 15px 5%;
+            background: #000;
+            border-bottom: 1px solid #222;
         }
+        .logo { font-weight: bold; font-size: 13px; line-height: 1.2; }
+        .logo span { color: #ffb400; }
+        .menu { display: flex; gap: 15px; align-items: center; }
+        .menu a { color: #fff; text-decoration: none; font-size: 13px; }
+        .btn-active { background: #ffb400; color: #000 !important; padding: 8px 15px; border-radius: 5px; font-weight: bold; }
+        .btn-outline { border: 1px solid #ffb400; padding: 8px 15px; border-radius: 5px; }
 
-        /* MODAL (Ventana del Reporte) */
-        .modal {
-            display: block; /* Se muestra por defecto para visualizar el cambio */
-            position: relative;
-            width: 100%;
-            max-width: 900px;
-            padding: 60px 20px;
-            text-align: center;
-        }
+        /* CONTENIDO PRINCIPAL CENTRADO */
+        .main-content { text-align: center; padding: 60px 20px; max-width: 1000px; margin: 0 auto; }
+        .tagline { color: #ffb400; font-size: 14px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; }
+        .main-title { font-size: 48px; font-weight: 800; margin: 0 0 20px 0; }
+        .description { color: #ccc; font-size: 16px; line-height: 1.6; margin-bottom: 50px; }
 
-        /* ENCABEZADO ESTILO IMAGEN */
-        .tagline { 
-            color: #ffb400; 
-            font-size: 0.9rem; 
-            font-weight: bold; 
-            text-transform: uppercase; 
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-        }
-        .main-title { 
-            font-size: 3.5rem; 
-            font-weight: 800; 
-            margin-bottom: 20px; 
-            letter-spacing: -1px;
-        }
-        .description { 
-            color: #ccc; 
-            font-size: 1.1rem; 
-            max-width: 750px; 
-            margin: 0 auto 50px; 
-            line-height: 1.5;
-        }
-
-        /* CUERPO DEL COMUNICADO */
-        .report-box {
-            text-align: left;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid #222;
-            border-radius: 15px;
-            padding: 35px;
-            margin-bottom: 40px;
-        }
-        .report-box h3 { 
-            color: #fff; 
-            font-size: 1.4rem; 
-            margin-bottom: 25px; 
-            display: flex; 
-            align-items: center; 
-            gap: 10px;
-        }
-        .data-item { 
-            margin-bottom: 18px; 
-            padding-left: 15px; 
-            border-left: 3px solid #ffb400;
-            color: #ddd;
-        }
-        .data-item b { color: #fff; }
-
-        /* CONTENEDOR DE GRÁFICAS */
-        .dashboard-container { 
-            display: flex; 
-            flex-wrap: wrap; 
-            justify-content: center; 
-            gap: 20px; 
-            margin-top: 30px;
-        }
-        .chart-card { 
-            background: #fff; 
-            border-radius: 12px; 
-            padding: 20px; 
-            flex: 1 1 280px; 
-            max-width: 350px; 
-            color: #000;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .chart-card h3 { 
-            font-size: 12px; 
-            margin-bottom: 15px; 
-            color: #202124; 
-            font-weight: bold; 
-            text-align: center;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .main-title { font-size: 2.5rem; }
-            .description { font-size: 1rem; }
-        }
+        /* GRÁFICAS */
+        .dashboard-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .chart-card { background: white; border-radius: 8px; padding: 20px; flex: 1 1 300px; max-width: 320px; color: #000; }
+        h3 { font-size: 12px; margin-bottom: 15px; text-transform: uppercase; font-weight: bold; text-align: center; color: #333; }
     </style>
 </head>
 <body>
 
-    <div class="modal">
+    <nav class="navbar">
+        <div class="logo">UNIVERSIDAD NACIONAL DEL CALLAO<br><span>MOVILIDAD UNIVERSITARIA</span></div>
+        <div class="menu">
+            <a href="#" class="btn-active">Inicio</a>
+            <a href="#">Horarios</a>
+            <a href="#">Rutas</a>
+            <a href="#">Noticias</a>
+            <a href="#" class="btn-outline">Consultas</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
         <p class="tagline">Mantente informado</p>
         <h1 class="main-title">Noticias y Avisos</h1>
-        <p class="description">Entérate de las últimas novedades, cambios en horarios, campañas y comunicados oficiales de la Oficina de Movilidad Universitaria.</p>
-
-        <div class="report-box">
-            <h3>📢 REPORTE DE GESTIÓN: RESULTADOS 2026-A 🚌💨</h3>
-            <div class="data-item">
-                <b>Respaldo Contundente:</b> ¡Gracias por la confianza! Contamos con un <b>94.3% de aprobación</b> a la gestión actual.
-            </div>
-            <div class="data-item">
-                <b>Demanda de Horarios:</b> El turno <b>Tarde-Noche (6:00 PM)</b> y el de la <b>Mañana (5:15 AM)</b> son los más críticos.
-            </div>
-            <div class="data-item">
-                <b>Participación Total:</b> Estudiantes liderados por <b>FCE, FCC y FCA</b> ya están registrados.
-            </div>
-        </div>
+        <p class="description">
+            Entérate de las últimas novedades, cambios en horarios, campañas y comunicados oficiales de la Oficina de Movilidad Universitaria.
+        </p>
 
         <div class="dashboard-container">
             <div class="chart-card">
@@ -143,80 +70,45 @@
                 <canvas id="chartVoto"></canvas>
             </div>
         </div>
-
-        <p style="margin-top: 50px; color: #888;">Atentamente, Delegado Sebastian – Movilidad Ventanilla 👦🏻🚌</p>
-        <p style="font-weight: bold; margin-top: 10px;">¡Nos vemos en la ruta este 1 de abril! 🗺️</p>
     </div>
 
-    <script>
-        Chart.register(ChartDataLabels);
+<script>
+    Chart.register(ChartDataLabels);
+    const commonOptions = { plugins: { datalabels: { color: '#fff', font: { weight: 'bold', size: 11 }, formatter: (v) => v + '%' } } };
 
-        // Configuración de las gráficas con los datos de las imágenes
-        const commonOptions = {
-            plugins: {
-                datalabels: {
-                    color: '#fff',
-                    font: { weight: 'bold', size: 11 },
-                    formatter: (v) => v + '%'
-                }
-            }
-        };
+    // Gráfica Facultad
+    new Chart(document.getElementById('chartFacultad'), {
+        type: 'pie',
+        data: {
+            labels: ['FCE', 'FCC', 'FCA', 'FIEE', 'FIQ', 'FIARN', 'Otros'],
+            datasets: [{
+                data: [16.8, 11.3, 11.3, 11.3, 9.8, 7.5, 32],
+                backgroundColor: ['#fbbc04', '#4285f4', '#ea4335', '#34a853', '#9334e6', '#12b5cb', '#70757a']
+            }]
+        },
+        options: { plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 9 } } }, datalabels: commonOptions.plugins.datalabels } }
+    });
 
-        // 1. Gráfico Facultad
-        new Chart(document.getElementById('chartFacultad'), {
-            type: 'pie',
-            data: {
-                labels: ['FCE', 'FCC', 'FCA', 'FIEE', 'FIQ', 'FIARN', 'Otros'],
-                datasets: [{
-                    data: [16.8, 11.3, 11.3, 11.3, 9.8, 7.5, 32],
-                    backgroundColor: ['#fbbc04', '#4285f4', '#ea4335', '#34a853', '#9334e6', '#12b5cb', '#70757a']
-                }]
-            },
-            options: {
-                plugins: {
-                    legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } },
-                    datalabels: commonOptions.plugins.datalabels
-                }
-            }
-        });
+    // Gráfica Horarios
+    new Chart(document.getElementById('chartHorarios'), {
+        type: 'bar',
+        data: {
+            labels: ['6:00 PM', '5:15 AM', '2:30 PM', '10:15 PM'],
+            datasets: [{ data: [74.3, 68.3, 46.3, 32], backgroundColor: '#a2d2df' }]
+        },
+        options: { indexAxis: 'y', scales: { x: { display: false }, y: { grid: { display: false }, ticks: { font: { size: 9 } } } }, plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'start', color: '#444', font: { weight: 'bold' }, formatter: (v) => v + '%' } } }
+    });
 
-        // 2. Gráfico Horarios
-        new Chart(document.getElementById('chartHorarios'), {
-            type: 'bar',
-            data: {
-                labels: ['6:00 PM', '5:15 AM', '2:30 PM', '10:15 PM'],
-                datasets: [{
-                    data: [74.3, 68.3, 46.3, 32],
-                    backgroundColor: '#a2d2df'
-                }]
-            },
-            options: {
-                indexAxis: 'y',
-                scales: { x: { display: false }, y: { grid: { display: false } } },
-                plugins: {
-                    legend: { display: false },
-                    datalabels: { anchor: 'end', align: 'start', color: '#444', font: { weight: 'bold' }, formatter: (v) => v + '%' }
-                }
-            }
-        });
+    // Gráfica Voto
+    new Chart(document.getElementById('chartVoto'), {
+        type: 'pie',
+        data: {
+            labels: ['SÍ, de acuerdo', 'NO'],
+            datasets: [{ data: [94.3, 5.7], backgroundColor: ['#3367d6', '#d93025'] }]
+        },
+        options: { plugins: { legend: { position: 'bottom', labels: { font: { size: 10 } } }, datalabels: commonOptions.plugins.datalabels } }
+    });
+</script>
 
-        // 3. Gráfico Voto
-        new Chart(document.getElementById('chartVoto'), {
-            type: 'pie',
-            data: {
-                labels: ['SÍ, de acuerdo', 'NO'],
-                datasets: [{
-                    data: [94.3, 5.7],
-                    backgroundColor: ['#3367d6', '#d93025']
-                }]
-            },
-            options: {
-                plugins: {
-                    legend: { position: 'bottom' },
-                    datalabels: commonOptions.plugins.datalabels
-                }
-            }
-        });
-    </script>
 </body>
 </html>
