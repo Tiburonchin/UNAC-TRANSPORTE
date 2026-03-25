@@ -31,9 +31,12 @@
         }
         .logo { font-weight: bold; font-size: 0.8rem; line-height: 1.2; }
         .logo span { color: #ffb400; }
-        .menu { display: flex; gap: 15px; align-items: center; }
-        .menu a { color: #fff; text-decoration: none; font-size: 0.85rem; padding: 5px 10px; }
+        
+        /* MENU RESPONSIVE */
+        .menu { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+        .menu a { color: #fff; text-decoration: none; font-size: 0.75rem; padding: 5px; }
         .menu a.active { color: #ffb400; font-weight: bold; }
+        .menu a.consultas { color: #fff; border: 1px solid #ffb400; border-radius: 4px; padding: 4px 8px; }
 
         .main-content {
             width: 100%;
@@ -43,9 +46,10 @@
         }
 
         .section-tag { color: #ffb400; font-size: 0.9rem; font-weight: bold; margin-bottom: 10px; display: block; }
-        .section-title { font-size: 3rem; font-weight: 800; margin-bottom: 15px; }
-        .section-description { color: #888; font-size: 1rem; max-width: 800px; margin: 0 auto 50px auto; line-height: 1.5; }
+        .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 15px; line-height: 1.1; }
+        .section-description { color: #888; font-size: 1rem; max-width: 800px; margin: 0 auto 40px auto; line-height: 1.5; }
 
+        /* GRID RESPONSIVE */
         .grid-info {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
@@ -58,47 +62,67 @@
             background: #11141b;
             border: 1px solid #222;
             border-radius: 12px;
-            padding: 25px;
+            padding: 20px;
         }
 
-        h2 { color: #ffb400; font-size: 1rem; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; text-transform: uppercase; font-weight: 700; }
+        h2 { color: #ffb400; font-size: 1rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; text-transform: uppercase; font-weight: 700; }
 
-        .stop-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .stop-item { background: #1a1e26; padding: 12px; border-radius: 6px; font-size: 0.85rem; border: 1px solid #2a2f3a; display: flex; align-items: center; gap: 10px; color: #ccc; }
+        .stop-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .stop-item { background: #1a1e26; padding: 10px; border-radius: 6px; font-size: 0.8rem; border: 1px solid #2a2f3a; display: flex; align-items: center; gap: 8px; color: #ccc; }
         .stop-item.highlight { border: 1px solid #ffb400; color: #fff; }
 
         .doc-item { background: #1a1e26; padding: 15px; border-radius: 8px; margin-bottom: 12px; border-left: 4px solid #ffb400; }
         .doc-item b { display: block; font-size: 0.9rem; color: #ffb400; margin-bottom: 5px; }
         .doc-item p { font-size: 0.8rem; color: #888; }
 
-        .alert-box { background: rgba(255, 68, 68, 0.05); border: 1px solid #442222; padding: 20px; border-radius: 10px; border-left: 5px solid #ff4444; margin-top: 20px; }
-        .alert-box b { color: #ff4444; display: block; margin-bottom: 8px; font-size: 0.85rem; text-transform: uppercase; }
-        .alert-box p { font-size: 0.85rem; color: #fca5a5; line-height: 1.5; }
+        .alert-box { background: rgba(255, 68, 68, 0.05); border: 1px solid #442222; padding: 15px; border-radius: 10px; border-left: 5px solid #ff4444; margin-top: 20px; }
+        .alert-box b { color: #ff4444; display: block; margin-bottom: 8px; font-size: 0.8rem; text-transform: uppercase; }
+        .alert-box p { font-size: 0.8rem; color: #fca5a5; line-height: 1.4; }
 
-        .map-section { width: 100%; background: #11141b; border: 1px solid #222; border-radius: 12px; padding: 15px; margin-top: 20px; }
-        .map-header { text-align: left; margin-bottom: 15px; font-weight: bold; display: flex; align-items: center; gap: 10px; font-size: 0.9rem; }
-        .map-container iframe { width: 100%; height: 450px; border-radius: 8px; border: none; }
+        .map-section { width: 100%; background: #11141b; border: 1px solid #222; border-radius: 12px; padding: 10px; margin-top: 20px; }
+        .map-header { text-align: left; margin-bottom: 10px; font-weight: bold; display: flex; align-items: center; gap: 10px; font-size: 0.85rem; }
+        
+        /* Contenedor de mapa responsivo */
+        .map-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 56.25%; /* Relación de aspecto 16:9 */
+        }
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            border: none;
+        }
 
         .stats { 
             background: #000; 
             display: flex; 
             justify-content: space-around; 
-            padding: 30px 5%; 
+            padding: 20px 5%; 
             border-top: 1px solid #222; 
             width: 100%; 
-            margin-top: 50px;
+            margin-top: 40px;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 15px;
         }
-        .item { text-align: center; min-width: 120px; }
-        .item strong { display: block; color: #ffb400; font-size: 1.2rem; margin-bottom: 5px; }
-        .item p { font-size: 0.7rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+        .item { text-align: center; min-width: 100px; flex: 1; }
+        .item strong { display: block; color: #ffb400; font-size: 1rem; margin-bottom: 5px; }
+        .item p { font-size: 0.65rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
 
-        @media (max-width: 800px) {
+        /* AJUSTES ESPECÍFICOS PARA MÓVIL */
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; gap: 10px; text-align: center; }
+            .menu { justify-content: center; }
+            .section-title { font-size: 1.8rem; }
             .grid-info { grid-template-columns: 1fr; }
             .stop-list { grid-template-columns: 1fr; }
-            .section-title { font-size: 2rem; }
             .stats { justify-content: center; }
+            .item { min-width: 45%; } /* Dos por fila en móvil */
         }
     </style>
 </head>
@@ -111,6 +135,7 @@
             <a href="horarios.html">Horarios</a>
             <a href="rutas.html" class="active">Rutas</a>
             <a href="noticias.html">Noticias</a>
+            <a href="#" class="consultas">Consultas</a>
         </div>
     </nav>
 
@@ -119,7 +144,7 @@
         <span class="section-tag">Recorrido y paradas</span>
         <h1 class="section-title">Rutas y Puntos de Partida</h1>
         <p class="section-description">
-            Conoce el recorrido completo de la Ruta Ventanilla, los puntos de parada y la documentación necesaria para acceder al servicio.
+            Conoce el recorrido completo de la Ruta Ventanilla y los puntos de parada autorizados.
         </p>
 
         <div class="grid-info">
@@ -151,25 +176,24 @@
                 </div>
                 <div class="doc-item">
                     <b>DNI Original</b>
-                    <p>Opcional para verificación de identidad adicional.</p>
+                    <p>Opcional para verificación adicional.</p>
                 </div>
                 <div class="doc-item">
                     <b>Constancia de Matrícula</b>
-                    <p>Actualizada del semestre vigente, en caso de no tener carnet universitario.</p>
+                    <p>En caso de no contar con carnet actualizado.</p>
                 </div>
 
                 <div class="alert-box">
-                    <b>❗ DATO ADICIONAL IMPORTANTE ❗</b>
-                    <p>Debido a la alta demanda, el último paradero para recoger pasajeros es <strong>CARSA VENTANILLA 🚌</strong>. No se confíen 😬.</p>
-                    <p style="margin-top:10px;">Comuníquense con el <strong>delegado 🙋‍♂️</strong> para ver si hay espacio disponible para subir en los siguientes paraderos 😥.</p>
+                    <b>❗ IMPORTANTE</b>
+                    <p>Último paradero para recoger: <strong>CARSA VENTANILLA 🚌</strong>. Consultar con el delegado por espacios disponibles.</p>
                 </div>
             </div>
         </div>
 
         <div class="map-section">
-            <div class="map-header">🗺️ Mapa: Campus UNAC – Bellavista, Callao</div>
+            <div class="map-header">🗺️ Mapa de Ruta</div>
             <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m64!1m12!1m3!1d30472.9992456036!2d-77.1375958!3d-12.044987500000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m49!3e0!4m5!1s0x9105d526b243bda5%3A0x4f54a232b468d4dd!2sUNAC%20-%20VENTANILLA%2C%205VG8%2BJM6%2C%20Ventanilla%2007076!3m2!1d-11.823452099999999!2d-77.13334929999999!4m3!3m2!1d-11.8252305!2d-77.1234052!4m3!3m2!1d-11.843182599999999!2d-77.101874!4m3!3m2!1d-11.8375611!2d-77.11113209999999!4m5!1s0x9105d43d3b9d9f15%3A0x7484f44b11f271b!2sPolicl%C3%ADnico%20Emanuel%2C%20Ventanilla%2007076!3m2!1d-11.841529999999999!2d-77.11502!4m5!1s0x9105d41212110f83%3A0x3381ebbdfb7c3a11!2sCajamarca%2C%20Mi%20Per%C3%BA%2007056!3m2!1d-11.85413!2d-77.12089!4m3!3m2!1d-11.859558199999999!2d-77.124529!4m3!3m2!1d-11.8754478!2d-77.1269141!4m3!3m2!1d-12.0480583!2d-77.11540509999999!4m5!1s0x9105cb910984762b%3A0x104327c627fa29ad!2sUniversidad%20Nacional%20del%20Callao%2C%20Av.%20Juan%20Pablo%20%E2%85%A1%20306%2C%20Bellavista%2007011!3m2!1d-12.0613052!2d-77.11724869999999!5e1!3m2!1ses-419!2spe!4v1774469761076!5m2!1ses-419!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m64!1m12!1m3!1d30472.9992456036!2d-77.1375958!3d-12.044987500000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m49!3e0!4m5!1s0x9105d526b243bda5%3A0x4f54a232b468d4dd!2sUNAC%20-%20VENTANILLA%2C%205VG8%2BJM6%2C%20Ventanilla%2007076!3m2!1d-11.823452099999999!2d-77.13334929999999!4m3!3m2!1d-11.8252305!2d-77.1234052!4m3!3m2!1d-11.843182599999999!2d-77.101874!4m3!3m2!1d-11.8375611!2d-77.11113209999999!4m5!1s0x9105d43d3b9d9f15%3A0x7484f44b11f271b!2sPolicl%C3%ADnico%20Emanuel%2C%20Ventanilla%2007076!3m2!1d-11.841529999999999!2d-77.11502!4m5!1s0x9105d41212110f83%3A0x3381ebbdfb7c3a11!2sCajamarca%2C%20Mi%20Per%C3%BA%2007056!3m2!1d-11.85413!2d-77.12089!4m3!3m2!1d-11.859558199999999!2d-77.124529!4m3!3m2!1d-11.8754478!2d-77.1269141!4m3!3m2!1d-12.0480583!2d-77.11540509999999!4m5!1s0x9105cb910984762b%3A0x104327c627fa29ad!2sUniversidad%20Nacional%20del%20Callao%2C%20Av.%20Juan%20Pablo%20%E2%85%A1%20306%2C%20Bellavista%2007011!3m2!1d-12.0613052!2d-77.11724869999999!5e1!3m2!1ses-419!2spe!4v1774469761076!5m2!1ses-419!2spe" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </main>
