@@ -6,110 +6,53 @@
     <title>Horarios - Movilidad UNAC</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* --- RESET Y BASE --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            background-color: #000; 
-            color: #fff; 
-            font-family: 'Segoe UI', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+        body { background-color: #000; color: #fff; font-family: 'Segoe UI', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
 
-        /* --- NAVBAR (Lo de arriba) --- */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 7%;
-            background: rgba(10, 10, 10, 0.95);
-            border-bottom: 1px solid #222;
-        }
+        /* NAVBAR (Imagen 2) */
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 7%; background: rgba(10, 10, 10, 0.95); border-bottom: 1px solid #222; }
         .logo { font-weight: bold; font-size: 0.8rem; line-height: 1.2; }
         .logo span { color: #ffb400; }
         .menu { display: flex; gap: 20px; }
-        .menu a { color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+        .menu a { color: #fff; text-decoration: none; font-size: 0.9rem; }
         .menu a.active { color: #ffb400; border-bottom: 2px solid #ffb400; padding-bottom: 5px; }
 
-        /* --- CONTENIDO CENTRAL --- */
-        .hero {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 50px 20px;
-            text-align: center;
-        }
-
+        /* CONTENIDO CENTRADO */
+        .hero { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 50px 20px; text-align: center; }
         h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 800; margin-bottom: 10px; }
         .subtitle { color: #888; margin-bottom: 40px; max-width: 700px; }
 
-        /* --- EL RECUADRO NEGRO --- */
-        .info-panel, .table-wrap {
-            background: #0a0a0a;
-            border: 1px solid #222;
-            border-radius: 20px;
-            width: 100%;
-            max-width: 1000px; /* Tamaño centrado y amplio */
-            padding: 30px;
-            margin-bottom: 25px;
-            text-align: left;
-        }
+        /* RECUADRO NEGRO */
+        .info-panel, .table-wrap { background: #0a0a0a; border: 1px solid #222; border-radius: 20px; width: 100%; max-width: 1000px; padding: 30px; margin-bottom: 25px; text-align: left; }
 
-        /* --- SWITCH IDA/VUELTA --- */
-        .switch-container {
-            display: flex;
-            background: #1a1a1a;
-            border-radius: 50px;
-            padding: 5px;
-            margin-bottom: 30px;
-            cursor: pointer;
-            width: fit-content;
-        }
-        .switch-btn {
-            padding: 12px 25px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: 0.3s;
-        }
+        /* SWITCH */
+        .switch-container { display: flex; background: #1a1a1a; border-radius: 50px; padding: 5px; margin-bottom: 30px; cursor: pointer; width: fit-content; }
+        .switch-btn { padding: 12px 25px; border-radius: 50px; font-weight: 600; font-size: 0.85rem; transition: 0.3s; }
         .going .btn-going, .return .btn-return { background: #ffb400; color: #000; }
         .going .btn-return, .return .btn-going { color: #666; }
 
-        /* --- TABLAS --- */
+        /* TABLAS CON TODAS LAS RUTAS */
         .schedule-table { display: none; width: 100%; border-collapse: collapse; }
         .active-table { display: table; }
         th { color: #ffb400; text-align: left; padding: 15px; border-bottom: 1px solid #222; font-size: 0.75rem; text-transform: uppercase; }
         td { padding: 15px; border-bottom: 1px solid #111; font-size: 0.9rem; }
         .time { font-weight: bold; color: #fff; }
 
-        /* --- BARRA DE ABAJO (Stats) --- */
-        .stats {
-            background: #0a0a0a;
-            display: flex;
-            justify-content: space-around;
-            padding: 30px 5%;
-            border-top: 1px solid #222;
-            width: 100%;
-        }
+        /* STATS (Imagen 3) */
+        .stats { background: #0a0a0a; display: flex; justify-content: space-around; padding: 30px 5%; border-top: 1px solid #222; width: 100%; }
         .item { text-align: center; }
         .item strong { display: block; color: #ffb400; font-size: 1.1rem; }
         .item p { font-size: 0.75rem; color: #666; margin-top: 5px; text-transform: uppercase; }
 
-        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            .navbar { padding: 15px 5%; }
-            .menu { display: none; } /* Oculto en móvil por espacio */
+            .menu { display: none; }
             .stats { flex-wrap: wrap; gap: 20px; }
             .item { flex: 1 1 40%; }
-            h1 { font-size: 2rem; }
             .table-wrap { overflow-x: auto; }
         }
     </style>
 </head>
 <body>
-
     <nav class="navbar">
         <div class="logo">UNIVERSIDAD NACIONAL DEL CALLAO<br><span>MOVILIDAD UNIVERSITARIA</span></div>
         <div class="menu">
@@ -122,13 +65,11 @@
     </nav>
 
     <section class="hero">
-        <p style="color: #ffb400; font-weight: bold; letter-spacing: 1px;">PLANIFICA TU VIAJE</p>
+        <p style="color: #ffb400; font-weight: bold;">PLANIFICA TU VIAJE</p>
         <h1>Horarios de la Ruta Ventanilla</h1>
-        <p class="subtitle">Programación vigente para el ciclo 2026-A.</p>
-
         <div class="info-panel">
             <p><strong>🚍 Servicio de Movilidad Universitaria 📍</strong></p><br>
-            <p style="color: #ccc;">Horarios sujetos a cambios por disposición institucional o semanas de evaluación. Mantente atento a las actualizaciones.</p>
+            <p>Horarios vigentes para el ciclo 2026-A.</p>
         </div>
 
         <div class="switch-container going" id="mainSwitch">
@@ -143,12 +84,11 @@
                     <tr><td class="time">05:15 AM</td><td>Ventanilla</td><td>Campus UNAC</td><td>L-V</td></tr>
                 </tbody>
             </table>
-
             <table class="schedule-table" id="tableReturn">
                 <thead><tr><th>Hora</th><th>Partida</th><th>Destino</th><th>Días</th></tr></thead>
                 <tbody>
-                    <tr><td class="time">06:00 PM</td><td>Campus UNAC</td><td>Ventanilla</td><td>L-V</td></tr>
                     <tr><td class="time">02:30 PM</td><td>Campus UNAC</td><td>INKA COLA</td><td>L-V</td></tr>
+                    <tr><td class="time">06:00 PM</td><td>Campus UNAC</td><td>Ventanilla</td><td>L-V</td></tr>
                     <tr><td class="time">10:15 PM</td><td>Campus UNAC</td><td>TELÉFONO</td><td>L-V</td></tr>
                 </tbody>
             </table>
@@ -166,7 +106,6 @@
         const sw = document.getElementById('mainSwitch');
         const t1 = document.getElementById('tableGoing');
         const t2 = document.getElementById('tableReturn');
-
         sw.addEventListener('click', () => {
             sw.classList.toggle('going');
             sw.classList.toggle('return');
