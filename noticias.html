@@ -1,40 +1,279 @@
-<div class="tarjeta-informativa" style="max-width: 850px; margin: 20px auto;">
-    <div style="padding: 10px;">
-        <span style="color: #ffb400; font-weight: bold; font-size: 0.8rem;">25 MARZO, 2026</span>
-        <h2 style="color: #0056b3; margin-top: 10px;">📢 REPORTE DE GESTIÓN: RESULTADOS RUMBO AL CICLO 2026-A 🚌💨</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias - Movilidad UNAC</title>
+    <style>
+        /* TU ESTILO ORIGINAL */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            background-color: #000; 
+            color: #fff; 
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: #0a0a0a;
+            border-bottom: 1px solid #222;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo { font-weight: bold; font-size: 0.8rem; line-height: 1.2; text-align: left; }
+        .logo span { color: #ffb400; }
         
-        <div style="text-align: left; font-size: 0.9rem; line-height: 1.6; color: #333; margin-top: 15px;">
-            <p>¡Hola, comunidad de la Ruta Ventanilla! 👋 😊 Tal como lo prometimos, la transparencia es la base de nuestra organización. Tras el cierre del formulario de <b>Actualización Obligatoria de Datos</b>, compartimos con ustedes los resultados que respaldan nuestras próximas gestiones ante las autoridades para este inicio de clases el <b>1 de abril</b>. 📍 📊</p>
-            
-            <p>📊 <b>Lo que dicen nuestros datos:</b></p>
-            <ul style="list-style: none; padding-left: 0;">
-                <li style="margin-bottom: 10px;">▪️ <b>Respaldo Contundente:</b> ¡Gracias por la confianza! Contamos con un <b>94.3% de aprobación</b> a la gestión actual. Este voto de confianza nos motiva a seguir luchando por un servicio de calidad. ✅ 🤝</li>
-                <li style="margin-bottom: 10px;">▪️ <b>Demanda de Horarios:</b> Hemos identificado que el turno <b>Tarde-Noche (6:00 PM)</b> y el de la <b>Mañana (5:15 AM)</b> son los más críticos. Usaremos estos números para exigir que las unidades cubran la capacidad necesaria. ⏳ 🚍</li>
-                <li style="margin-bottom: 10px;">▪️ <b>Participación Total:</b> Estudiantes de todas las facultades, liderados por <b>FCE, FCC y FCA</b>, ya están registrados. ¡Somos una sola comunidad universitaria! 🏛️ 👥</li>
-            </ul>
+        .menu { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+        .menu a { color: #fff; text-decoration: none; font-size: 0.75rem; padding: 5px; }
+        .menu a.active { color: #ffb400; font-weight: bold; }
+        .menu a.consultas { color: #fff; border: 1px solid #ffb400; border-radius: 4px; padding: 4px 8px; }
 
-            <p>⚠️ <b>RECORDATORIO FINAL:</b> El padrón oficial ha sido actualizado. Como se avisó, este registro es <b>VITAL</b> para garantizar tu cupo y seguridad en la ruta. El verano se acaba, pero nuestro compromiso por una movilidad segura y organizada para este <b>2026-A</b> está más fuerte que nunca. ☀️ 🔵</p>
-            
-            <p style="font-style: italic; margin-top: 15px;">Atentamente, <b>Delegado Sebastian – Movilidad Ventanilla</b> 👦🏻 🚌</p>
+        .container { width: 100%; max-width: 1100px; padding: 40px 20px; }
+        h1 { font-size: 2.5rem; margin-bottom: 40px; text-align: center; font-weight: 800; }
+
+        .news-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 25px; 
+        }
+
+        .news-card { 
+            background: #0a0a0a; 
+            border: 1px solid #222; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            cursor: pointer; 
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .news-card:hover { border-color: #ffb400; transform: translateY(-5px); background: #111; }
+        
+        .news-content { padding: 25px; }
+        .news-date { color: #ffb400; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .news-title { font-size: 1.25rem; margin: 12px 0; font-weight: 700; line-height: 1.3; }
+        .news-excerpt { color: #888; font-size: 0.9rem; line-height: 1.5; }
+
+        /* MODALES MEJORADOS */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .modal-content {
+            background: #0a0a0a;
+            width: 100%;
+            max-width: 800px; /* Un poco más ancho para los gráficos */
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid #333;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .close-btn {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 2rem;
+            color: #ffb400;
+            cursor: pointer;
+        }
+
+        /* Contenedor de gráficos */
+        .charts-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+        .chart-box {
+            flex: 1;
+            min-width: 200px;
+            background: #111;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .chart-box h4 { font-size: 0.7rem; color: #ffb400; margin-bottom: 10px; }
+
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; gap: 10px; text-align: center; }
+            .menu { justify-content: center; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">UNIVERSIDAD NACIONAL DEL CALLAO<br><span>MOVILIDAD UNIVERSITARIA</span></div>
+        <div class="menu">
+            <a href="index.html">Inicio</a>
+            <a href="horarios.html">Horarios</a>
+            <a href="rutas.html">Rutas</a>
+            <a href="noticias.html" class="active">Noticias</a>
+            <a href="#" class="consultas">Consultas</a>
         </div>
+    </nav>
 
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 25px; border-top: 1px solid #eee; padding-top: 20px;">
-            <div style="flex: 1; min-width: 220px; max-width: 260px;">
-                <h3 style="font-size: 11px; text-align: center; color: #666;">FACULTAD</h3>
-                <canvas id="chartFacultad"></canvas>
+    <div class="container">
+        <h1>Últimas Noticias</h1>
+        
+        <div class="news-grid">
+            <div class="news-card" onclick="openModal('modal1')">
+                <div class="news-content">
+                    <p class="news-date">29 MARZO, 2026</p>
+                    <h3 class="news-title">Actualización del Padrón 2026-A</h3>
+                    <p class="news-excerpt">Información importante sobre el cierre de inscripciones para el nuevo ciclo académico...</p>
+                </div>
             </div>
-            <div style="flex: 1; min-width: 220px; max-width: 260px;">
-                <h3 style="font-size: 11px; text-align: center; color: #666;">HORARIOS SOLICITADOS</h3>
-                <canvas id="chartHorarios"></canvas>
-            </div>
-            <div style="flex: 1; min-width: 220px; max-width: 260px;">
-                <h3 style="font-size: 11px; text-align: center; color: #666;">VOTO DE CONFIANZA</h3>
-                <canvas id="chartVoto"></canvas>
-            </div>
-        </div>
 
-        <div style="text-align: center; margin-top: 20px;">
-            <a href="#" class="btn-accion" style="background-color: #0056b3; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; display: inline-block;">Ver Resultados Detallados</a>
+            <div class="news-card" onclick="openModal('modal2')">
+                <div class="news-content">
+                    <p class="news-date">20 MARZO, 2026</p>
+                    <h3 class="news-title">Nuevos Paraderos en Ventanilla</h3>
+                    <p class="news-excerpt">Se han habilitado nuevos puntos de recojo estratégicos para mejorar la fluidez del servicio...</p>
+                </div>
+            </div>
+
+            <div class="news-card" onclick="openModal('modalReporte')">
+                <div class="news-content">
+                    <p class="news-date">25 MARZO, 2026</p>
+                    <h3 class="news-title">📢 Reporte de Gestión: Resultados 2026-A</h3>
+                    <p class="news-excerpt">¡Transparencia total! Mira los resultados de la actualización de datos y el respaldo a la gestión actual...</p>
+                </div>
+            </div>
+
+            <div class="news-card"><div class="news-content"><p class="news-date">PRÓXIMAMENTE</p><h3 class="news-title">Noticia en desarrollo</h3></div></div>
+            <div class="news-card"><div class="news-content"><p class="news-date">PRÓXIMAMENTE</p><h3 class="news-title">Noticia en desarrollo</h3></div></div>
+            <div class="news-card"><div class="news-content"><p class="news-date">PRÓXIMAMENTE</p><h3 class="news-title">Noticia en desarrollo</h3></div></div>
         </div>
     </div>
-</div>
+
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
+            <p style="color: #ffb400; font-weight: bold;">29 MARZO, 2026</p>
+            <h2 style="margin: 15px 0;">Actualización del Padrón 2026-A</h2>
+            <hr style="border: 0; border-top: 1px solid #333; margin-bottom: 20px;">
+            <p style="line-height: 1.6; color: #ccc;">
+                Estimados estudiantes, se les comunica que el proceso de inscripción para el padrón de movilidad del ciclo 2026-A finaliza hoy.<br><br>
+                Es obligatorio haber completado el formulario digital para que se les asigne un número de asiento y reciban su correo de confirmación.
+            </p>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal2')">&times;</span>
+            <p style="color: #ffb400; font-weight: bold;">20 MARZO, 2026</p>
+            <h2 style="margin: 15px 0;">Nuevos Paraderos en Ventanilla</h2>
+            <p style="line-height: 1.6; color: #ccc;">
+                Se han habilitado nuevos puntos estratégicos para mejorar la fluidez del servicio. Revisa el mapa actualizado para ubicar tu paradero más cercano.
+            </p>
+        </div>
+    </div>
+
+    <div id="modalReporte" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modalReporte')">&times;</span>
+            <p style="color: #ffb400; font-weight: bold;">25 MARZO, 2026</p>
+            <h2 style="margin: 15px 0;">REPORTE DE GESTIÓN: RESULTADOS 2026-A 🚌💨</h2>
+            <hr style="border: 0; border-top: 1px solid #333; margin-bottom: 20px;">
+            
+            <div style="font-size: 0.9rem; line-height: 1.6; color: #ccc;">
+                <p>¡Hola, comunidad de la Ruta Ventanilla! 👋 Tras el cierre del formulario, compartimos los resultados que respaldan nuestras gestiones para este inicio de clases el <b>1 de abril</b>. 📍</p>
+                <ul style="margin: 15px 0; padding-left: 20px;">
+                    <li><b>Respaldo Contundente:</b> 94.3% de aprobación a la gestión actual. ✅</li>
+                    <li><b>Demanda:</b> Turnos Mañana (5:15 AM) y Tarde-Noche (6:00 PM) son los más solicitados. ⏳</li>
+                    <li><b>Participación:</b> Liderada por las facultades FCE, FCC y FCA. 🏛️</li>
+                </ul>
+            </div>
+
+            <div class="charts-container">
+                <div class="chart-box">
+                    <h4>POR FACULTAD</h4>
+                    <canvas id="chartFacultad"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h4>HORARIOS</h4>
+                    <canvas id="chartHorarios"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h4>CONFIANZA</h4>
+                    <canvas id="chartVoto"></canvas>
+                </div>
+            </div>
+            
+            <p style="text-align: center; margin-top: 20px; font-weight: bold; color: #ffb400;">Atte: Delegado Sebastian 👦🏻</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            if(id === 'modalReporte') renderCharts();
+        }
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function renderCharts() {
+            // Facultad
+            new Chart(document.getElementById('chartFacultad'), {
+                type: 'pie',
+                data: {
+                    labels: ['FCE', 'FCC', 'FCA', 'Otros'],
+                    datasets: [{ data: [16.8, 11.3, 11.3, 60.6], backgroundColor: ['#ffb400', '#4285f4', '#ea4335', '#333'] }]
+                },
+                options: { plugins: { legend: { display: false } } }
+            });
+
+            // Horarios
+            new Chart(document.getElementById('chartHorarios'), {
+                type: 'bar',
+                data: {
+                    labels: ['6:00 PM', '5:15 AM'],
+                    datasets: [{ label: '%', data: [74.3, 68.3], backgroundColor: '#ffb400' }]
+                },
+                options: { scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false } } }
+            });
+
+            // Voto
+            new Chart(document.getElementById('chartVoto'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['SÍ', 'NO'],
+                    datasets: [{ data: [94.3, 5.7], backgroundColor: ['#ffb400', '#333'] }]
+                },
+                options: { plugins: { legend: { position: 'bottom', labels: { color: '#fff', font: { size: 10 } } } } }
+            });
+        }
+
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
+</body>
+</html>
