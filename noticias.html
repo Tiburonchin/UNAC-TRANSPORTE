@@ -29,6 +29,15 @@
             transition: 0.3s; 
         }
         .news-card:hover { border-color: #ffb400; transform: translateY(-5px); }
+        
+        /* ESTILO PARA LA IMAGEN EN LA TARJETA */
+        .news-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover; /* Recorta la imagen para que quepa */
+            border-bottom: 1px solid #222;
+        }
+
         .news-content { padding: 20px; }
         .news-date { color: #ffb400; font-size: 0.8rem; font-weight: bold; }
         .news-title { font-size: 1.2rem; margin: 10px 0; }
@@ -55,6 +64,15 @@
             max-height: 80vh;
             overflow-y: auto;
         }
+
+        /* ESTILO PARA LA IMAGEN DENTRO DEL MODAL */
+        .modal-content img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            height: auto;
+        }
+
         .close-btn {
             position: absolute;
             top: 20px; right: 20px;
@@ -81,6 +99,7 @@
         
         <div class="news-grid">
             <div class="news-card" onclick="openModal('modal1')">
+                <img src="https://via.placeholder.com/600x400/1a1a1a/ffb400?text=Padrón+Ciclo+2026-A" alt="Inscripción Ciclo">
                 <div class="news-content">
                     <p class="news-date">29 MARZO, 2026</p>
                     <h3 class="news-title">Actualización del Padrón 2026-A</h3>
@@ -89,6 +108,7 @@
             </div>
 
             <div class="news-card" onclick="openModal('modal2')">
+                <img src="https://via.placeholder.com/600x400/1a1a1a/ffb400?text=Nuevos+Paraderos+en+Ventanilla" alt="Paraderos Ventanilla">
                 <div class="news-content">
                     <p class="news-date">20 MARZO, 2026</p>
                     <h3 class="news-title">Nuevos Paraderos en Ventanilla</h3>
@@ -101,6 +121,7 @@
     <div id="modal1" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('modal1')">&times;</span>
+            <img src="https://via.placeholder.com/800x500/1a1a1a/ffb400?text=Confirmación+de+Inscripción" alt="Confirmación de Inscripción">
             <p style="color: #ffb400;">29 MARZO, 2026</p>
             <h2 style="margin: 15px 0;">Actualización del Padrón 2026-A</h2>
             <hr style="border: 0; border-top: 1px solid #333; margin-bottom: 20px;">
