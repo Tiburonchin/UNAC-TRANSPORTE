@@ -16,7 +16,7 @@
             min-height: 100vh;
         }
 
-        /* NAVBAR */
+        /* NAVBAR RESPONSIVE */
         .navbar {
             width: 100%;
             display: flex;
@@ -31,9 +31,11 @@
         }
         .logo { font-weight: bold; font-size: 0.8rem; line-height: 1.2; }
         .logo span { color: #ffb400; }
-        .menu { display: flex; gap: 15px; }
-        .menu a { color: #fff; text-decoration: none; font-size: 0.85rem; }
+        
+        .menu { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+        .menu a { color: #fff; text-decoration: none; font-size: 0.75rem; padding: 5px; }
         .menu a.active { color: #ffb400; font-weight: bold; }
+        .menu a.consultas { color: #fff; border: 1px solid #ffb400; border-radius: 4px; padding: 4px 8px; }
 
         /* CONTENEDOR HERO */
         .hero {
@@ -46,12 +48,12 @@
             text-align: center;
         }
 
-        h1 { font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 800; margin-bottom: 10px; }
-        .subtitle { color: #888; margin-bottom: 20px; max-width: 800px; font-size: 0.95rem; }
+        h1 { font-size: clamp(1.8rem, 5vw, 3.5rem); font-weight: 800; margin-bottom: 10px; line-height: 1.1; }
+        .subtitle { color: #888; margin-bottom: 20px; max-width: 800px; font-size: 0.9rem; line-height: 1.4; }
         
         /* BLOQUE INFORMATIVO */
         .info-box {
-            background: #0a0a0a;
+            background: #11141b;
             border: 1px solid #222;
             border-radius: 15px;
             padding: 20px;
@@ -59,10 +61,10 @@
             text-align: left;
             width: 100%;
             max-width: 900px;
-            line-height: 1.6;
+            line-height: 1.5;
         }
-        .info-box strong { color: #fff; display: block; margin-bottom: 8px; }
-        .info-box p { color: #aaa; font-size: 0.9rem; }
+        .info-box strong { color: #ffb400; display: block; margin-bottom: 8px; font-size: 0.95rem; }
+        .info-box p { color: #aaa; font-size: 0.85rem; }
 
         /* SWITCH IDA/VUELTA */
         .switch-container {
@@ -74,7 +76,7 @@
             cursor: pointer;
             width: fit-content;
         }
-        .switch-btn { padding: 12px 25px; border-radius: 50px; font-weight: 600; font-size: 0.85rem; transition: 0.3s; }
+        .switch-btn { padding: 10px 20px; border-radius: 50px; font-weight: 600; font-size: 0.8rem; transition: 0.3s; }
         .going .btn-going, .return .btn-return { background: #ffb400; color: #000; }
         .going .btn-return, .return .btn-going { color: #666; }
 
@@ -84,41 +86,48 @@
             border: 1px solid #222;
             border-radius: 20px;
             width: 100%;
-            padding: 25px;
+            padding: 20px;
             margin-bottom: 30px;
-            overflow-x: auto;
+            overflow-x: auto; /* Permite scroll horizontal en tablas si es necesario */
             text-align: left;
         }
-        .internal-header { color: #ffb400; font-weight: bold; font-size: 1.3rem; margin-bottom: 5px; }
-        .internal-subheader { color: #666; font-size: 0.85rem; margin-bottom: 20px; }
+        .internal-header { color: #ffb400; font-weight: bold; font-size: 1.2rem; margin-bottom: 5px; }
+        .internal-subheader { color: #666; font-size: 0.8rem; margin-bottom: 20px; }
         
-        .schedule-table { display: none; width: 100%; border-collapse: collapse; min-width: 650px; }
+        .schedule-table { display: none; width: 100%; border-collapse: collapse; min-width: 500px; }
         .active-table { display: table; }
-        th { color: #888; text-align: left; padding: 15px; border-bottom: 1px solid #222; font-size: 0.75rem; text-transform: uppercase; }
-        td { padding: 15px; border-bottom: 1px solid #111; font-size: 0.9rem; }
+        th { color: #888; text-align: left; padding: 12px; border-bottom: 1px solid #222; font-size: 0.7rem; text-transform: uppercase; }
+        td { padding: 12px; border-bottom: 1px solid #111; font-size: 0.85rem; }
         
         /* ETIQUETAS DE ESTADO */
-        .badge { padding: 5px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: bold; }
+        .badge { padding: 4px 8px; border-radius: 5px; font-size: 0.7rem; font-weight: bold; }
         .badge-regular { background: rgba(0, 255, 100, 0.1); color: #00ff64; }
         .badge-previo { background: rgba(255, 0, 0, 0.1); color: #ff3c3c; }
 
-        /* FOOTER STATS */
+        /* FOOTER STATS RESPONSIVE */
         .stats {
-            background: #0a0a0a;
+            background: #000;
             display: flex;
             justify-content: space-around;
-            padding: 30px 5%;
+            padding: 20px 5%;
             border-top: 1px solid #222;
             width: 100%;
             margin-top: auto;
+            flex-wrap: wrap;
+            gap: 15px;
         }
-        .item { text-align: center; }
-        .item strong { display: block; color: #ffb400; font-size: 1.1rem; }
-        .item p { font-size: 0.7rem; color: #666; margin-top: 5px; text-transform: uppercase; }
+        .item { text-align: center; min-width: 100px; flex: 1; }
+        .item strong { display: block; color: #ffb400; font-size: 1rem; }
+        .item p { font-size: 0.65rem; color: #666; margin-top: 5px; text-transform: uppercase; }
 
+        /* AJUSTES CELULAR */
         @media (max-width: 768px) {
-            .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-            .internal-header { font-size: 1.1rem; }
+            .navbar { flex-direction: column; gap: 10px; text-align: center; }
+            .menu { justify-content: center; }
+            .hero { padding: 30px 15px; }
+            .stats { justify-content: center; }
+            .item { min-width: 45%; } /* Dos por fila */
+            .table-container { padding: 15px; }
         }
     </style>
 </head>
@@ -131,17 +140,18 @@
             <a href="horarios.html" class="active">Horarios</a>
             <a href="rutas.html">Rutas</a>
             <a href="noticias.html">Noticias</a>
+            <a href="#" class="consultas">Consultas</a>
         </div>
     </nav>
 
     <section class="hero">
-        <p style="color: #ffb400; font-weight: bold; margin-bottom: 10px;">PLANIFICA TU VIAJE</p>
+        <p style="color: #ffb400; font-weight: bold; margin-bottom: 10px; font-size: 0.8rem;">PLANIFICA TU VIAJE</p>
         <h1>Horarios de la Ruta Ventanilla</h1>
         <p class="subtitle">Consulta la programación oficial de ida y vuelta para el ciclo 2026-A.</p>
 
         <div class="info-box">
-            <strong>🚍 Servicio de Movilidad Universitaria: Ruta Ventanilla 📍</strong>
-            <p>Comprometidos con tu puntualidad académica, presentamos la programación vigente para este semestre. Los horarios están sujetos a cambios excepcionales por disposición institucional o semanas de evaluación, los cuales serán notificados oportunamente por este medio. 🎓✨</p>
+            <strong>🚍 Servicio de Movilidad Universitaria</strong>
+            <p>Programación vigente para este semestre. Los horarios pueden variar en semanas de exámenes, lo cual será notificado por este medio.</p>
         </div>
 
         <div class="switch-container going" id="mainSwitch">
@@ -151,18 +161,17 @@
 
         <div class="table-container">
             <div class="internal-header" id="tableTitle">HORARIO: IDA</div>
-            <div class="internal-subheader">Programación de salida desde el paradero inicial hacia el Campus.</div>
+            <div class="internal-subheader">Salidas desde paradero inicial hacia el Campus.</div>
             
             <table class="schedule-table active-table" id="tableGoing">
                 <thead>
-                    <tr><th>Hora</th><th>Partida</th><th>Destino</th><th>Días</th><th>Estado</th></tr>
+                    <tr><th>Hora</th><th>Partida</th><th>Destino</th><th>Estado</th></tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td><strong>05:15 AM</strong></td>
                         <td>Sede UNAC (Ventanilla)</td>
                         <td>Campus Bellavista</td>
-                        <td>Lunes a Viernes</td>
                         <td><span class="badge badge-regular">Regular</span></td>
                     </tr>
                 </tbody>
@@ -170,28 +179,25 @@
 
             <table class="schedule-table" id="tableReturn">
                 <thead>
-                    <tr><th>Hora</th><th>Partida</th><th>Destino</th><th>Días</th><th>Estado</th></tr>
+                    <tr><th>Hora</th><th>Partida</th><th>Destino</th><th>Estado</th></tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td><strong>02:30 PM</strong></td>
                         <td>Campus Bellavista</td>
                         <td>INKA COLA</td>
-                        <td>Lunes a Viernes</td>
                         <td><span class="badge badge-previo">Previo</span></td>
                     </tr>
                     <tr>
                         <td><strong>06:00 PM</strong></td>
                         <td>Campus Bellavista</td>
-                        <td>Sede UNAC (Ventanilla)</td>
-                        <td>Lunes a Viernes</td>
+                        <td>Sede UNAC</td>
                         <td><span class="badge badge-regular">Regular</span></td>
                     </tr>
                     <tr>
                         <td><strong>10:15 PM</strong></td>
                         <td>Campus Bellavista</td>
                         <td>TELÉFONO</td>
-                        <td>Lunes a Viernes</td>
                         <td><span class="badge badge-previo">Previo</span></td>
                     </tr>
                 </tbody>
