@@ -42,8 +42,8 @@
             text-align: center;
         }
 
-        /* ENCABEZADO ESPECÍFICO DE LA IMAGEN */
-        .section-tag { color: #ffb400; font-size: 0.9rem; font-weight: bold; text-transform: none; margin-bottom: 10px; display: block; }
+        /* ENCABEZADO SOLICITADO */
+        .section-tag { color: #ffb400; font-size: 0.9rem; font-weight: bold; margin-bottom: 10px; display: block; }
         .section-title { font-size: 3rem; font-weight: 800; margin-bottom: 15px; }
         .section-description { color: #888; font-size: 1rem; max-width: 800px; margin: 0 auto 50px auto; line-height: 1.5; }
 
@@ -57,7 +57,7 @@
         }
 
         .card-box {
-            background: #11141b; /* Un tono un poco más azulado/oscuro como en la imagen */
+            background: #11141b;
             border: 1px solid #222;
             border-radius: 12px;
             padding: 25px;
@@ -67,7 +67,7 @@
 
         .stop-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .stop-item { background: #1a1e26; padding: 12px; border-radius: 6px; font-size: 0.85rem; border: 1px solid #2a2f3a; display: flex; align-items: center; gap: 10px; color: #ccc; }
-        .stop-item.highlight { border: 1px solid #ffb400; color: #fff; background: #1a1e26; }
+        .stop-item.highlight { border: 1px solid #ffb400; color: #fff; }
 
         .doc-item { background: #1a1e26; padding: 15px; border-radius: 8px; margin-bottom: 12px; border-left: 4px solid #ffb400; }
         .doc-item b { display: block; font-size: 0.9rem; color: #ffb400; margin-bottom: 5px; }
@@ -75,11 +75,12 @@
 
         .alert-box { background: rgba(255, 68, 68, 0.05); border: 1px solid #442222; padding: 20px; border-radius: 10px; border-left: 5px solid #ff4444; margin-top: 20px; }
         .alert-box b { color: #ff4444; display: block; margin-bottom: 8px; font-size: 0.85rem; text-transform: uppercase; }
-        .alert-box p { font-size: 0.85rem; color: #ffaaaa; line-height: 1.5; }
+        .alert-box p { font-size: 0.85rem; color: #fca5a5; line-height: 1.5; }
 
+        /* MAPA CORREGIDO */
         .map-section { width: 100%; background: #11141b; border: 1px solid #222; border-radius: 12px; padding: 15px; margin-top: 20px; }
         .map-header { text-align: left; margin-bottom: 15px; font-weight: bold; display: flex; align-items: center; gap: 10px; font-size: 0.9rem; }
-        iframe { width: 100%; height: 450px; border-radius: 8px; filter: grayscale(1) invert(90%); border: none; }
+        .map-container iframe { width: 100%; height: 450px; border-radius: 8px; filter: grayscale(1) invert(90%); border: none; }
 
         .stats { background: #000; display: flex; justify-content: space-around; padding: 30px 5%; border-top: 1px solid #222; width: 100%; margin-top: 50px; }
         .item strong { display: block; color: #ffb400; font-size: 1.2rem; }
@@ -158,14 +159,16 @@
 
         <div class="map-section">
             <div class="map-header">🗺️ Mapa: Campus UNAC – Bellavista, Callao</div>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15605.345678!2d-77.1189!3d-12.0621!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDAzJzQzLjYiUyA3N8KwMDcnMDguMCJX!5e0!3m2!1ses!2spe!4v1620000000000!5m2!1ses!2spe"></iframe>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m64!1m12!1m3!1d30472.9992456036!2d-77.1375958!3d-12.044987500000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m49!3e0!4m5!1s0x9105d526b243bda5%3A0x4f54a232b468d4dd!2sUNAC%20-%20VENTANILLA%2C%205VG8%2BJM6%2C%20Ventanilla%2007076!3m2!1d-11.823452099999999!2d-77.13334929999999!4m3!3m2!1d-11.8252305!2d-77.1234052!4m3!3m2!1d-11.843182599999999!2d-77.101874!4m3!3m2!1d-11.8375611!2d-77.11113209999999!4m5!1s0x9105d43d3b9d9f15%3A0x7484f44b11f271b!2sPolicl%C3%ADnico%20Emanuel%2C%20Ventanilla%2007076!3m2!1d-11.841529999999999!2d-77.11502!4m5!1s0x9105d41212110f83%3A0x3381ebbdfb7c3a11!2sCajamarca%2C%20Mi%20Per%C3%BA%2007056!3m2!1d-11.85413!2d-77.12089!4m3!3m2!1d-11.859558199999999!2d-77.124529!4m3!3m2!1d-11.8754478!2d-77.1269141!4m3!3m2!1d-12.0480583!2d-77.11540509999999!4m5!1s0x9105cb910984762b%3A0x104327c627fa29ad!2sUniversidad%20Nacional%20del%20Callao%2C%20Av.%20Juan%20Pablo%20%E2%85%A1%20306%2C%20Bellavista%2007011!3m2!1d-12.0613052!2d-77.11724869999999!5e1!3m2!1ses-419!2spe!4v1774461096258!5m2!1ses-419!2spe" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
         </div>
     </main>
 
     <footer class="stats">
         <div class="item"><strong>LUNES A VIERNES</strong><p>FRECUENCIA</p></div>
         <div class="item"><strong>EN SERVICIO</strong><p>ESTADO</p></div>
-        <div class="item"><strong>40 CUPOS</strong><p>CAPACIDAD</p></div>
+        <div class="item"><strong>LIMITADO</strong><p>CAPACIDAD</p></div>
         <div class="item"><strong>DIRECTA</strong><p>RUTA</p></div>
     </footer>
 
