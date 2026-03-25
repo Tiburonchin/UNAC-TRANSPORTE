@@ -1,164 +1,104 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noticias - Movilidad UNAC</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            background-color: #000; 
-            color: #fff; 
-            font-family: 'Segoe UI', Arial, sans-serif;
-            min-height: 100vh;
-        }
-
-        /* NAVBAR UNIFICADA */
-        .navbar {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            background: #0a0a0a;
-            border-bottom: 1px solid #222;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .logo { font-weight: bold; font-size: 0.8rem; line-height: 1.2; }
-        .logo span { color: #ffb400; }
+<div class="tarjeta-informativa" style="grid-column: span 1; max-width: 100%;">
+    <div>
+        <span style="color: #ffb400; font-weight: bold; font-size: 0.8rem;">25 MARZO, 2026</span>
+        <h2>REPORTE DE GESTIÓN: RUMBO AL CICLO 2026-A 🚌💨</h2>
         
-        .menu { display: flex; gap: 10px; align-items: center; }
-        .menu a { color: #fff; text-decoration: none; font-size: 0.75rem; padding: 5px; }
-        .menu a.active { color: #ffb400; font-weight: bold; }
-        .menu a.consultas { border: 1px solid #ffb400; border-radius: 4px; padding: 4px 8px; }
-
-        /* CONTENEDOR PRINCIPAL */
-        .contenedor-noticias-unac {
-            padding: 60px 5%;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* TARJETA ESTILO REFERENCIA */
-        .tarjeta-informativa {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 250px;
-            transition: transform 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .tarjeta-informativa:hover { transform: translateY(-5px); }
-
-        .tarjeta-informativa h2 {
-            color: #0056b3;
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .tarjeta-informativa p {
-            color: #444;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin-bottom: 25px;
-        }
-
-        /* BOTÓN AZUL ESTILO REFERENCIA */
-        .btn-azul {
-            background-color: #0056b3;
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 0.85rem;
-            display: inline-block;
-            width: fit-content;
-            transition: background 0.3s;
-        }
-        .btn-azul:hover { background-color: #004494; }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .navbar { flex-direction: column; padding: 15px; text-align: center; }
-            .menu { margin-top: 10px; justify-content: center; width: 100%; }
-            .contenedor-noticias-unac { grid-template-columns: 1fr; padding: 30px 20px; }
-        }
-    </style>
-</head>
-<body>
-
-    <nav class="navbar">
-        <div class="logo">UNIVERSIDAD NACIONAL DEL CALLAO<br><span>MOVILIDAD UNIVERSITARIA</span></div>
-        <div class="menu">
-            <a href="index.html">Inicio</a>
-            <a href="horarios.html">Horarios</a>
-            <a href="rutas.html">Rutas</a>
-            <a href="noticias.html" class="active">Noticias</a>
-            <a href="#" class="consultas">Consultas</a>
-        </div>
-    </nav>
-
-    <div class="contenedor-noticias-unac">
+        <p>¡Hola, comunidad de la Ruta Ventanilla! ✋😊 Tal como lo prometimos, compartimos los resultados que respaldan nuestras gestiones ante las autoridades para este inicio de clases el 1 de abril. 🎓📊</p>
         
-        <div class="tarjeta-informativa">
-            <div>
-                <h2>Actualización del Padrón 2026-A</h2>
-                <p>Se informa que el plazo máximo para la inscripción y actualización de datos es el 29 de marzo. Asegura tu vacante para la ruta de Ventanilla a tiempo.</p>
-            </div>
-            <a href="#" class="btn-azul">Ver Registro</a>
-        </div>
+        <div id="reporte-detallado" style="display: none; margin-top: 20px; border-top: 1px solid #eee; padding-top: 20px;">
+            <div style="color: #333; font-size: 0.9rem; text-align: left;">
+                <p><strong>📊 Lo que dicen nuestros datos:</strong></p>
+                <ul style="margin-left: 20px; margin-bottom: 20px;">
+                    <li><strong>Respaldo Contundente:</strong> ¡Gracias por la confianza! Contamos con un <strong>94.3% de aprobación</strong> a la gestión actual. ✅🤝</li>
+                    <li><strong>Demanda de Horarios:</strong> El turno Tarde-Noche (6:00 PM) y el de la Mañana (5:15 AM) son los más críticos. ⏳🚆</li>
+                    <li><strong>Participación Total:</strong> Estudiantes de todas las facultades, liderados por <strong>FCE, FCC y FCA</strong>, ya están registrados. 🏛️👥</li>
+                </ul>
+                
+                <p style="background: #fff3cd; padding: 10px; border-radius: 5px; font-size: 0.85rem;">
+                    ⚠️ <strong>RECORDATORIO FINAL:</strong> El padrón oficial ha sido actualizado. Este registro es VITAL para garantizar tu cupo. El verano se acaba, pero nuestro compromiso está más fuerte que nunca. ☀️💙
+                </p>
+                <p style="font-style: italic; margin-top: 10px;">Atentamente, <strong>Delegado Sebastian</strong></p>
 
-        <div class="tarjeta-informativa">
-            <div>
-                <h2>Nuevos Paraderos en Ventanilla</h2>
-                <p>A partir del 20 de marzo se han habilitado nuevos puntos estratégicos para mejorar la fluidez del servicio. Revisa el mapa actualizado aquí.</p>
+                <div class="dashboard-container" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 20px;">
+                    <div style="flex: 1 1 250px; border: 1px solid #eee; padding: 10px; border-radius: 8px;">
+                        <h3 style="font-size: 11px; text-align: center;">FACULTAD</h3>
+                        <canvas id="chartFacultad"></canvas>
+                    </div>
+                    <div style="flex: 1 1 250px; border: 1px solid #eee; padding: 10px; border-radius: 8px;">
+                        <h3 style="font-size: 11px; text-align: center;">HORARIOS</h3>
+                        <canvas id="chartHorarios"></canvas>
+                    </div>
+                    <div style="flex: 1 1 250px; border: 1px solid #eee; padding: 10px; border-radius: 8px;">
+                        <h3 style="font-size: 11px; text-align: center;">VOTO DE CONFIANZA</h3>
+                        <canvas id="chartVoto"></canvas>
+                    </div>
+                </div>
             </div>
-            <a href="#" class="btn-azul">Ver Mapa</a>
         </div>
-
-        <div class="tarjeta-informativa">
-            <div>
-                <h2>Horarios de Verano 2026</h2>
-                <p>Consulta los horarios ajustados para el periodo de verano. Las unidades saldrán en intervalos de 15 minutos desde el paradero inicial.</p>
-            </div>
-            <a href="#" class="btn-azul">Ver Horarios</a>
-        </div>
-
-        <div class="tarjeta-informativa">
-            <div>
-                <h2>Carnet Universitario Vigente</h2>
-                <p>Recuerda que para hacer uso del servicio es indispensable presentar tu carnet universitario original o constancia de matrícula actualizada.</p>
-            </div>
-            <a href="#" class="btn-azul">Más Información</a>
-        </div>
-
-        <div class="tarjeta-informativa">
-            <div>
-                <h2>Protocolos de Seguridad</h2>
-                <p>Conoce las normas de convivencia y seguridad dentro de las unidades de transporte para garantizar un viaje cómodo para todos.</p>
-            </div>
-            <a href="#" class="btn-azul">Leer Protocolo</a>
-        </div>
-
-        <div class="tarjeta-informativa">
-            <div>
-                <h2>Canales de Atención</h2>
-                <p>¿Tienes dudas o sugerencias? Comunícate directamente con los delegados de ruta a través de nuestros nuevos canales digitales oficiales.</p>
-            </div>
-            <a href="#" class="btn-azul">Contactar</a>
-        </div>
-
     </div>
+    
+    <button onclick="toggleReporte()" id="btn-reporte" class="btn-azul" style="border: none; cursor: pointer; margin-top: 15px;">Ver Resultados y Gráficos</button>
+</div>
 
-</body>
-</html>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.1.0/dist/chartjs-plugin-datalabels.min.js"></script>
+
+<script>
+function toggleReporte() {
+    var reporte = document.getElementById("reporte-detallado");
+    var btn = document.getElementById("btn-reporte");
+    
+    if (reporte.style.display === "none") {
+        reporte.style.display = "block";
+        btn.innerText = "Cerrar Reporte";
+        inicializarGraficos(); // Carga los gráficos solo cuando se abre
+    } else {
+        reporte.style.display = "none";
+        btn.innerText = "Ver Resultados y Gráficos";
+    }
+}
+
+function inicializarGraficos() {
+    Chart.register(ChartDataLabels);
+    const commonOptions = { plugins: { datalabels: { color: '#fff', font: { weight: 'bold', size: 10 }, formatter: (v) => v + '%' } } };
+
+    // Gráfico Facultad
+    new Chart(document.getElementById('chartFacultad'), {
+        type: 'pie',
+        data: {
+            labels: ['FCE', 'FCC', 'FCA', 'FIEE', 'FIQ', 'FIARN', 'Otros'],
+            datasets: [{
+                data: [16.8, 11.3, 11.3, 11.3, 9.8, 7.5, 32],
+                backgroundColor: ['#fbbc04', '#4285f4', '#ea4335', '#34a853', '#9334e6', '#12b5cb', '#70757a']
+            }]
+        },
+        options: { plugins: { legend: { display: false }, datalabels: commonOptions.plugins.datalabels } }
+    });
+
+    // Gráfico Horarios
+    new Chart(document.getElementById('chartHorarios'), {
+        type: 'bar',
+        data: {
+            labels: ['6:00 PM', '5:15 AM', '2:30 PM', '10:15 PM'],
+            datasets: [{
+                data: [74.3, 68.3, 46.3, 32],
+                backgroundColor: '#a2d2df'
+            }]
+        },
+        options: { indexAxis: 'y', plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'start', color: '#444', formatter: (v) => v + '%' } } }
+    });
+
+    // Gráfico Voto (94.3%)
+    new Chart(document.getElementById('chartVoto'), {
+        type: 'pie',
+        data: {
+            labels: ['SÍ', 'NO'],
+            datasets: [{
+                data: [94.3, 5.7],
+                backgroundColor: ['#3367d6', '#d93025']
+            }]
+        },
+        options: { plugins: { legend: { position: 'bottom' }, datalabels: commonOptions.plugins.datalabels } }
+    });
+}
+</script>
