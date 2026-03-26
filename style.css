@@ -20,8 +20,8 @@ body, html {
     position: relative;
     
     /* ESTA ES LA LÍNEA CLAVE: Debe decir 1444.png */
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                url('1444.png'); 
+    background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), 
+                url('1444.PNG');
     
     background-size: cover;
     background-position: center;
