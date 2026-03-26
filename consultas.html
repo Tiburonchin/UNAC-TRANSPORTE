@@ -17,7 +17,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
             line-height: 1.4;
-            overflow-x: hidden; /* Evita scroll horizontal por animaciones */
+            overflow-x: hidden;
         }
 
         /* NAVBAR UNIFICADA */
@@ -55,16 +55,21 @@
             padding: 40px 20px;
         }
 
-        /* ANIMACIÓN DE ENTRADA PARA LA CABECERA */
+        /* ANIMACIONES */
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .hero-header {
             text-align: center;
             margin-bottom: 40px;
-            animation: fadeInDown 0.8s ease-out; /* Animación aquí */
+            animation: fadeInDown 0.8s ease-out;
         }
         .hero-header .mantente {
             color: #ffb400;
@@ -93,13 +98,6 @@
             gap: 20px;
         }
 
-        /* ANIMACIÓN DE ENTRADA PARA LAS TARJETAS (FADE IN UP) */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* TARJETA ESTILO COMPACTO */
         .contact-card {
             background: #0a0a0a;
             border: 1px solid #222;
@@ -107,11 +105,10 @@
             padding: 25px 20px;
             text-align: center;
             transition: all 0.4s ease;
-            opacity: 0; /* Empieza invisible para la animación */
-            animation: fadeInUp 0.8s ease-out forwards; /* Animación aquí */
+            opacity: 0; 
+            animation: fadeInUp 0.8s ease-out forwards;
         }
 
-        /* Delays para que aparezcan una tras otra */
         .card-1 { animation-delay: 0.2s; }
         .card-2 { animation-delay: 0.4s; }
         .card-3 { animation-delay: 0.6s; }
@@ -163,7 +160,6 @@
             opacity: 0.8;
         }
 
-        /* BOTÓN WHATSAPP */
         .btn-whatsapp {
             display: inline-flex;
             align-items: center;
@@ -215,10 +211,10 @@
 
         <div class="contact-grid">
             <div class="contact-card card-1">
-                <div class="icon-wrap">👨‍💼</div>
-                <div class="contact-name">Jared Flores</div>
+                <div class="icon-wrap">👩‍💼</div>
+                <div class="contact-name">Antonella Flores</div>
                 <div class="contact-faculty">C. Contables</div>
-                <div class="contact-role">Delegado de Ruta</div>
+                <div class="contact-role">Delegada de Ruta</div>
                 <div class="contact-emojis">✨ 📑 🚌 📈</div>
                 <a href="https://wa.me/51971302428" target="_blank" class="btn-whatsapp">
                     Contactar por WhatsApp
