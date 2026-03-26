@@ -13,9 +13,21 @@
             color: #fff; 
             font-family: 'Segoe UI', sans-serif;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* NAVBAR - CORREGIDA Y UNIFICADA */
+        /* --- NUEVAS ANIMACIONES --- */
+        @keyframes revealCard {
+            0% { opacity: 0; transform: scale(0.95) translateY(30px); filter: blur(10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* NAVBAR */
         .navbar {
             width: 100%;
             display: flex;
@@ -35,10 +47,9 @@
         .menu { display: flex; align-items: center; gap: 20px; }
         .menu a { color: #fff; text-decoration: none; font-size: 0.8rem; transition: 0.3s; }
         .menu a:hover, .menu a.active { color: #ffb400; }
-        /* Botón de consultas estilo Rutas/Horarios */
         .menu a.consultas { color: #fff; border: 1px solid #ffb400; border-radius: 4px; padding: 4px 8px; }
 
-        /* CABECERA SEGÚN IMAGEN 11 */
+        /* HERO HEADER */
         .hero-header {
             text-align: center;
             padding: 60px 20px 40px;
@@ -51,41 +62,58 @@
             font-size: 0.9rem;
             margin-bottom: 10px;
             letter-spacing: 1px;
+            animation: slideInRight 0.8s ease-out;
         }
         .hero-header h1 {
             font-size: 3.5rem;
             font-weight: 800;
             margin-bottom: 15px;
+            animation: revealCard 1s ease-out;
         }
         .hero-header p.desc {
             color: #ccc;
             max-width: 800px;
             margin: 0 auto;
             font-size: 1rem;
+            animation: revealCard 1s ease-out 0.2s backwards;
         }
 
         .container { max-width: 900px; margin: 0 auto; padding: 20px; }
 
-        /* CARDS DE NOTICIAS */
+        /* CARDS DE NOTICIAS ANIMADAS */
         .news-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid #30363d;
             border-radius: 12px;
             padding: 30px;
             margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: revealCard 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+        
+        /* Retraso para la segunda tarjeta */
+        .news-card:nth-child(2) { animation-delay: 0.4s; opacity: 0; }
+
         .news-tag { color: #ffb400; font-weight: bold; font-size: 0.85rem; margin-bottom: 10px; display: block; text-transform: uppercase; }
         .news-title { font-size: 1.5rem; margin-bottom: 20px; border-bottom: 2px solid #ffb400; padding-bottom: 10px; line-height: 1.3; }
         
         /* DASHBOARD */
         .dashboard-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin: 25px 0; }
-        .chart-card { background: #fff; border-radius: 8px; padding: 15px; flex: 1 1 250px; max-width: 280px; color: #000; }
+        .chart-card { 
+            background: #fff; border-radius: 8px; padding: 15px; flex: 1 1 250px; 
+            max-width: 280px; color: #000; transition: transform 0.3s ease; 
+        }
+        .chart-card:hover { transform: translateY(-5px); }
         .chart-card h3 { font-size: 10px; text-align: center; margin-bottom: 10px; color: #333; font-weight: bold; }
 
         /* LISTAS Y SECCIONES */
         .sub-section { margin-top: 25px; }
         .sub-title { color: #ffb400; font-weight: bold; margin-bottom: 15px; display: block; font-size: 1rem; }
-        .item { margin-bottom: 15px; padding-left: 15px; border-left: 2px solid #ffb400; }
+        .item { 
+            margin-bottom: 15px; padding-left: 15px; border-left: 2px solid #ffb400; 
+            transition: 0.3s;
+        }
+        .item:hover { background: rgba(255, 180, 0, 0.05); }
         
         .status-box { padding: 15px; border-radius: 8px; margin: 15px 0; font-size: 0.95rem; }
         .green { background: rgba(45, 164, 78, 0.15); border: 1px solid #2da44e; }
@@ -94,17 +122,12 @@
         .footer-sig { margin-top: 30px; font-weight: bold; color: #ffb400; text-align: right; font-size: 0.95rem; }
         .thanks-footer { text-align: center; font-weight: bold; font-size: 1.1rem; margin-top: 25px; color: #fff; }
 
-        /* RESPONSIVE CELULAR */
         @media (max-width: 768px) {
             .navbar { flex-direction: column; padding: 15px; }
             .logo-container { text-align: center; margin-bottom: 15px; }
             .menu { justify-content: center; gap: 10px; }
-            .menu a { font-size: 0.75rem; }
-            .hero-header h1 { font-size: 2.5rem; }
+            .hero-header h1 { font-size: 2.2rem; }
             .news-card { padding: 20px; }
-            .news-title { font-size: 1.25rem; }
-            .chart-card { flex: 1 1 100%; max-width: 100%; }
-            .footer-sig { text-align: center; }
         }
     </style>
 </head>
@@ -127,15 +150,15 @@
     <header class="hero-header">
         <p class="mantente">Mantente informado</p>
         <h1>Noticias y Avisos</h1>
-        <p class="desc">Entérate de las últimas novedades, cambios en horarios, campañas y comunicados oficiales de la Oficina de Movilidad Universitaria.</p>
+        <p class="desc">Entérate de las últimas novedades, cambios en horarios y comunicados oficiales para el ciclo 2026-A.</p>
     </header>
 
     <div class="container">
 
         <div class="news-card">
             <span class="news-tag">REPORTE OFICIAL</span>
-            <h2 class="news-title">📢 REPORTE DE GESTIÓN: RESULTADOS RUMBO AL CICLO 2026-A 🚌💨</h2>
-            <p>¡Hola, comunidad de la Ruta Ventanilla! 👋😊 Tal como lo prometimos, la transparencia es la base de nuestra organización. Tras el cierre del formulario de <b>Actualización Obligatoria de Datos</b>, compartimos con ustedes los resultados que respaldan nuestras próximas gestiones ante las autoridades para este inicio de clases el <b>1 de abril</b>. 🎓📚</p>
+            <h2 class="news-title">📢 REPORTE DE GESTIÓN: RESULTADOS RUMBO AL 2026-A 🚌💨</h2>
+            <p>¡Hola, comunidad de la Ruta Ventanilla! 👋 Tras el cierre del formulario de <b>Actualización Obligatoria</b>, compartimos los resultados que respaldan nuestras gestiones para el inicio el <b>1 de abril</b>.</p>
             
             <div class="sub-section">
                 <span class="sub-title">📊 Lo que dicen nuestros datos:</span>
@@ -145,63 +168,43 @@
                     <div class="chart-card"><h3>VOTO DE CONFIANZA</h3><canvas id="chartVoto"></canvas></div>
                 </div>
 
-                <div class="item"><b>Respaldo Contundente:</b> ¡Gracias por la confianza! Contamos con un <b>94.3% de aprobación</b> a la gestión actual. Este voto de confianza nos motiva a seguir luchando por un servicio de calidad. ✅🤝</div>
-                <div class="item"><b>Demanda de Horarios:</b> Hemos identificado que el turno <b>Tarde-Noche (6:00 PM)</b> y el de la <b>Mañana (5:15 AM)</b> son los más críticos. Usaremos estos números para exigir que las unidades cubran la capacidad necesaria. ⏳🚍</div>
-                <div class="item"><b>Participación Total:</b> Estudiantes de todas las facultades, liderados por <b>FCE, FCC y FCA</b>, ya están registrados. ¡Somos una sola comunidad universitaria! 🏛️👥</div>
+                <div class="item"><b>Respaldo Contundente:</b> ¡Gracias por la confianza! Contamos con un <b>94.3% de aprobación</b> a la gestión actual.</div>
+                <div class="item"><b>Demanda de Horarios:</b> El turno <b>Tarde-Noche (6:00 PM)</b> es el más solicitado para el retorno.</div>
             </div>
             
-            <p style="margin-top: 20px; font-size: 0.95rem; color: #ffb400;">⚠️ <b>RECORDATORIO FINAL:</b> El padrón oficial ha sido actualizado. Como se avisó, este registro es <b>VITAL</b> para garantizar tu cupo y seguridad en la ruta. El verano se acaba, pero nuestro compromiso para este <b>2026-A</b> está más fuerte que nunca. ☀️🛡️</p>
-            
-            <p class="footer-sig">Atentamente, Delegado Sebastian – Movilidad Ventanilla 🫡🚌</p>
-            <p class="thanks-footer">¡Gracias por ser parte del cambio! Nos vemos en la ruta este 30 de marzo. 🛣️🙌</p>
+            <p class="footer-sig">Atentamente, Delegado Sebastian 🫡🚌</p>
+            <p class="thanks-footer">¡Nos vemos en la ruta! 🛣️</p>
         </div>
 
         <div class="news-card">
             <span class="news-tag">NUEVA LOGÍSTICA</span>
-            <h2 class="news-title">🚀 ¡INNOVACIÓN TECNOLÓGICA Y ORDEN EN LA RUTA! 🚌📲</h2>
-            
-            <p>¡Hola de nuevo, compañeros y compañeras! 👋😊 Seguimos modernizando nuestra gestión para que este <b>30 de abril</b> todo sea más eficiente. Como su delegado 🫡, les presento la nueva logística digital diseñada para eliminar las colas y asegurar el orden:</p>
+            <h2 class="news-title">🚀 ¡INNOVACIÓN TECNOLÓGICA EN LA RUTA! 🚌📲</h2>
+            <p>Implementamos una nueva logística digital diseñada para eliminar las colas y asegurar el orden mediante validación por correo electrónico.</p>
 
             <div class="sub-section">
-                <span class="sub-title">✅ ASÍ SERÁ EL NUEVO PROCESO DE ACCESO:</span>
-                <p style="margin-bottom: 15px;">Al completar el formulario, el sistema validará tus datos automáticamente y enviará una respuesta inmediata a tu Gmail:</p>
+                <span class="sub-title">✅ PROCESO DE ACCESO:</span>
                 <div class="status-box green">
-                    <b>¡VERIFICACIÓN CORRECTA! (Pase Verde):</b> Si tus datos son válidos, recibirás tu correo de confirmación con tu <b>NÚMERO DE ASIENTO OFICIAL</b> (Cupos limitados a 40 asientos). 💺🔢
+                    <b>¡PASE VERDE! (Verificado):</b> Recibirás un correo con tu <b>NÚMERO DE ASIENTO</b>.
                 </div>
                 <div class="status-box red">
-                    <b>VERIFICACIÓN INCORRECTA (Aviso Rojo):</b> Si ingresas mal tu DNI o Código, el sistema rechazará la solicitud. <b>IMPORTANTE:</b> NO se te asignará un asiento, ya que el registro no será válido. ❌⚠️
+                    <b>AVISO ROJO (Pendiente):</b> Datos incorrectos. No se te podrá asignar asiento numerado.
                 </div>
             </div>
 
-            <div class="sub-section">
-                <span class="sub-title">⏳ LOGÍSTICA EN TIEMPO REAL:</span>
-                <div class="item"><b>📅 Cierre de Padrón:</b> El formulario se procesa y envía automáticamente una vez hayas completado el formulario 🙃.</div>
-                <div class="item"><b>🚍 Llegada del Bus:</b> La movilidad estará en el punto de partida a las <b>6:00 PM (puntualidad)</b>.</div>
-                <div class="item"><b>🤳 Abordaje Rápido:</b> ¡Olvídate de hacer colas! Ya no habrá listas manuales. Para subir, solo muestra el correo desde tu celular. ✅</div>
-            </div>
-
-            <div class="sub-section">
-                <span class="sub-title">⚠️ SOBRE LOS ASIENTOS (ACUERDO GENERAL):</span>
-                <div class="item"><b>🏆 Con Registro Válido:</b> Quienes reciban su ¡Verificación Correcta! tienen su asiento asegurado y numerado.</div>
-                <div class="item"><b>🚶 Sin Registro o Incorrectos:</b> Si no llenaste el formulario, podrás subir a la unidad, pero viajarás sin asiento asignado. <b>¡La movilidad es GRATUITA PARA TODOS!</b> 🟢💺</div>
-            </div>
-
-            <p style="margin-top: 20px;"><b>💡 RECOMENDACIONES:</b> Ten tu batería cargada y el correo abierto antes de llegar a la puerta para un abordaje fluido. 🎓📚</p>
-
-            <p class="footer-sig">Atentamente, Delegado Sebastian – Innovación y Movilidad Ventanilla 🫡🚌</p>
+            <p class="footer-sig">Atentamente, Delegado Sebastian 🫡🚌</p>
         </div>
     </div>
 
     <script>
         Chart.register(ChartDataLabels);
         function renderCharts() {
-            const commonOptions = { plugins: { datalabels: { color: '#fff', font: { weight: 'bold', size: 10 }, formatter: (v) => v + '%' } } };
+            const commonOptions = { plugins: { datalabels: { color: '#000', font: { weight: 'bold', size: 10 }, formatter: (v) => v + '%' } } };
             
             new Chart(document.getElementById('chartFacultad'), {
                 type: 'pie',
                 data: {
-                    labels: ['FCE', 'FCC', 'FCA', 'FIEE', 'FIQ', 'FIARN', 'Otros'],
-                    datasets: [{ data: [16.8, 11.3, 11.3, 11.3, 9.8, 7.5, 32], backgroundColor: ['#fbbc04', '#4285f4', '#ea4335', '#34a853', '#9334e6', '#12b5cb', '#70757a'] }]
+                    labels: ['FCE', 'FCC', 'FCA', 'FIEE', 'FIQ', 'Otros'],
+                    datasets: [{ data: [16.8, 11.3, 11.3, 11.3, 9.8, 39.5], backgroundColor: ['#fbbc04', '#4285f4', '#ea4335', '#34a853', '#9334e6', '#70757a'] }]
                 },
                 options: { plugins: { legend: { display: false }, datalabels: commonOptions.plugins.datalabels } }
             });
@@ -209,19 +212,19 @@
             new Chart(document.getElementById('chartHorarios'), {
                 type: 'bar',
                 data: {
-                    labels: ['6:00 PM', '5:15 AM', '2:30 PM', '10:15 PM'],
-                    datasets: [{ data: [74.3, 68.3, 46.3, 32], backgroundColor: '#a2d2df' }]
+                    labels: ['6:00 PM', '5:15 AM', '2:30 PM'],
+                    datasets: [{ data: [74.3, 68.3, 46.3], backgroundColor: '#ffb400' }]
                 },
-                options: { indexAxis: 'y', scales: { x: { display: false } }, plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'start', color: '#444', font: { weight: 'bold', size: 10 }, formatter: (v) => v + '%' } } }
+                options: { indexAxis: 'y', scales: { x: { display: false } }, plugins: { legend: { display: false }, datalabels: { anchor: 'end', align: 'start', color: '#000' } } }
             });
 
             new Chart(document.getElementById('chartVoto'), {
                 type: 'pie',
                 data: {
                     labels: ['SÍ', 'NO'],
-                    datasets: [{ data: [94.3, 5.7], backgroundColor: ['#3367d6', '#d93025'] }]
+                    datasets: [{ data: [94.3, 5.7], backgroundColor: ['#2da44e', '#d93025'] }]
                 },
-                options: { plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 8 }, color: '#fff' } }, datalabels: commonOptions.plugins.datalabels } }
+                options: { plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 8 } } }, datalabels: commonOptions.plugins.datalabels } }
             });
         }
     </script>
