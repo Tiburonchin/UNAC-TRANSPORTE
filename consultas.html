@@ -16,28 +16,30 @@
             overflow-x: hidden;
         }
 
-        /* NAVBAR - ESTILO BASE */
+        /* --- NAVBAR: ESTILO LAPTOP (HORIZONTAL) --- */
         .navbar {
             width: 100%;
             display: flex;
-            flex-direction: column; /* Columna para centrar los textos arriba */
+            justify-content: space-between;
             align-items: center;
-            padding: 15px 5%;
+            padding: 12px 5%;
             background: #000;
             border-bottom: 1px solid #1a1a1a;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
-        .logo-container { text-align: center; margin-bottom: 15px; }
-        .logo-top { color: #fff; font-weight: bold; font-size: 0.85rem; letter-spacing: 0.5px; text-transform: uppercase; }
-        .logo-bottom { color: #ffb400; font-weight: bold; font-size: 0.85rem; text-transform: uppercase; }
+        .logo-container { text-align: left; }
+        .logo-top { color: #fff; font-weight: bold; font-size: 0.75rem; }
+        .logo-bottom { color: #ffb400; font-weight: bold; font-size: 0.75rem; }
         
-        .menu { display: flex; align-items: center; justify-content: center; gap: 15px; width: 100%; }
+        .menu { display: flex; align-items: center; gap: 15px; }
         .menu a { color: #fff; text-decoration: none; font-size: 0.8rem; font-weight: 500; }
-        .menu a.active { color: #ffb400; border: 1px solid #ffb400; padding: 4px 10px; border-radius: 5px; }
+        .menu a.active { color: #ffb400; border: 1px solid #ffb400; padding: 5px 12px; border-radius: 5px; }
 
-        /* ANIMACIONES */
+        .main-container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+
+        /* --- ANIMACIONES --- */
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -47,8 +49,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .main-container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
-
         .hero-header {
             text-align: center;
             margin-bottom: 40px;
@@ -57,12 +57,11 @@
         .hero-header h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 10px; }
         .hero-header .desc { color: #888; max-width: 500px; margin: 0 auto; font-size: 0.9rem; }
 
-        /* GRID DE CONTACTOS */
+        /* --- GRID: 3 COLUMNAS EN LAPTOP --- */
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr); /* Forzado a 3 columnas en desktop */
             gap: 20px;
-            justify-items: center;
             margin-bottom: 50px;
         }
 
@@ -74,40 +73,59 @@
             text-align: center;
             opacity: 0; 
             animation: fadeInUp 0.8s ease-out forwards;
-            width: 100%;
-            max-width: 320px;
+            transition: transform 0.3s ease;
         }
+        .contact-card:hover { transform: translateY(-5px); border-color: #ffb400; }
 
-        /* RETRASOS DE ANIMACIÓN */
         .card-1 { animation-delay: 0.2s; }
         .card-2 { animation-delay: 0.4s; }
         .card-3 { animation-delay: 0.6s; }
 
         .icon-wrap { width: 55px; height: 55px; background: #111; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 1.5rem; }
-        .contact-name { font-size: 1.2rem; font-weight: bold; margin-bottom: 5px; }
-        .contact-faculty { color: #ffb400; font-size: 0.8rem; font-weight: bold; margin-bottom: 10px; }
+        .contact-name { font-size: 1.1rem; font-weight: bold; margin-bottom: 5px; }
+        .contact-faculty { color: #ffb400; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; }
+        .contact-role { color: #666; font-size: 0.8rem; margin-bottom: 15px; }
+        .contact-emojis { font-size: 1.1rem; margin-bottom: 20px; }
 
         .btn-whatsapp {
             display: block;
             background: #fff;
             color: #000;
             text-decoration: none;
-            padding: 12px;
+            padding: 10px;
             border-radius: 8px;
             font-weight: bold;
-            font-size: 0.9rem;
-            transition: 0.3s;
+            font-size: 0.85rem;
         }
 
-        /* --- CORRECCIÓN VISTA MÓVIL (TÍTULOS COMPACTOS) --- */
+        /* --- SECCIÓN TRANSPARENCIA (TEXTO COMPLETO) --- */
+        .transparency-section {
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 40px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.8s;
+        }
+        .transparency-title { font-size: 1.1rem; margin-bottom: 15px; font-weight: bold; }
+        .transparency-item { margin-bottom: 12px; padding-left: 10px; border-left: 2px solid #ffb400; font-size: 0.85rem; color: #ccc; }
+        .transparency-item b { color: #ffb400; }
+
+        /* --- VISTA MÓVIL: SÓLO AQUÍ CAMBIA EL DISEÑO --- */
         @media (max-width: 480px) {
-            .navbar { padding: 12px 2%; }
-            .logo-top { font-size: 0.7rem; }
-            .logo-bottom { font-size: 0.7rem; }
+            .navbar { flex-direction: column; text-align: center; } /* Compacto como imagen 2 */
+            .logo-container { margin-bottom: 10px; }
             .menu { gap: 10px; }
-            .menu a { font-size: 0.75rem; }
+            
+            .contact-grid {
+                grid-template-columns: 1fr; /* Una sola columna en cel */
+                justify-items: center;
+            }
+            .contact-card { max-width: 290px; } /* Compacto y centrado */
+            
             .hero-header h1 { font-size: 1.8rem; }
-            .contact-card { max-width: 290px; }
         }
     </style>
 </head>
@@ -135,9 +153,11 @@
 
         <div class="contact-grid">
             <div class="contact-card card-1">
-                <div class="icon-wrap">👨‍💼</div>
-                <div class="contact-name">Jared Flores</div>
+                <div class="icon-wrap">👩‍💼</div>
+                <div class="contact-name">Antonella Flores</div>
                 <div class="contact-faculty">C. CONTABLES</div>
+                <div class="contact-role">Delegada de Ruta</div>
+                <div class="contact-emojis">✨ 📑 🚌 📈</div>
                 <a href="https://wa.me/51971302428" class="btn-whatsapp">Contactar por WhatsApp</a>
             </div>
 
@@ -145,6 +165,8 @@
                 <div class="icon-wrap">👨‍💼</div>
                 <div class="contact-name">Sebastian De La Cruz</div>
                 <div class="contact-faculty">ING. QUÍMICA</div>
+                <div class="contact-role">Delegado de Ruta</div>
+                <div class="contact-emojis">🧪 ⚗️ 🚌 ⚙️</div>
                 <a href="https://wa.me/51917002183" class="btn-whatsapp">Contactar por WhatsApp</a>
             </div>
 
@@ -152,8 +174,24 @@
                 <div class="icon-wrap">👨‍💼</div>
                 <div class="contact-name">Jefry Cuya</div>
                 <div class="contact-faculty">FIEE</div>
+                <div class="contact-role">Delegado de Ruta</div>
+                <div class="contact-emojis">⚡ 🔌 🚌 🛠️</div>
                 <a href="https://wa.me/51994052971" class="btn-whatsapp">Contactar por WhatsApp</a>
             </div>
+        </div>
+
+        <div class="transparency-section">
+            <h2 class="transparency-title">📘 Propósito y Transparencia de la Plataforma 🚀</h2>
+            <div class="transparency-item">
+                <b>Fomentar el Desarrollo e Innovación: 💡</b> Buscamos optimizar los procesos de transporte mediante herramientas digitales y tecnológicas de vanguardia.
+            </div>
+            <div class="transparency-item">
+                <b>Gestión Académica: 🚌</b> Facilitar la organización de la movilidad estudiantil de manera eficiente y moderna.
+            </div>
+            <div class="transparency-item">
+                <b>Neutralidad Total: 🚫</b> No tenemos fines políticos ni malintencionados. Este espacio es ajeno a cualquier ideología externa a la gestión de servicios universitarios.
+            </div>
+            <p style="margin-top: 15px; font-weight: bold; text-align: center; font-size: 0.85rem;">Nuestro compromiso es con el progreso estudiantil. 🎓✨</p>
         </div>
     </div>
 
