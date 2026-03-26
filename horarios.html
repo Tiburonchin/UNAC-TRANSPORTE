@@ -14,9 +14,21 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* NAVBAR RESPONSIVE */
+        /* ANIMACIONES BASE */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* NAVBAR */
         .navbar {
             width: 100%;
             display: flex;
@@ -48,8 +60,23 @@
             text-align: center;
         }
 
-        h1 { font-size: clamp(1.8rem, 5vw, 3.5rem); font-weight: 800; margin-bottom: 10px; line-height: 1.1; }
-        .subtitle { color: #888; margin-bottom: 20px; max-width: 800px; font-size: 0.9rem; line-height: 1.4; }
+        /* Aplicación de retrasos en la carga */
+        .hero h1 { 
+            font-size: clamp(1.8rem, 5vw, 3.5rem); 
+            font-weight: 800; 
+            margin-bottom: 10px; 
+            line-height: 1.1;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        .subtitle { 
+            color: #888; 
+            margin-bottom: 20px; 
+            max-width: 800px; 
+            font-size: 0.9rem; 
+            line-height: 1.4;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+        }
         
         /* BLOQUE INFORMATIVO */
         .info-box {
@@ -62,6 +89,8 @@
             width: 100%;
             max-width: 900px;
             line-height: 1.5;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
         }
         .info-box strong { color: #ffb400; display: block; margin-bottom: 8px; font-size: 0.95rem; }
         .info-box p { color: #aaa; font-size: 0.85rem; }
@@ -75,6 +104,8 @@
             margin-bottom: 25px;
             cursor: pointer;
             width: fit-content;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 0.6s forwards;
         }
         .switch-btn { padding: 10px 20px; border-radius: 50px; font-weight: 600; font-size: 0.8rem; transition: 0.3s; }
         .going .btn-going, .return .btn-return { background: #ffb400; color: #000; }
@@ -90,21 +121,28 @@
             margin-bottom: 30px;
             overflow-x: auto;
             text-align: left;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.8s forwards;
         }
         .internal-header { color: #ffb400; font-weight: bold; font-size: 1.2rem; margin-bottom: 5px; }
         .internal-subheader { color: #666; font-size: 0.8rem; margin-bottom: 20px; }
         
-        .schedule-table { display: none; width: 100%; border-collapse: collapse; min-width: 500px; }
+        .schedule-table { 
+            display: none; 
+            width: 100%; 
+            border-collapse: collapse; 
+            min-width: 500px; 
+            animation: fadeIn 0.4s ease-in; /* Animación de cambio */
+        }
         .active-table { display: table; }
         th { color: #888; text-align: left; padding: 12px; border-bottom: 1px solid #222; font-size: 0.7rem; text-transform: uppercase; }
         td { padding: 12px; border-bottom: 1px solid #111; font-size: 0.85rem; }
         
-        /* ETIQUETAS DE ESTADO */
         .badge { padding: 4px 8px; border-radius: 5px; font-size: 0.7rem; font-weight: bold; }
         .badge-regular { background: rgba(0, 255, 100, 0.1); color: #00ff64; }
         .badge-previo { background: rgba(255, 0, 0, 0.1); color: #ff3c3c; }
 
-        /* FOOTER STATS RESPONSIVE */
+        /* FOOTER STATS */
         .stats {
             background: #000;
             display: flex;
@@ -115,19 +153,17 @@
             margin-top: auto;
             flex-wrap: wrap;
             gap: 15px;
+            animation: fadeIn 1.2s ease-out;
         }
         .item { text-align: center; min-width: 100px; flex: 1; }
         .item strong { display: block; color: #ffb400; font-size: 1rem; }
         .item p { font-size: 0.65rem; color: #666; margin-top: 5px; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* AJUSTES CELULAR */
         @media (max-width: 768px) {
             .navbar { flex-direction: column; gap: 10px; text-align: center; }
             .menu { justify-content: center; }
             .hero { padding: 30px 15px; }
-            .stats { justify-content: center; }
             .item { min-width: 45%; }
-            .table-container { padding: 15px; }
         }
     </style>
 </head>
@@ -145,7 +181,7 @@
     </nav>
 
     <section class="hero">
-        <p style="color: #ffb400; font-weight: bold; margin-bottom: 10px; font-size: 0.8rem;">PLANIFICA TU VIAJE</p>
+        <p style="color: #ffb400; font-weight: bold; margin-bottom: 10px; font-size: 0.8rem; animation: fadeIn 1s ease-out;">PLANIFICA TU VIAJE</p>
         <h1>Horarios de la Ruta Ventanilla</h1>
         <p class="subtitle">Consulta la programación oficial de ida y vuelta para el ciclo 2026-A.</p>
 
