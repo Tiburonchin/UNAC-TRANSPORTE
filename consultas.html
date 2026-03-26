@@ -1,129 +1,218 @@
-<style>
-    .contact-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 20px;
-        margin-top: 30px;
-    }
-
-    .contact-card {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid #30363d;
-        border-radius: 15px;
-        padding: 25px;
-        text-align: center;
-        transition: transform 0.3s ease, border-color 0.3s ease;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .contact-card:hover {
-        transform: translateY(-5px);
-        border-color: #ffb400;
-        background: rgba(255, 180, 0, 0.02);
-    }
-
-    .contact-card .icon-profile {
-        font-size: 2.5rem;
-        margin-bottom: 15px;
-        display: block;
-    }
-
-    .contact-name {
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: #fff;
-        margin-bottom: 5px;
-    }
-
-    .contact-faculty {
-        font-size: 0.85rem;
-        color: #ffb400;
-        font-weight: 600;
-        margin-bottom: 10px;
-        min-height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .contact-role {
-        font-size: 0.9rem;
-        color: #ccc;
-        margin-bottom: 15px;
-    }
-
-    .contact-emojis {
-        font-size: 1.1rem;
-        margin-bottom: 20px;
-        letter-spacing: 3px;
-    }
-
-    .btn-whatsapp {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: #25d366;
-        color: #fff;
-        text-decoration: none;
-        padding: 10px 20px;
-        border-radius: 50px;
-        font-weight: bold;
-        font-size: 0.9rem;
-        transition: 0.3s;
-    }
-
-    .btn-whatsapp:hover {
-        background: #128c7e;
-        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-    }
-
-    @media (max-width: 768px) {
-        .contact-container {
-            grid-template-columns: 1fr;
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Movilidad UNAC</title>
+    <style>
+        /* RESET GENERAL */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-    }
-</style>
+        body {
+            background-color: #000; /* Fondo negro de la segunda imagen */
+            color: #fff;
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+        }
 
-<div class="container">
-    <header class="hero-header" style="padding-top: 20px;">
-        <p class="mantente">Canales Oficiales</p>
-        <h1 style="font-size: 2.5rem;">Delegados de Ruta</h1>
-        <p class="desc">Comunícate con los responsables de la movilidad para consultas, reportes o asistencia técnica.</p>
-    </header>
+        /* NAVBAR (Idéntica a la segunda imagen de referencia) */
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 4%;
+            background: #000;
+            border-bottom: 1px solid #1a1a1a;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo-container { text-align: left; }
+        .logo-top { color: #fff; font-weight: bold; font-size: 0.85rem; }
+        .logo-bottom { color: #ffb400; font-weight: bold; font-size: 0.85rem; }
+        
+        .menu { display: flex; align-items: center; gap: 20px; }
+        .menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+        .menu a:hover, .menu a.active { color: #ffb400; }
+        .btn-consultas { border: 1px solid #ffb400; padding: 6px 15px; border-radius: 5px; }
 
-    <div class="contact-container">
-        <div class="contact-card">
-            <span class="icon-profile">📲</span>
-            <div class="contact-name">Jared Flores Kispe</div>
-            <div class="contact-faculty">Facultad de Ciencias Contables</div>
-            <div class="contact-role">👩‍💼 Delegada</div>
-            <div class="contact-emojis">✨ 📑 🚌 📈 ✨</div>
-            <a href="https://wa.me/51971302428" target="_blank" class="btn-whatsapp">
-                <span>WhatsApp</span>
-            </a>
+        /* CONTENEDOR PRINCIPAL */
+        .main-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* CABECERA SECCIÓN DE CONTACTO (Estilo naranja de la UNAC) */
+        .hero-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .hero-header .mantente {
+            color: #ffb400; /* Naranja institucional */
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        .hero-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        .hero-header .desc {
+            color: #ccc;
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1rem;
+        }
+
+        /* CONTENEDOR DE TARJETAS DE CONTACTO */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        /* TARJETA DE CONTACTO BLANCA (Mismo diseño de tu primera imagen) */
+        .contact-card {
+            background: #fff; /* Fondo blanco de la tarjeta */
+            border-radius: 12px;
+            padding: 40px 25px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Sombra para que flote sobre el fondo negro */
+            border: 1px solid #e1e4e8;
+            color: #333; /* Texto oscuro dentro de la tarjeta blanca */
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .icon-profile {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .contact-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 5px;
+        }
+
+        .contact-faculty {
+            font-size: 0.85rem;
+            color: #ffb400; /* Naranja en el nombre de la facultad */
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .contact-role {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .contact-emojis {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            letter-spacing: 3px;
+        }
+
+        /* BOTÓN WHATSAPP (Como en tu primera imagen) */
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            background: #25d366;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .btn-whatsapp:hover {
+            background: #128c7e;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid { grid-template-columns: 1fr; }
+            .hero-header h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo-container">
+            <div class="logo-top">UNIVERSIDAD NACIONAL DEL CALLAO</div>
+            <div class="logo-bottom">MOVILIDAD UNIVERSITARIA</div>
         </div>
-
-        <div class="contact-card">
-            <span class="icon-profile">📲</span>
-            <div class="contact-name">Sebastian De La Cruz Gavino</div>
-            <div class="contact-faculty">Facultad de Ingeniería Química</div>
-            <div class="contact-role">👨‍💼 Delegado</div>
-            <div class="contact-emojis">🧪 ⚗️ 🚌 👷‍♂️ ⚙️</div>
-            <a href="https://wa.me/51917002183" target="_blank" class="btn-whatsapp">
-                <span>WhatsApp</span>
-            </a>
+        <div class="menu">
+            <a href="index.html">Inicio</a>
+            <a href="horarios.html">Horarios</a>
+            <a href="rutas.html">Rutas</a>
+            <a href="noticias.html">Noticias</a>
+            <a href="consultas.html" class="active btn-consultas">Consultas</a>
         </div>
+    </nav>
 
-        <div class="contact-card">
-            <span class="icon-profile">📲</span>
-            <div class="contact-name">Jefry Cuya Palomino</div>
-            <div class="contact-faculty">Facultad de Ingeniería Eléctrica y Electrónica</div>
-            <div class="contact-role">👨‍💼 Delegado</div>
-            <div class="contact-emojis">⚡ 🔌 🚌 🛠️ 📱</div>
-            <a href="https://wa.me/51994052971" target="_blank" class="btn-whatsapp">
-                <span>WhatsApp</span>
-            </a>
+    <div class="main-container">
+        <header class="hero-header">
+            <p class="mantente">Canales Oficiales</p>
+            <h1>Delegados de Ruta</h1>
+            <p class="desc">Comunícate con los responsables de la movilidad para consultas, reportes o asistencia técnica.</p>
+        </header>
+
+        <div class="contact-grid">
+            <div class="contact-card">
+                <span class="icon-profile">📲</span>
+                <div class="contact-faculty">Facultad de Ciencias Contables</div>
+                <div class="contact-role">👩‍💼 Delegada</div>
+                <div class="contact-emojis">✨ 📑 🚌 📈 ✨</div>
+                <a href="https://wa.me/51971302428" target="_blank" class="btn-whatsapp">
+                    WhatsApp
+                </a>
+            </div>
+
+            <div class="contact-card">
+                <span class="icon-profile">📲</span>
+                <div class="contact-faculty">Facultad de Ingeniería Química</div>
+                <div class="contact-role">👨‍💼 Delegado</div>
+                <div class="contact-emojis">🧪 ⚗️ 🚌 👷‍♂️ ⚙️</div>
+                <a href="https://wa.me/51917002183" target="_blank" class="btn-whatsapp">
+                    WhatsApp
+                </a>
+            </div>
+
+            <div class="contact-card">
+                <span class="icon-profile">📲</span>
+                <div class="contact-faculty">Facultad de Ingeniería Eléctrica y Electrónica</div>
+                <div class="contact-role">👨‍💼 Delegado</div>
+                <div class="contact-emojis">⚡ 🔌 🚌 🛠️ 📱</div>
+                <a href="https://wa.me/51994052971" target="_blank" class="btn-whatsapp">
+                    WhatsApp
+                </a>
+            </div>
         </div>
     </div>
-</div>
+
+</body>
+</html>
