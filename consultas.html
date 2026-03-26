@@ -16,7 +16,8 @@
             color: #fff;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
-            line-height: 1.6;
+            line-height: 1.4;
+            overflow-x: hidden; /* Evita scroll horizontal por animaciones */
         }
 
         /* NAVBAR UNIFICADA */
@@ -25,7 +26,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 5%;
+            padding: 12px 5%;
             background: #000;
             border-bottom: 1px solid #1a1a1a;
             position: sticky;
@@ -33,148 +34,158 @@
             z-index: 1000;
         }
         .logo-container { text-align: left; }
-        .logo-top { color: #fff; font-weight: bold; font-size: 0.8rem; letter-spacing: 0.5px; }
-        .logo-bottom { color: #ffb400; font-weight: bold; font-size: 0.8rem; }
+        .logo-top { color: #fff; font-weight: bold; font-size: 0.75rem; letter-spacing: 0.5px; }
+        .logo-bottom { color: #ffb400; font-weight: bold; font-size: 0.75rem; }
         
-        .menu { display: flex; align-items: center; gap: 20px; }
+        .menu { display: flex; align-items: center; gap: 15px; }
         .menu a {
             color: #fff;
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 500;
             transition: 0.3s;
         }
         .menu a:hover, .menu a.active { color: #ffb400; }
-        .btn-consultas { border: 1px solid #ffb400; padding: 6px 15px; border-radius: 5px; }
+        .btn-consultas { border: 1px solid #ffb400; padding: 5px 12px; border-radius: 5px; }
 
         /* CONTENEDOR PRINCIPAL */
         .main-container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 40px 20px;
+        }
+
+        /* ANIMACIÓN DE ENTRADA PARA LA CABECERA */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .hero-header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease-out; /* Animación aquí */
         }
         .hero-header .mantente {
             color: #ffb400;
             font-weight: bold;
             text-transform: uppercase;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             letter-spacing: 2px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         .hero-header h1 {
-            font-size: 2.8rem;
+            font-size: 2.2rem;
             font-weight: 800;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         .hero-header .desc {
             color: #888;
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
         /* GRID DE CONTACTOS */
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
         }
 
-        /* TARJETA ESTILO DARK PREMIUM */
+        /* ANIMACIÓN DE ENTRADA PARA LAS TARJETAS (FADE IN UP) */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* TARJETA ESTILO COMPACTO */
         .contact-card {
             background: #0a0a0a;
             border: 1px solid #222;
-            border-radius: 16px;
-            padding: 40px 30px;
+            border-radius: 12px;
+            padding: 25px 20px;
             text-align: center;
             transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
+            opacity: 0; /* Empieza invisible para la animación */
+            animation: fadeInUp 0.8s ease-out forwards; /* Animación aquí */
         }
 
+        /* Delays para que aparezcan una tras otra */
+        .card-1 { animation-delay: 0.2s; }
+        .card-2 { animation-delay: 0.4s; }
+        .card-3 { animation-delay: 0.6s; }
+
         .contact-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             border-color: #ffb400;
-            box-shadow: 0 10px 30px rgba(255, 180, 0, 0.1);
+            box-shadow: 0 8px 25px rgba(255, 180, 0, 0.08);
         }
 
         .icon-wrap {
-            width: 70px;
-            height: 70px;
+            width: 55px;
+            height: 55px;
             background: #111;
             border: 1px solid #222;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 1.8rem;
+            margin: 0 auto 15px;
+            font-size: 1.5rem;
         }
 
         .contact-name {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: bold;
             color: #fff;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
         }
 
         .contact-faculty {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: #ffb400;
             font-weight: 600;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .contact-role {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: #666;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            margin-bottom: 15px;
         }
 
         .contact-emojis {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
             opacity: 0.8;
         }
 
         /* BOTÓN WHATSAPP */
         .btn-whatsapp {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             background: #fff;
             color: #000;
             text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 10px;
+            padding: 10px 18px;
+            border-radius: 8px;
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             transition: 0.3s;
+            width: 100%;
         }
 
         .btn-whatsapp:hover {
             background: #ffb400;
-            color: #000;
-        }
-
-        .btn-whatsapp img {
-            width: 20px;
         }
 
         @media (max-width: 768px) {
-            .hero-header h1 { font-size: 2.2rem; }
+            .hero-header h1 { font-size: 1.8rem; }
             .contact-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -203,20 +214,20 @@
         </header>
 
         <div class="contact-grid">
-            <div class="contact-card">
-                <div class="icon-wrap">👩‍💼</div>
-                <div class="contact-name">Valery</div>
+            <div class="contact-card card-1">
+                <div class="icon-wrap">👨‍💼</div>
+                <div class="contact-name">Jared Flores</div>
                 <div class="contact-faculty">C. Contables</div>
-                <div class="contact-role">Delegada de Ruta</div>
+                <div class="contact-role">Delegado de Ruta</div>
                 <div class="contact-emojis">✨ 📑 🚌 📈</div>
                 <a href="https://wa.me/51971302428" target="_blank" class="btn-whatsapp">
                     Contactar por WhatsApp
                 </a>
             </div>
 
-            <div class="contact-card">
+            <div class="contact-card card-2">
                 <div class="icon-wrap">👨‍💼</div>
-                <div class="contact-name">Sebastian</div>
+                <div class="contact-name">Sebastian De La Cruz</div>
                 <div class="contact-faculty">Ing. Química</div>
                 <div class="contact-role">Delegado de Ruta</div>
                 <div class="contact-emojis">🧪 ⚗️ 🚌 ⚙️</div>
@@ -225,9 +236,9 @@
                 </a>
             </div>
 
-            <div class="contact-card">
+            <div class="contact-card card-3">
                 <div class="icon-wrap">👨‍💼</div>
-                <div class="contact-name">Alexander</div>
+                <div class="contact-name">Jefry Cuya</div>
                 <div class="contact-faculty">FIEE</div>
                 <div class="contact-role">Delegado de Ruta</div>
                 <div class="contact-emojis">⚡ 🔌 🚌 🛠️</div>
