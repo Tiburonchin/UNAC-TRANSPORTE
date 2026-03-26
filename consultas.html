@@ -12,19 +12,20 @@
             padding: 0;
         }
         body {
-            background-color: #000; /* Fondo negro de la segunda imagen */
+            background-color: #000;
             color: #fff;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
+            line-height: 1.6;
         }
 
-        /* NAVBAR (Idéntica a la segunda imagen de referencia) */
+        /* NAVBAR UNIFICADA */
         .navbar {
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 4%;
+            padding: 15px 5%;
             background: #000;
             border-bottom: 1px solid #1a1a1a;
             position: sticky;
@@ -32,14 +33,15 @@
             z-index: 1000;
         }
         .logo-container { text-align: left; }
-        .logo-top { color: #fff; font-weight: bold; font-size: 0.85rem; }
-        .logo-bottom { color: #ffb400; font-weight: bold; font-size: 0.85rem; }
+        .logo-top { color: #fff; font-weight: bold; font-size: 0.8rem; letter-spacing: 0.5px; }
+        .logo-bottom { color: #ffb400; font-weight: bold; font-size: 0.8rem; }
         
         .menu { display: flex; align-items: center; gap: 20px; }
         .menu a {
             color: #fff;
             text-decoration: none;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
+            font-weight: 500;
             transition: 0.3s;
         }
         .menu a:hover, .menu a.active { color: #ffb400; }
@@ -47,114 +49,133 @@
 
         /* CONTENEDOR PRINCIPAL */
         .main-container {
-            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 60px 20px;
         }
 
-        /* CABECERA SECCIÓN DE CONTACTO (Estilo naranja de la UNAC) */
         .hero-header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
         }
         .hero-header .mantente {
-            color: #ffb400; /* Naranja institucional */
+            color: #ffb400;
             font-weight: bold;
             text-transform: uppercase;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
             margin-bottom: 10px;
-            letter-spacing: 1px;
         }
         .hero-header h1 {
-            font-size: 3rem;
+            font-size: 2.8rem;
             font-weight: 800;
             margin-bottom: 15px;
-            color: #fff;
         }
         .hero-header .desc {
-            color: #ccc;
-            max-width: 800px;
+            color: #888;
+            max-width: 600px;
             margin: 0 auto;
             font-size: 1rem;
         }
 
-        /* CONTENEDOR DE TARJETAS DE CONTACTO */
+        /* GRID DE CONTACTOS */
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
         }
 
-        /* TARJETA DE CONTACTO BLANCA (Mismo diseño de tu primera imagen) */
+        /* TARJETA ESTILO DARK PREMIUM */
         .contact-card {
-            background: #fff; /* Fondo blanco de la tarjeta */
-            border-radius: 12px;
-            padding: 40px 25px;
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 16px;
+            padding: 40px 30px;
             text-align: center;
-            transition: transform 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Sombra para que flote sobre el fondo negro */
-            border: 1px solid #e1e4e8;
-            color: #333; /* Texto oscuro dentro de la tarjeta blanca */
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
 
         .contact-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            border-color: #ffb400;
+            box-shadow: 0 10px 30px rgba(255, 180, 0, 0.1);
         }
 
-        .icon-profile {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            display: block;
+        .icon-wrap {
+            width: 70px;
+            height: 70px;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
         }
 
         .contact-name {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
-            color: #000;
+            color: #fff;
             margin-bottom: 5px;
         }
 
         .contact-faculty {
             font-size: 0.85rem;
-            color: #ffb400; /* Naranja en el nombre de la facultad */
+            color: #ffb400;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .contact-role {
             font-size: 0.9rem;
-            color: #555;
-            margin-bottom: 15px;
+            color: #666;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .contact-emojis {
-            font-size: 1.1rem;
-            margin-bottom: 25px;
-            letter-spacing: 3px;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.8;
         }
 
-        /* BOTÓN WHATSAPP (Como en tu primera imagen) */
+        /* BOTÓN WHATSAPP */
         .btn-whatsapp {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            background: #25d366;
-            color: #fff;
+            justify-content: center;
+            gap: 10px;
+            background: #fff;
+            color: #000;
             text-decoration: none;
-            padding: 10px 25px;
-            border-radius: 50px;
+            padding: 12px 20px;
+            border-radius: 10px;
             font-weight: bold;
             font-size: 0.9rem;
             transition: 0.3s;
         }
 
         .btn-whatsapp:hover {
-            background: #128c7e;
+            background: #ffb400;
+            color: #000;
+        }
+
+        .btn-whatsapp img {
+            width: 20px;
         }
 
         @media (max-width: 768px) {
-            .contact-grid { grid-template-columns: 1fr; }
             .hero-header h1 { font-size: 2.2rem; }
+            .contact-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -178,37 +199,40 @@
         <header class="hero-header">
             <p class="mantente">Canales Oficiales</p>
             <h1>Delegados de Ruta</h1>
-            <p class="desc">Comunícate con los responsables de la movilidad para consultas, reportes o asistencia técnica.</p>
+            <p class="desc">Atención personalizada para resolver tus dudas sobre la Ruta Ventanilla.</p>
         </header>
 
         <div class="contact-grid">
             <div class="contact-card">
-                <span class="icon-profile">📲</span>
-                <div class="contact-faculty">Facultad de Ciencias Contables</div>
-                <div class="contact-role">👩‍💼 Delegada</div>
-                <div class="contact-emojis">✨ 📑 🚌 📈 ✨</div>
+                <div class="icon-wrap">👩‍💼</div>
+                <div class="contact-name">Valery</div>
+                <div class="contact-faculty">C. Contables</div>
+                <div class="contact-role">Delegada de Ruta</div>
+                <div class="contact-emojis">✨ 📑 🚌 📈</div>
                 <a href="https://wa.me/51971302428" target="_blank" class="btn-whatsapp">
-                    WhatsApp
+                    Contactar por WhatsApp
                 </a>
             </div>
 
             <div class="contact-card">
-                <span class="icon-profile">📲</span>
-                <div class="contact-faculty">Facultad de Ingeniería Química</div>
-                <div class="contact-role">👨‍💼 Delegado</div>
-                <div class="contact-emojis">🧪 ⚗️ 🚌 👷‍♂️ ⚙️</div>
+                <div class="icon-wrap">👨‍💼</div>
+                <div class="contact-name">Sebastian</div>
+                <div class="contact-faculty">Ing. Química</div>
+                <div class="contact-role">Delegado de Ruta</div>
+                <div class="contact-emojis">🧪 ⚗️ 🚌 ⚙️</div>
                 <a href="https://wa.me/51917002183" target="_blank" class="btn-whatsapp">
-                    WhatsApp
+                    Contactar por WhatsApp
                 </a>
             </div>
 
             <div class="contact-card">
-                <span class="icon-profile">📲</span>
-                <div class="contact-faculty">Facultad de Ingeniería Eléctrica y Electrónica</div>
-                <div class="contact-role">👨‍💼 Delegado</div>
-                <div class="contact-emojis">⚡ 🔌 🚌 🛠️ 📱</div>
+                <div class="icon-wrap">👨‍💼</div>
+                <div class="contact-name">Alexander</div>
+                <div class="contact-faculty">FIEE</div>
+                <div class="contact-role">Delegado de Ruta</div>
+                <div class="contact-emojis">⚡ 🔌 🚌 🛠️</div>
                 <a href="https://wa.me/51994052971" target="_blank" class="btn-whatsapp">
-                    WhatsApp
+                    Contactar por WhatsApp
                 </a>
             </div>
         </div>
