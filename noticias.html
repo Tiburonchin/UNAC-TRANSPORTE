@@ -22,49 +22,34 @@
             background-attachment: fixed;
         }
 
-        @keyframes revealCard {
-            0% { opacity: 0; transform: scale(0.98) translateY(30px); filter: blur(5px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
-        }
-
-        /* --- NAVBAR ESTILO LAPTOP --- */
+        /* NAVBAR - ESTILO LAPTOP */
         .navbar {
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 4%;
-            background: rgba(0, 0, 0, 0.9);
+            padding: 15px 5%;
+            background: rgba(10, 10, 10, 0.9);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid #1a1a1a;
+            border-bottom: 1px solid #222;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
-        .logo-container { text-align: left; line-height: 1.2; }
-        .logo-top { color: #fff; font-weight: bold; font-size: 0.85rem; }
-        .logo-bottom { color: #ffb400; font-weight: bold; font-size: 0.85rem; }
+        .logo { font-weight: bold; font-size: 0.8rem; line-height: 1.2; text-align: left; }
+        .logo span { color: #ffb400; }
         
-        .menu { display: flex; align-items: center; gap: 20px; }
-        .menu a { color: #fff; text-decoration: none; font-size: 0.8rem; transition: 0.3s; }
-        .menu a:hover, .menu a.active { color: #ffb400; }
+        .menu { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+        .menu a { color: #fff; text-decoration: none; font-size: 0.75rem; padding: 5px; transition: 0.3s; }
+        .menu a.active { color: #ffb400; font-weight: bold; }
         .menu a.consultas { color: #fff; border: 1px solid #ffb400; border-radius: 4px; padding: 4px 8px; }
+        .menu a.consultas:hover { background: #ffb400; color: #000; }
 
-        .hero-header {
-            text-align: center;
-            padding: 60px 20px 40px;
-        }
-        .hero-header h1 { font-size: 3rem; font-weight: 800; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        /* HEADER */
+        .hero-header { text-align: center; padding: 60px 20px 40px; }
+        .hero-header h1 { font-size: 3rem; font-weight: 800; margin-bottom: 15px; }
         .hero-header p.mantente { color: #ffb400; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; margin-bottom: 10px; }
-        .hero-header p.desc {
-            color: #ddd;
-            max-width: 700px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-            line-height: 1.5;
-            padding: 0 20px;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-        }
+        .hero-header p.desc { color: #ddd; max-width: 700px; margin: 0 auto; font-size: 1.1rem; }
 
         .container { max-width: 900px; margin: 0 auto; padding: 20px; }
 
@@ -75,14 +60,13 @@
             border-radius: 12px;
             padding: 35px;
             margin-bottom: 50px;
-            animation: revealCard 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
-        .news-card:nth-child(2) { animation-delay: 0.3s; opacity: 0; }
 
         .news-tag { color: #ffb400; font-weight: bold; font-size: 0.85rem; margin-bottom: 10px; display: block; }
         .news-title { font-size: 1.6rem; margin-bottom: 25px; border-bottom: 2px solid #ffb400; padding-bottom: 10px; line-height: 1.3; }
         
+        /* GRÁFICAS */
         .dashboard-grid { 
             display: grid; 
             grid-template-columns: repeat(2, 1fr); 
@@ -94,15 +78,13 @@
             border-radius: 8px; 
             padding: 15px; 
             color: #000; 
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            height: 350px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            height: 350px;
         }
         .chart-card h3 { font-size: 10px; text-align: center; margin-bottom: 10px; color: #333; font-weight: bold; }
 
-        .sub-section { margin-top: 25px; }
         .sub-title { color: #ffb400; font-weight: bold; margin-bottom: 15px; display: block; font-size: 1.1rem; }
         .item { margin-bottom: 15px; padding-left: 15px; border-left: 2px solid #ffb400; }
         
@@ -111,50 +93,30 @@
         .red { background: rgba(248, 81, 73, 0.1); border: 1px solid #f85149; color: #ffb3b0; }
 
         .footer-sig { margin-top: 30px; font-weight: bold; color: #ffb400; text-align: right; }
-        .thanks-footer { text-align: center; font-weight: bold; font-size: 1.1rem; margin-top: 25px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .thanks-footer { text-align: center; font-weight: bold; font-size: 1.1rem; margin-top: 25px; }
 
-        /* --- CORRECCIÓN ENCABEZADO PARA CELULAR (IMAGEN 2) --- */
+        /* --- MODIFICACIÓN PARA CELULAR (IGUAL A TU CÓDIGO DE RUTAS) --- */
         @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column; /* Apila logo y menú */
-                padding: 15px 10px;
-                height: auto;
+            .navbar { 
+                flex-direction: column; 
+                gap: 10px; 
+                text-align: center; 
+                padding: 15px 5%;
             }
-            .logo-container {
-                text-align: center; /* Centra el texto del logo */
-                margin-bottom: 15px;
-            }
-            .logo-top, .logo-bottom {
-                font-size: 0.9rem;
-            }
-            .menu {
-                justify-content: center; /* Centra los botones del menú */
-                flex-wrap: wrap; /* Permite que el menú baje si no hay espacio */
-                width: 100%;
-                gap: 12px;
-            }
-            .menu a {
-                font-size: 0.85rem;
-            }
-
-            .dashboard-grid { 
-                grid-template-columns: 1fr; 
-            }
-            .chart-card {
-                height: 400px; 
-            }
+            .logo { text-align: center; } /* Centra el logo en celular */
+            .menu { justify-content: center; } /* Centra el menú en celular */
+            
+            .dashboard-grid { grid-template-columns: 1fr; }
             .hero-header h1 { font-size: 2.2rem; }
             .news-card { padding: 20px; }
+            .chart-card { height: 400px; }
         }
     </style>
 </head>
 <body onload="renderCharts()">
 
     <nav class="navbar">
-        <div class="logo-container">
-            <div class="logo-top">UNIVERSIDAD NACIONAL DEL CALLAO</div>
-            <div class="logo-bottom">MOVILIDAD UNIVERSITARIA</div>
-        </div>
+        <div class="logo">UNIVERSIDAD NACIONAL DEL CALLAO<br><span>MOVILIDAD UNIVERSITARIA</span></div>
         <div class="menu">
             <a href="index.html">Inicio</a>
             <a href="horarios.html">Horarios</a>
@@ -185,13 +147,12 @@
                     <div class="chart-card"><h3>RATIFICACIÓN Y VOTO DE CONFIANZA</h3><canvas id="chartVoto"></canvas></div>
                 </div>
 
-                <div class="item"><b>Respaldo Contundente:</b> ¡Gracias por la confianza! Contamos con un 93.4% de aprobación a la gestión actual. Este voto de confianza nos motiva a seguir luchando por un servicio de calidad. ✅🤝</div>
-                <div class="item"><b>Demanda de Horarios:</b> Hemos identificado que el turno Tarde-Noche (6:00 PM) y el de la Mañana (5:15 AM) son los más críticos. Usaremos estos números para exigir que las unidades cubran la capacidad necesaria y nadie se quede fuera. ⏳🚍</div>
-                <div class="item"><b>Participación Total:</b> Estudiantes de todas las facultades, liderados por FCE, FCC y FCA, ya están registrados. ¡Somos una sola comunidad universitaria! 🏛️👥</div>
+                <div class="item"><b>Respaldo Contundente:</b> ¡Gracias por la confianza! Contamos con un 94.3% de aprobación a la gestión actual. ✅🤝</div>
+                <div class="item"><b>Demanda de Horarios:</b> Hemos identificado que el turno Tarde-Noche (6:00 PM) y el de la Mañana (5:15 AM) son los más críticos. ⏳🚍</div>
+                <div class="item"><b>Participación Total:</b> Estudiantes de todas las facultades ya están registrados. ¡Somos una sola comunidad universitaria! 🏛️👥</div>
             </div>
             
-            <p style="margin-top: 20px;">⚠️ <b>RECORDATORIO FINAL:</b> El padrón oficial ha sido actualizado. Como se avisó, este registro es VITAL para garantizar tu cupo y seguridad en la ruta. El verano se acaba, pero nuestro compromiso por una movilidad segura y organizada para este 2026-A está más fuerte que nunca. ☀️🛡️</p>
-            
+            <p style="margin-top: 20px;">⚠️ <b>RECORDATORIO FINAL:</b> El padrón oficial ha sido actualizado. Como se avisó, este registro es VITAL para garantizar tu cupo y seguridad en la ruta. ☀️🛡️</p>
             <p class="footer-sig">Atentamente, Delegado Sebastian – Movilidad Ventanilla 🫡🚌</p>
             <p class="thanks-footer">¡Gracias por ser parte del cambio! Nos vemos en la ruta este 30 de marzo. 🛣️🙌</p>
         </div>
@@ -199,37 +160,22 @@
         <div class="news-card">
             <span class="news-tag">INNOVACIÓN</span>
             <h2 class="news-title">🚀 ¡INNOVACIÓN TECNOLÓGICA Y ORDEN EN LA RUTA! 🚌📲</h2>
-            <p>¡Hola de nuevo, compañeros y compañeras! 👋😊 Seguimos modernizando nuestra gestión para que este 30 de abril todo sea más eficiente. Como su delegado 🫡, les presento la nueva logística digital diseñada para eliminar las colas y asegurar el orden, cumpliendo con la votación realizada anteriormente:</p>
+            <p>Seguimos modernizando nuestra gestión para que este 30 de abril todo sea más eficiente. Les presento la nueva logística digital diseñada para eliminar las colas y asegurar el orden:</p>
 
             <div class="sub-section">
                 <span class="sub-title">✅ ASÍ SERÁ EL NUEVO PROCESO DE ACCESO:</span>
-                <p>Al completar el formulario, el sistema validará tus datos automáticamente y enviará una respuesta inmediata a tu Gmail:</p>
                 <div class="status-box green">
-                    <b>¡VERIFICACIÓN CORRECTA! (Pase Verde):</b> Si tus datos son válidos, recibirás tu correo de confirmación con tu <b>NÚMERO DE ASIENTO OFICIAL</b> (Cupos limitados a 40 asientos). 💺🔢
+                    <b>¡VERIFICACIÓN CORRECTA! (Pase Verde):</b> Recibirás tu correo con tu <b>NÚMERO DE ASIENTO OFICIAL</b>. 💺🔢
                 </div>
                 <div class="status-box red">
-                    <b>VERIFICACIÓN INCORRECTA (Aviso Rojo):</b> Si ingresas mal tu DNI o Código, el sistema rechazará la solicitud. <b>IMPORTANTE:</b> Con una verificación incorrecta NO se te asignará un asiento, ya que el registro no será válido para el padrón oficial. ❌⚠️
+                    <b>VERIFICACIÓN INCORRECTA (Aviso Rojo):</b> Con una verificación incorrecta NO se te asignará un asiento. ❌⚠️
                 </div>
             </div>
 
             <div class="sub-section">
                 <span class="sub-title">⏳ LOGÍSTICA EN TIEMPO REAL:</span>
-                <div class="item"><b>📅 Cierre de Padrón:</b> El formulario se procesa y envía automáticamente una vez hayas completado el formulario🙃.</div>
-                <div class="item"><b>🚍 Llegada del Bus:</b> La movilidad estará en el punto de partida a las 6:00 PM (puntualidad).</div>
-                <div class="item"><b>🤳 Abordaje Rápido:</b> ¡Olvídate de hacer colas! Ya no habrá listas manuales. Para subir, solo acércate con tu celular y muestra el correo de verificación. ✅</div>
-            </div>
-
-            <div class="sub-section">
-                <span class="sub-title">⚠️ SOBRE LOS ASIENTOS (ACUERDO GENERAL):</span>
-                <p>Tal como se decidió por votación previa, el orden de prioridad es:</p>
-                <div class="item"><b>🏆 Con Registro Válido:</b> Quienes reciban su ¡Verificación Correcta! tienen su asiento asegurado y numerado.</div>
-                <div class="item"><b>🚶 Sin Registro o Incorrectos:</b> Si no llenaste el formulario, podrás subir a la unidad, pero lamentablemente viajarás sin asiento asignado. <b>¡La movilidad es GRATUITA PARA TODOS!</b> 🟢💺</div>
-            </div>
-
-            <div class="sub-section">
-                <span class="sub-title">💡 RECOMENDACIONES:</span>
-                <div class="item"><b>🔋 Batería cargada:</b> Ten tu celular listo para mostrar el pase digital al subir.</div>
-                <div class="item"><b>⏱️ Puntualidad:</b> Ten el correo abierto antes de llegar a la puerta para un abordaje fluido.</div>
+                <div class="item"><b>📅 Cierre de Padrón:</b> El formulario se procesa y envía automáticamente🙃.</div>
+                <div class="item"><b>🤳 Abordaje Rápido:</b> ¡Olvídate de hacer colas! Para subir, solo muestra el correo de verificación en tu celular. ✅</div>
             </div>
 
             <p style="margin-top: 20px;">Estamos usando la tecnología para que tu viaje sea seguro y organizado. ¡Nos vemos en la ruta! 🎓📚</p>
@@ -241,22 +187,16 @@
         Chart.register(ChartDataLabels);
         function renderCharts() {
             const commonOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
+                responsive: true, maintainAspectRatio: false,
                 plugins: {
                     legend: { position: 'bottom', labels: { boxWidth: 8, font: { size: 9 } } },
-                    datalabels: {
-                        color: '#fff',
-                        font: { weight: 'bold', size: 10 },
-                        formatter: (value, ctx) => {
-                            let sum = ctx.dataset.data.reduce((a, b) => a + b, 0);
-                            return (value * 100 / sum).toFixed(1) + "%";
-                        }
-                    }
+                    datalabels: { color: '#fff', font: { weight: 'bold', size: 10 }, formatter: (v, ctx) => {
+                        let sum = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                        return (v * 100 / sum).toFixed(1) + "%";
+                    }}
                 }
             };
 
-            // 1. Facultad
             new Chart(document.getElementById('chartFacultad'), {
                 type: 'pie',
                 data: {
@@ -266,7 +206,6 @@
                 options: commonOptions
             });
 
-            // 2. Ciclo
             new Chart(document.getElementById('chartCiclo'), {
                 type: 'pie',
                 data: {
@@ -276,7 +215,6 @@
                 options: commonOptions
             });
 
-            // 3. Horarios
             new Chart(document.getElementById('chartHorarios'), {
                 type: 'bar',
                 data: {
@@ -284,18 +222,12 @@
                     datasets: [{ data: [417, 367, 278, 176], backgroundColor: '#89c4d1' }]
                 },
                 options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    maintainAspectRatio: false,
+                    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
                     scales: { x: { display: false } },
-                    plugins: { 
-                        legend: { display: false },
-                        datalabels: { color: '#000', anchor: 'end', align: 'start', formatter: (v) => v }
-                    }
+                    plugins: { legend: { display: false }, datalabels: { color: '#000', anchor: 'end', align: 'start' } }
                 }
             });
 
-            // 4. Voto
             new Chart(document.getElementById('chartVoto'), {
                 type: 'pie',
                 data: {
