@@ -17,7 +17,6 @@
             align-items: center;
             min-height: 100vh;
             overflow-x: hidden;
-            /* Fondo calcado de tus otras vistas */
             background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), 
                         url('Azul Viaje Ofertas y Descuentos Sitio Web (2).png'); 
             background-size: cover;
@@ -31,7 +30,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* NAVBAR IDÉNTICO */
+        /* NAVBAR */
         .navbar {
             width: 100%;
             display: flex;
@@ -63,44 +62,29 @@
             flex-grow: 1;
         }
 
-        /* TEXTOS DE CABECERA */
-        .section-tag { 
-            color: #ffb400; font-size: 0.9rem; font-weight: bold; margin-bottom: 10px; display: block; 
-            text-transform: uppercase;
-            animation: fadeInUp 0.6s ease-out forwards;
-        }
-        .section-title { 
-            font-size: 2.5rem; font-weight: 800; margin-bottom: 15px; line-height: 1.1;
-            animation: fadeInUp 0.6s ease-out 0.1s forwards; opacity: 0;
-        }
-        .section-description { 
-            color: #ccc; font-size: 1rem; margin: 0 auto 30px auto; line-height: 1.5; 
-            animation: fadeInUp 0.6s ease-out 0.2s forwards; opacity: 0;
-        }
+        .section-tag { color: #ffb400; font-size: 0.9rem; font-weight: bold; margin-bottom: 10px; display: block; text-transform: uppercase; animation: fadeInUp 0.6s ease-out forwards;}
+        .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 15px; line-height: 1.1; animation: fadeInUp 0.6s ease-out 0.1s forwards; opacity: 0;}
+        .section-description { color: #ccc; font-size: 1rem; margin: 0 auto 30px auto; line-height: 1.5; animation: fadeInUp 0.6s ease-out 0.2s forwards; opacity: 0;}
 
-        /* --- CONTENEDOR TIPO TARJETA --- */
+        /* TARJETAS */
         .card-box {
             background: rgba(20, 25, 35, 0.6);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 15px;
             padding: 30px;
-            transition: 0.3s ease;
             margin-bottom: 30px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
-        /* --- BANNER DE BÚSQUEDA --- */
-        .banner-lookup {
-            animation: fadeInUp 0.8s ease-out 0.3s forwards; opacity: 0;
-        }
-        
+        /* BUSCADOR */
         .search-input-group {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 15px;
             margin-top: 20px;
+            animation: fadeInUp 0.8s ease-out 0.3s forwards; opacity: 0;
         }
 
         input[type="text"] {
@@ -113,12 +97,6 @@
             border-radius: 8px;
             font-size: 1.2rem;
             text-align: center;
-            letter-spacing: 2px;
-        }
-        input[type="text"]:focus {
-            border-color: #ffb400;
-            outline: none;
-            box-shadow: 0 0 15px rgba(255, 180, 0, 0.4);
         }
 
         button#searchBtn {
@@ -128,45 +106,30 @@
             padding: 15px 40px;
             border-radius: 8px;
             font-weight: bold;
-            font-size: 1rem;
             cursor: pointer;
             transition: 0.3s;
             text-transform: uppercase;
         }
         button#searchBtn:hover { background: #fff; transform: scale(1.05); }
+        button#searchBtn:disabled { background: #555; cursor: wait; }
 
-        /* --- SECCIÓN DE RESULTADOS --- */
+        /* RESULTADOS */
         .results-section {
-            display: none; 
+            display: none;
             text-align: left;
             animation: fadeInUp 0.5s ease-out forwards;
         }
-        .results-section h2 { color: #ffb400; font-size: 1.2rem; margin-bottom: 20px; text-transform: uppercase; font-weight: 700; text-align: center; border-bottom: 1px solid rgba(255,180,0,0.2); padding-bottom: 10px;}
+        .results-section h2 { color: #ffb400; font-size: 1.2rem; margin-bottom: 20px; text-transform: uppercase; text-align: center; border-bottom: 1px solid rgba(255,180,0,0.2); padding-bottom: 10px;}
 
-        /* ITEMS DE DATOS */
-        .data-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-
-        .data-item { 
-            background: rgba(255, 255, 255, 0.03); 
-            padding: 15px; 
-            border-radius: 8px; 
-            border-left: 3px solid #ffb400; 
-        }
+        .data-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .data-item { background: rgba(255, 255, 255, 0.03); padding: 15px; border-radius: 8px; border-left: 3px solid #ffb400; }
         .data-item b { display: block; font-size: 0.85rem; color: #aaa; margin-bottom: 5px; text-transform: uppercase; }
         .data-item p { font-size: 1.1rem; color: #fff; font-weight: 500;}
 
-        /* CUADRO DE ESTADO */
-        .status-box { padding: 15px; border-radius: 8px; margin-top: 25px; font-weight: bold; text-align: center; border-left: 5px solid; font-size: 1.1rem;}
+        .status-box { padding: 15px; border-radius: 8px; margin-top: 25px; font-weight: bold; text-align: center; border-left: 5px solid; }
         .valid { background: rgba(45, 164, 78, 0.15); border-color: #2da44e; color: #a6f3b7; }
-        .invalid { background: rgba(248, 81, 73, 0.15); border-color: #f85149; color: #ffb3b0; }
 
         @media (max-width: 768px) {
-            .navbar { flex-direction: column; gap: 10px; text-align: center; }
-            .menu { justify-content: center; }
             .section-title { font-size: 2rem; }
         }
     </style>
@@ -186,128 +149,76 @@
     </nav>
 
     <main class="main-content">
-        <span class="section-tag">Empadronamiento 2026-A</span>
-        <h1 class="section-title">Consulta tu Registro</h1>
-        <p class="section-description">
-            Ingresa tu número de DNI para verificar tu estado en el padrón de la Ruta Ventanilla y confirmar tu asiento asignado.
-        </p>
+        <span class="section-tag">Padrón Oficial 2026-A</span>
+        <h1 class="section-title">Verifica tus Datos</h1>
+        <p class="section-description">Consulta el estado de tu inscripción ingresando tu DNI o identificación tal como la registraste en el formulario.</p>
 
-        <div class="card-box banner-lookup">
+        <div class="card-box">
             <div class="search-input-group">
-                <input type="text" id="dniInput" maxlength="8" placeholder="Ingresa tu DNI (8 dígitos)">
-                <button id="searchBtn">Buscar Alumno</button>
+                <input type="text" id="dniInput" placeholder="Ingresa tu DNI / ID">
+                <button id="searchBtn">Consultar Registro</button>
             </div>
         </div>
 
         <div class="card-box results-section" id="resultsSection">
-            <h2>Datos del Estudiante Registrado</h2>
-            
+            <h2>Información del Pasajero</h2>
             <div class="data-grid">
-                <div class="data-item">
-                    <b>DNI:</b>
-                    <p id="dniRes">-</p>
-                </div>
-                <div class="data-item">
-                    <b>Nombres y Apellidos:</b>
-                    <p id="nombresRes">-</p>
-                </div>
-                <div class="data-item">
-                    <b>Código UNAC:</b>
-                    <p id="codigoRes">-</p>
-                </div>
-                <div class="data-item">
-                    <b>Facultad:</b>
-                    <p id="facultadRes">-</p>
-                </div>
-                <div class="data-item" style="border-left-color: #2da44e;">
-                    <b>Horario:</b>
-                    <p id="horarioRes">-</p>
-                </div>
+                <div class="data-item"><b>Identificación:</b> <p id="dniRes">-</p></div>
+                <div class="data-item"><b>Estudiante:</b> <p id="nombresRes">-</p></div>
+                <div class="data-item"><b>Código:</b> <p id="codigoRes">-</p></div>
+                <div class="data-item"><b>Facultad:</b> <p id="facultadRes">-</p></div>
+                <div class="data-item"><b>Horario:</b> <p id="horarioRes">-</p></div>
                 <div class="data-item" style="border-left-color: #2da44e; background: rgba(45, 164, 78, 0.1);">
-                    <b>Asiento Asignado:</b>
-                    <p id="asientoRes" style="font-size: 1.5rem; color: #a6f3b7; font-weight: bold;">-</p>
+                    <b>Asiento:</b> <p id="asientoRes" style="font-size: 1.5rem; color: #a6f3b7;">-</p>
                 </div>
             </div>
-
-            <div id="statusBox" class="status-box">
-                <p id="statusText">Verificando...</p>
+            <div id="statusBox" class="status-box valid">
+                <p id="statusText">✅ REGISTRO ENCONTRADO EN EL PADRÓN ACTUAL.</p>
             </div>
         </div>
     </main>
 
     <script>
-        // --- CONFIGURACIÓN DE TU GOOGLE SHEET ---
-        // Aquí deberás pegar la URL que te dé Google Apps Script cuando lo implementes.
-        // Mientras tanto, he dejado un código de simulación para que veas que la interfaz funciona perfecto.
-        const API_URL = ''; 
+        // TU URL DE APPS SCRIPT YA INTEGRADA
+        const API_URL = 'https://script.google.com/macros/s/AKfycbzvOKvaSny1fecoF3Sd18Nsu3GlQgNfvUtEA1bPHiFXJVSlbkmSO47bwS71_dTbC5-Q/exec'; 
 
         const dniInput = document.getElementById('dniInput');
         const searchBtn = document.getElementById('searchBtn');
         const resultsSection = document.getElementById('resultsSection');
-        
-        // Función principal
+
         searchBtn.addEventListener('click', function() {
             const dni = dniInput.value.trim();
-            resultsSection.style.display = 'none';
-
-            if (dni.length !== 8 || isNaN(dni)) {
-                alert('Por favor, ingresa un DNI válido de 8 números.');
-                return;
-            }
+            if (!dni) { alert('Ingresa un DNI para buscar.'); return; }
 
             searchBtn.innerText = 'Buscando...';
             searchBtn.disabled = true;
+            resultsSection.style.display = 'none';
 
-            // SIMULACIÓN (Borrar cuando conectes tu Google Sheet real)
-            setTimeout(() => {
-                const baseSimulada = {
-                    '12345678': { DNI: '12345678', Nombres: 'Juan Perez', Codigo: '2026100000', Facultad: 'Ing. Química', Horario: '6:00 PM', Asiento: '12', Estado: 'VALIDADO' },
-                };
-
-                const data = baseSimulada[dni];
-                searchBtn.innerText = 'Buscar Alumno';
-                searchBtn.disabled = false;
-
-                if (data) {
-                    document.getElementById('dniRes').innerText = data.DNI;
-                    document.getElementById('nombresRes').innerText = data.Nombres;
-                    document.getElementById('codigoRes').innerText = data.Codigo;
-                    document.getElementById('facultadRes').innerText = data.Facultad;
-                    document.getElementById('horarioRes').innerText = data.Horario;
-                    document.getElementById('asientoRes').innerText = data.Asiento;
-
-                    const statusBox = document.getElementById('statusBox');
-                    const statusText = document.getElementById('statusText');
-
-                    if (data.Estado === 'VALIDADO') {
-                        statusBox.className = 'status-box valid';
-                        statusText.innerText = '✅ REGISTRO CONFIRMADO. Estás en el padrón.';
-                    } else {
-                        statusBox.className = 'status-box invalid';
-                        statusText.innerText = '❌ REGISTRO PENDIENTE O INVÁLIDO.';
-                    }
-
-                    resultsSection.style.display = 'block';
-                } else {
-                    alert('DNI no encontrado en el padrón. Asegúrate de haber completado el formulario de empadronamiento.');
-                }
-            }, 800);
-            // FIN DE SIMULACIÓN
-
-            /* // CUANDO TENGAS TU LINK DE APPS SCRIPT, DESCOMENTA ESTO Y BORRA LA SIMULACIÓN DE ARRIBA:
             fetch(API_URL + '?dni=' + dni)
                 .then(response => response.json())
                 .then(data => {
-                    searchBtn.innerText = 'Buscar Alumno';
+                    searchBtn.innerText = 'Consultar Registro';
                     searchBtn.disabled = false;
-                    // Aquí iría la misma lógica de llenado de datos de arriba
+
+                    if (data.found) {
+                        document.getElementById('dniRes').innerText = data.DNI;
+                        document.getElementById('nombresRes').innerText = data.Nombres;
+                        document.getElementById('codigoRes').innerText = data.Codigo;
+                        document.getElementById('facultadRes').innerText = data.Facultad;
+                        document.getElementById('horarioRes').innerText = data.Horario;
+                        document.getElementById('asientoRes').innerText = data.Asiento;
+                        
+                        resultsSection.style.display = 'block';
+                        resultsSection.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        alert('No se encontró el DNI ' + dni + ' en el registro. Verifica el número o contacta al delegado Sebastian.');
+                    }
                 })
                 .catch(error => {
-                    searchBtn.innerText = 'Buscar Alumno';
+                    searchBtn.innerText = 'Consultar Registro';
                     searchBtn.disabled = false;
-                    alert('Error de conexión. Intenta de nuevo.');
+                    alert('Error de conexión. Asegúrate de haber publicado el script como "Cualquiera".');
                 });
-            */
         });
     </script>
 </body>
