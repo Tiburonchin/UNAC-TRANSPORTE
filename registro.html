@@ -18,7 +18,7 @@
             min-height: 100vh;
             overflow-x: hidden;
 
-            /* CONFIGURACIÓN DE IMAGEN DE FONDO (Igual a Rutas) */
+            /* FONDO DE RUTAS */
             background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), 
                         url('486135019_1066064098880646_4598676692904469015444.jpg'); 
             background-size: cover;
@@ -32,7 +32,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* NAVBAR (IDÉNTICA A RUTAS) */
+        /* NAVBAR IDÉNTICA */
         .navbar {
             width: 100%;
             display: flex;
@@ -71,7 +71,7 @@
             animation: fadeInUp 0.6s ease-out 0.1s forwards; opacity: 0;
         }
 
-        /* CARD DEL BUSCADOR (Efecto Cristal de Rutas) */
+        /* CARD DE BÚSQUEDA */
         .card-box {
             background: rgba(20, 25, 35, 0.8);
             backdrop-filter: blur(12px);
@@ -109,7 +109,7 @@
         }
         .btn-search:hover { background: #fff; transform: scale(1.05); }
 
-        /* RESULTADOS */
+        /* CONTENEDOR DE RESULTADOS */
         .results-container {
             display: none;
             text-align: left;
@@ -170,11 +170,14 @@
             <div class="data-item"><label>Código UNAC:</label><p id="resCodigo">-</p></div>
             <div class="data-item"><label>Facultad:</label><p id="resFacultad">-</p></div>
             <div class="data-item"><label>Horario:</label><p id="resHorario">-</p></div>
+            <div class="data-item"><label>Conformidad con Delegado:</label><p id="resConforme">-</p></div>
+            
             <div class="status-badge">MATRÍCULA CONFIRMADA EN RUTA VENTANILLA ✅</div>
         </div>
     </main>
 
     <script>
+        // URL DE TU GOOGLE APPS SCRIPT
         const API_URL = 'https://script.google.com/macros/s/AKfycbzvOKvaSny1fecoF3Sd18Nsu3GlQgNfvUtEA1bPHiFXJVSlbkmSO47bwS71_dTbC5-Q/exec';
         const searchBtn = document.getElementById('searchBtn');
         const resultsBox = document.getElementById('resultsBox');
@@ -197,6 +200,10 @@
                         document.getElementById('resCodigo').innerText = data.Codigo;
                         document.getElementById('resFacultad').innerText = data.Facultad;
                         document.getElementById('resHorario').innerText = data.Horario;
+                        
+                        // Mostramos si el alumno está conforme o no
+                        document.getElementById('resConforme').innerText = data.Conforme || "No especificado";
+                        
                         resultsBox.style.display = 'block';
                         resultsBox.scrollIntoView({ behavior: 'smooth' });
                     } else {
