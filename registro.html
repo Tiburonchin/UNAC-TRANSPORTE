@@ -5,90 +5,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - Movilidad UNAC</title>
     <style>
+        /* FORMATO HEREDADO DE RUTAS */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body { 
             background-color: #000; 
             color: #fff; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            overflow-x: hidden;
+
+            /* CONFIGURACIÓN DE IMAGEN DE FONDO (Igual a Rutas) */
             background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), 
-                        url('Azul Viaje Ofertas y Descuentos Sitio Web (2).png'); 
+                        url('486135019_1066064098880646_4598676692904469015444.jpg'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
         }
 
-        /* NAVBAR IGUAL A RUTAS/CONSULTAS */
+        /* ANIMACIONES */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* NAVBAR (IDÉNTICA A RUTAS) */
         .navbar {
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 5%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(10, 10, 10, 0.9);
             backdrop-filter: blur(10px);
+            border-bottom: 1px solid #222;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
-
         .logo { font-weight: bold; font-size: 0.8rem; line-height: 1.2; }
         .logo span { color: #ffb400; }
-
-        .menu { display: flex; align-items: center; gap: 20px; }
-        .menu a { color: #fff; text-decoration: none; font-size: 0.8rem; transition: 0.3s; }
-        .menu a:hover { color: #ffb400; }
+        
+        .menu { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+        .menu a { color: #fff; text-decoration: none; font-size: 0.75rem; padding: 5px; }
         .menu a.active { color: #ffb400; font-weight: bold; }
+        .menu a.consultas { color: #fff; border: 1px solid #ffb400; border-radius: 4px; padding: 4px 8px; transition: 0.3s; }
+        .menu a.consultas:hover { background: #ffb400; color: #000; }
 
-        /* Botón dorado de Consultas */
-        .btn-consultas {
-            border: 1px solid #ffb400;
-            color: #ffb400 !important;
-            padding: 5px 15px;
-            border-radius: 5px;
-        }
-        .btn-consultas:hover { background: #ffb400; color: #000 !important; }
-
-        /* CONTENIDO PRINCIPAL */
         .main-content {
             width: 100%;
             max-width: 800px;
-            padding: 60px 20px;
+            padding: 40px 20px;
             text-align: center;
         }
 
-        .section-tag { color: #ffb400; font-size: 0.8rem; font-weight: bold; margin-bottom: 10px; display: block; }
-        .section-title { font-size: 2.8rem; font-weight: 800; margin-bottom: 30px; }
-
-        /* TARJETA DE BÚSQUEDA */
-        .search-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 180, 0, 0.2);
-            padding: 40px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            margin-bottom: 30px;
+        .section-tag { 
+            color: #ffb400; font-size: 0.9rem; font-weight: bold; margin-bottom: 10px; display: block; 
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        .section-title { 
+            font-size: 2.5rem; font-weight: 800; margin-bottom: 15px; line-height: 1.1;
+            animation: fadeInUp 0.6s ease-out 0.1s forwards; opacity: 0;
         }
 
-        input {
+        /* CARD DEL BUSCADOR (Efecto Cristal de Rutas) */
+        .card-box {
+            background: rgba(20, 25, 35, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease-out 0.3s forwards; opacity: 0;
+        }
+
+        input[type="text"] {
             width: 100%;
-            max-width: 400px;
+            max-width: 350px;
             padding: 15px;
-            background: #000;
-            border: 2px solid #1a1a1a;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #ffb400;
             color: #fff;
             border-radius: 8px;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             text-align: center;
             margin-bottom: 20px;
             outline: none;
-            transition: 0.3s;
         }
-        input:focus { border-color: #ffb400; }
 
         .btn-search {
             background: #ffb400;
@@ -99,30 +105,39 @@
             font-weight: bold;
             cursor: pointer;
             text-transform: uppercase;
+            transition: 0.3s;
         }
+        .btn-search:hover { background: #fff; transform: scale(1.05); }
 
         /* RESULTADOS */
         .results-container {
             display: none;
             text-align: left;
-            background: rgba(15, 15, 15, 0.95);
-            padding: 30px;
+            background: rgba(10, 10, 10, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 25px;
             border-radius: 12px;
-            border: 1px solid #1a1a1a;
+            margin-top: 20px;
         }
 
-        .data-item { margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 10px; }
-        .data-item label { color: #ffb400; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; display: block; }
-        .data-item p { font-size: 1.1rem; margin-top: 5px; }
+        .data-item { margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; }
+        .data-item label { color: #ffb400; font-size: 0.75rem; text-transform: uppercase; font-weight: bold; display: block; }
+        .data-item p { font-size: 1.1rem; margin-top: 4px; }
 
-        .status-success {
-            background: rgba(45, 164, 78, 0.1);
+        .status-badge {
+            background: rgba(45, 164, 78, 0.2);
             color: #a6f3b7;
-            padding: 15px;
+            padding: 12px;
             border-radius: 8px;
             text-align: center;
             font-weight: bold;
             border: 1px solid #2da44e;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; gap: 10px; text-align: center; }
+            .section-title { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -136,26 +151,26 @@
             <a href="rutas.html">Rutas</a>
             <a href="registro.html" class="active">Registro</a>
             <a href="noticias.html">Noticias</a>
-            <a href="consultas.html" class="btn-consultas">Consultas</a>
+            <a href="consultas.html" class="consultas">Consultas</a>
         </div>
     </nav>
 
     <main class="main-content">
-        <span class="section-tag">PADRÓN 2026-A</span>
-        <h1 class="section-title">Consulta de Registro</h1>
+        <span class="section-tag">VERIFICACIÓN 2026-A</span>
+        <h1 class="section-title">Consulta de Padrón</h1>
         
-        <div class="search-card">
-            <input type="text" id="dniInput" placeholder="70718321">
+        <div class="card-box">
+            <input type="text" id="dniInput" placeholder="Ingresa tu DNI">
             <br>
-            <button class="btn-search" id="searchBtn">VERIFICAR DATOS</button>
+            <button class="btn-search" id="searchBtn">Verificar Registro</button>
         </div>
 
         <div class="results-container" id="resultsBox">
-            <div class="data-item"><label>ESTUDIANTE:</label><p id="resNombre"></p></div>
-            <div class="data-item"><label>CÓDIGO UNAC:</label><p id="resCodigo"></p></div>
-            <div class="data-item"><label>FACULTAD:</label><p id="resFacultad"></p></div>
-            <div class="data-item"><label>HORARIO:</label><p id="resHorario"></p></div>
-            <div class="status-success">REGISTRO ENCONTRADO EN LA COLUMNA F ✅</div>
+            <div class="data-item"><label>Estudiante:</label><p id="resNombre">-</p></div>
+            <div class="data-item"><label>Código UNAC:</label><p id="resCodigo">-</p></div>
+            <div class="data-item"><label>Facultad:</label><p id="resFacultad">-</p></div>
+            <div class="data-item"><label>Horario:</label><p id="resHorario">-</p></div>
+            <div class="status-badge">MATRÍCULA CONFIRMADA EN RUTA VENTANILLA ✅</div>
         </div>
     </main>
 
@@ -166,7 +181,7 @@
 
         searchBtn.addEventListener('click', () => {
             const dni = document.getElementById('dniInput').value.trim();
-            if(!dni) return alert("Ingresa un DNI");
+            if(!dni) return alert("Por favor, ingresa un DNI.");
 
             searchBtn.innerText = "BUSCANDO...";
             searchBtn.disabled = true;
@@ -175,7 +190,7 @@
             fetch(API_URL + '?dni=' + dni)
                 .then(res => res.json())
                 .then(data => {
-                    searchBtn.innerText = "VERIFICAR DATOS";
+                    searchBtn.innerText = "VERIFICAR REGISTRO";
                     searchBtn.disabled = false;
                     if(data.found) {
                         document.getElementById('resNombre').innerText = data.Nombres;
@@ -183,12 +198,13 @@
                         document.getElementById('resFacultad').innerText = data.Facultad;
                         document.getElementById('resHorario').innerText = data.Horario;
                         resultsBox.style.display = 'block';
+                        resultsBox.scrollIntoView({ behavior: 'smooth' });
                     } else {
-                        alert("No se encontró el DNI " + dni);
+                        alert("No se encontró el DNI " + dni + " en el padrón actual.");
                     }
                 }).catch(() => {
                     searchBtn.disabled = false;
-                    alert("Error de conexión");
+                    alert("Error al conectar con la base de datos.");
                 });
         });
     </script>
