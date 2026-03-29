@@ -22,7 +22,7 @@
             background-attachment: fixed;
         }
 
-        /* --- NAVBAR ESTILO LAPTOP --- */
+        /* --- NAVBAR --- */
         .navbar {
             width: 100%;
             display: flex;
@@ -96,7 +96,7 @@
         .footer-sig { margin-top: 30px; font-weight: bold; color: #ffb400; text-align: right; }
         .thanks-footer { text-align: center; font-weight: bold; font-size: 1.1rem; margin-top: 25px; }
 
-        /* --- MODIFICACIÓN ÚNICA PARA CELULAR (IGUAL A TU CÓDIGO DE RUTAS) --- */
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .navbar { 
                 flex-direction: column; 
@@ -121,7 +121,7 @@
             <a href="index.html">Inicio</a>
             <a href="horarios.html">Horarios</a>
             <a href="rutas.html">Rutas</a>
-            <a href="noticias.html" class="active">Noticias</a>
+            <a href="registro.html">Registro</a> <a href="noticias.html" class="active">Noticias</a>
             <a href="consultas.html" class="consultas">Consultas</a>
         </div>
     </nav>
@@ -147,51 +147,27 @@
                     <div class="chart-card"><h3>RATIFICACIÓN Y VOTO DE CONFIANZA</h3><canvas id="chartVoto"></canvas></div>
                 </div>
 
-                <div class="item"><b>Respaldo Contundente:</b> ¡Gracias por la confianza! Contamos con un 93.4% de aprobación a la gestión actual. Este voto de confianza nos motiva a seguir luchando por un servicio de calidad. ✅🤝</div>
-                <div class="item"><b>Demanda de Horarios:</b> Hemos identificado que el turno Tarde-Noche (6:00 PM) y el de la Mañana (5:15 AM) son los más críticos. Usaremos estos números para exigir que las unidades cubran la capacidad necesaria y nadie se quede fuera. ⏳🚍</div>
-                <div class="item"><b>Participación Total:</b> Estudiantes de todas las facultades ya están registrados. ¡Somos una sola comunidad universitaria! 🏛️👥</div>
+                <div class="item"><b>Respaldo Contundente:</b> ¡Gracias por la confianza! Contamos con un 93.4% de aprobación a la gestión actual.</div>
+                <div class="item"><b>Demanda de Horarios:</b> Identificamos que el turno Tarde-Noche (6:00 PM) y el de la Mañana (5:15 AM) son los más críticos.</div>
             </div>
             
-            <p style="margin-top: 25px;">⚠️ <b>RECORDATORIO FINAL:</b> El padrón oficial ha sido actualizado. Como se avisó, este registro es VITAL para garantizar tu cupo y seguridad en la ruta. El verano se acaba, pero nuestro compromiso por una movilidad segura y organizada para este 2026-A está más fuerte que nunca. ☀️🛡️</p>
-            
             <p class="footer-sig">Atentamente, Delegado Sebastian – Movilidad Ventanilla 🫡🚌</p>
-            <p class="thanks-footer">¡Gracias por ser parte del cambio! Nos vemos en la ruta este 30 de marzo. 🛣️🙌</p>
         </div>
 
         <div class="news-card">
             <span class="news-tag">INNOVACIÓN</span>
             <h2 class="news-title">🚀 ¡INNOVACIÓN TECNOLÓGICA Y ORDEN EN LA RUTA! 🚌📲</h2>
-            <p>¡Hola de nuevo, compañeros y compañeras! 👋😊 Seguimos modernizando nuestra gestión para que este 30 de abril todo sea más eficiente. Como su delegado 🫡, les presento la nueva logística digital diseñada para eliminar las colas y asegurar el orden, cumpliendo con la votación realizada anteriormente:</p>
+            <p>¡Hola de nuevo, compañeros y compañeras! 👋😊 Seguimos modernizando nuestra gestión para que este ciclo sea más eficiente. Presentamos la nueva logística digital diseñada para eliminar las colas y asegurar el orden:</p>
 
             <div class="sub-section">
                 <span class="sub-title">✅ ASÍ SERÁ EL NUEVO PROCESO DE ACCESO:</span>
                 <p>Al completar el formulario, el sistema validará tus datos automáticamente y enviará una respuesta inmediata a tu Gmail:</p>
                 <div class="status-box green">
-                    <b>¡VERIFICACIÓN CORRECTA! (Pase Verde):</b> Si tus datos son válidos, recibirás tu correo de confirmación con tu <b>NÚMERO DE ASIENTO OFICIAL</b> (Cupos limitados a 40 asientos). 💺🔢
+                    <b>¡VERIFICACIÓN CORRECTA! (Pase Verde):</b> Datos válidos, confirmación de correo y <b>NÚMERO DE ASIENTO OFICIAL</b>. 💺🔢
                 </div>
                 <div class="status-box red">
-                    <b>VERIFICACIÓN INCORRECTA (Aviso Rojo):</b> Si ingresas mal tu DNI o Código, el sistema rechazará la solicitud. <b>IMPORTANTE:</b> Con una verificación incorrecta NO se te asignará un asiento. ❌⚠️
+                    <b>VERIFICACIÓN INCORRECTA (Aviso Rojo):</b> Si hay errores en DNI o Código, el sistema rechazará la solicitud. ❌⚠️
                 </div>
-            </div>
-
-            <div class="sub-section">
-                <span class="sub-title">⏳ LOGÍSTICA EN TIEMPO REAL:</span>
-                <div class="item"><b>📅 Cierre de Padrón:</b> El formulario se procesa y envía automáticamente una vez hayas completado el formulario🙃.</div>
-                <div class="item"><b>🚍 Llegada del Bus:</b> La movilidad estará en el punto de partida a las 6:00 PM (puntualidad).</div>
-                <div class="item"><b>🤳 Abordaje Rápido:</b> ¡Olvídate de hacer colas! Ya no habrá listas manuales. Para subir, solo acércate con tu celular y muestra el correo de verificación. ✅</div>
-            </div>
-
-            <div class="sub-section">
-                <span class="sub-title">⚠️ SOBRE LOS ASIENTOS (ACUERDO GENERAL):</span>
-                <p>Tal como se decidió por votación previa, el orden de prioridad es:</p>
-                <div class="item"><b>🏆 Con Registro Válido:</b> Quienes reciban su ¡Verificación Correcta! tienen su asiento asegurado y numerado.</div>
-                <div class="item"><b>🚶 Sin Registro o Incorrectos:</b> Si no llenaste el formulario, podrás subir a la unidad, pero lamentablemente viajarás sin asiento asignado. <b>¡La movilidad es GRATUITA PARA TODOS!</b> 🟢💺</div>
-            </div>
-
-            <div class="sub-section">
-                <span class="sub-title">💡 RECOMENDACIONES:</span>
-                <div class="item"><b>🔋 Batería cargada:</b> Ten tu celular listo para mostrar el pase digital al subir.</div>
-                <div class="item"><b>⏱️ Puntualidad:</b> Ten el correo abierto antes de llegar a la puerta para un abordaje fluido.</div>
             </div>
 
             <p style="margin-top: 25px;">Estamos usando la tecnología para que tu viaje sea seguro y organizado. ¡Nos vemos en la ruta! 🎓📚</p>
