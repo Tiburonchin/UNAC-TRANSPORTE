@@ -16,6 +16,8 @@
             align-items: center;
             min-height: 100vh;
             overflow-x: hidden;
+
+            /* CONFIGURACIÓN DE IMAGEN DE FONDO */
             background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), 
                         url('486135019_1066064098880646_4598676692904469015444.jpg'); 
             background-size: cover;
@@ -23,6 +25,7 @@
             background-attachment: fixed;
         }
 
+        /* ANIMACIONES */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -64,10 +67,20 @@
             text-align: center;
         }
 
-        .section-tag { color: #ffb400; font-size: 0.9rem; font-weight: bold; margin-bottom: 10px; display: block; animation: fadeInUp 0.6s ease-out forwards; }
-        .section-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 15px; line-height: 1.1; animation: fadeInUp 0.6s ease-out 0.1s forwards; opacity: 0; }
-        .section-description { color: #ccc; font-size: 1rem; max-width: 800px; margin: 0 auto 40px auto; line-height: 1.5; animation: fadeInUp 0.6s ease-out 0.2s forwards; opacity: 0; }
+        .section-tag { 
+            color: #ffb400; font-size: 0.9rem; font-weight: bold; margin-bottom: 10px; display: block; 
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        .section-title { 
+            font-size: 2.5rem; font-weight: 800; margin-bottom: 15px; line-height: 1.1;
+            animation: fadeInUp 0.6s ease-out 0.1s forwards; opacity: 0;
+        }
+        .section-description { 
+            color: #ccc; font-size: 1rem; max-width: 800px; margin: 0 auto 40px auto; line-height: 1.5; 
+            animation: fadeInUp 0.6s ease-out 0.2s forwards; opacity: 0;
+        }
 
+        /* GRID INFO CON EFECTO CRISTAL */
         .grid-info {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
@@ -77,22 +90,43 @@
             animation: fadeInUp 0.8s ease-out 0.3s forwards; opacity: 0;
         }
 
-        .card-box { background: rgba(20, 25, 35, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 25px; }
+        .card-box {
+            background: rgba(20, 25, 35, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+        }
 
         h2 { color: #ffb400; font-size: 1rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; text-transform: uppercase; font-weight: 700; }
 
+        /* PARADEROS ACTUALIZADOS */
         .stop-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .stop-item { background: rgba(255, 255, 255, 0.05); padding: 12px; border-radius: 8px; font-size: 0.8rem; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; gap: 8px; color: #ddd; transition: 0.3s ease; }
+        .stop-item { 
+            background: rgba(255, 255, 255, 0.05); padding: 12px; border-radius: 8px; font-size: 0.8rem; 
+            border: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; gap: 8px; color: #ddd;
+            transition: 0.3s ease;
+        }
         .stop-item:hover { transform: translateX(5px); background: rgba(255, 255, 255, 0.1); color: #fff; }
-        .stop-item.highlight { border: 1px solid #ffb400; color: #fff; animation: pulseGlow 2s infinite; background: rgba(255, 180, 0, 0.1); }
+        
+        .stop-item.highlight { 
+            border: 1px solid #ffb400; color: #fff; 
+            animation: pulseGlow 2s infinite; 
+            background: rgba(255, 180, 0, 0.1);
+        }
 
+        /* DOCUMENTOS */
         .doc-item { background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 8px; margin-bottom: 12px; border-left: 4px solid #ffb400; transition: 0.3s; }
+        .doc-item:hover { background: rgba(255, 255, 255, 0.1); transform: scale(1.02); }
         .doc-item b { display: block; font-size: 0.9rem; color: #ffb400; margin-bottom: 5px; }
         .doc-item p { font-size: 0.8rem; color: #aaa; }
 
-        .alert-box { background: rgba(255, 68, 68, 0.1); border: 1px solid rgba(255, 68, 68, 0.3); padding: 15px; border-radius: 10px; border-left: 5px solid #ff4444; margin-top: 20px; }
+        .alert-box { 
+            background: rgba(255, 68, 68, 0.1); border: 1px solid rgba(255, 68, 68, 0.3); padding: 15px; 
+            border-radius: 10px; border-left: 5px solid #ff4444; margin-top: 20px; 
+        }
 
-        /* MAPA FULL WIDTH CORREGIDO */
+        /* MAPA FULL WIDTH */
         .map-section { 
             width: 100%; 
             background: rgba(20, 25, 35, 0.8); 
@@ -120,17 +154,24 @@
             border: none;
         }
 
-        .stats { background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 25px 5%; border-top: 1px solid #222; width: 100%; margin-top: 40px; flex-wrap: wrap; gap: 15px; animation: fadeInUp 0.8s ease-out 0.6s forwards; opacity: 0; }
-        .item-stat { text-align: center; min-width: 100px; flex: 1; }
-        .item-stat strong { display: block; color: #ffb400; font-size: 1rem; margin-bottom: 5px; }
-        .item-stat p { font-size: 0.65rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+        /* FOOTER STATS */
+        .stats { 
+            background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 25px 5%; 
+            border-top: 1px solid #222; width: 100%; margin-top: 40px; flex-wrap: wrap; gap: 15px;
+            animation: fadeInUp 0.8s ease-out 0.6s forwards; opacity: 0;
+        }
+        .item { text-align: center; min-width: 100px; flex: 1; }
+        .item strong { display: block; color: #ffb400; font-size: 1rem; margin-bottom: 5px; }
+        .item p { font-size: 0.65rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
 
         @media (max-width: 768px) {
             .navbar { flex-direction: column; gap: 10px; text-align: center; }
+            .menu { justify-content: center; }
             .section-title { font-size: 1.8rem; }
             .grid-info { grid-template-columns: 1fr; }
             .stop-list { grid-template-columns: 1fr; }
-            .map-container { padding-top: 75%; }
+            .item { min-width: 45%; }
+            .map-container { padding-top: 60%; }
         }
     </style>
 </head>
@@ -142,8 +183,7 @@
             <a href="index.html">Inicio</a>
             <a href="horarios.html">Horarios</a>
             <a href="rutas.html" class="active">Rutas</a>
-            <a href="registro.html">Registro</a> 
-            <a href="noticias.html">Noticias</a>
+            <a href="registro.html">Registro</a> <a href="noticias.html">Noticias</a>
             <a href="consultas.html" class="consultas">Consultas</a>
         </div>
     </nav>
@@ -151,7 +191,9 @@
     <main class="main-content">
         <span class="section-tag">RECORRIDO Y PARADAS</span>
         <h1 class="section-title">Ruta Ventanilla 2026-A</h1>
-        <p class="section-description">Consulta los puntos estratégicos de recojo y el trayecto oficial hacia el Campus Bellavista.</p>
+        <p class="section-description">
+            Consulta los puntos estratégicos de recojo y el trayecto oficial hacia el Campus Bellavista.
+        </p>
 
         <div class="grid-info">
             <div class="card-box">
@@ -200,16 +242,21 @@
         <div class="map-section">
             <div class="map-header">🗺️ Visualización del Recorrido en Google Maps</div>
             <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m64!1m12!1m3!1d30472.9992456036!2d-77.1375958!3d-12.044987500000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m49!3e0!4m5!1s0x9105d526b243bda5%3A0x4f54a232b468d4dd!2sUNAC%20-%20VENTANILLA%2C%205VG8%2BJM6%2C%20Ventanilla%2007076!3m2!1d-11.823452099999999!2d-77.13334929999999!4m3!3m2!1d-11.8252305!2d-77.1234052!4m3!3m2!1d-11.843182599999999!2d-77.101874!4m3!3m2!1d-11.8375611!2d-77.11113209999999!4m5!1s0x9105d43d3b9d9f15%3A0x7484f44b11f271b!2sPolicl%C3%ADnico%20Emanuel%2C%20Ventanilla%2007076!3m2!1d-11.841529999999999!2d-77.11502!4m5!1s0x9105d41212110f83%3A0x3381ebbdfb7c3a11!2sCajamarca%2C%20Mi%20Per%C3%BA%2007056!3m2!1d-11.85413!2d-77.12089!4m3!3m2!1d-11.859558199999999!2d-77.124529!4m3!3m2!1d-11.8754478!2d-77.1269141!4m3!3m2!1d-12.0480583!2d-77.11540509999999!4m5!1s0x9105cb910984762b%3A0x104327c627fa29ad!2sUniversidad%20Nacional%20del%20Callao%2C%20Av.%20Juan%20Pablo%20%E2%85%A1%20306%2C%20Bellavista%2007011!3m2!1d-12.0613052!2d-77.11724869999999!5e1!3m2!1ses-419!2spe!4v1774766502370!5m2!1ses-419!2spe" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m64!1m12!1m3!1d30472.9992456036!2d-77.1375958!3d-12.044987500000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m49!3e0!4m5!1s0x9105d526b243bda5%3A0x4f54a232b468d4dd!2sUNAC%20-%20VENTANILLA%2C%205VG8%2BJM6%2C%20Ventanilla%2007076!3m2!1d-11.823452099999999!2d-77.13334929999999!4m3!3m2!1d-11.8252305!2d-77.1234052!4m3!3m2!1d-11.843182599999999!2d-77.101874!4m3!3m2!1d-11.8375611!2d-77.11113209999999!4m5!1s0x9105d43d3b9d9f15%3A0x7484f44b11f271b!2sPolicl%C3%ADnico%20Emanuel%2C%20Ventanilla%2007076!3m2!1d-11.841529999999999!2d-77.11502!4m5!1s0x9105d41212110f83%3A0x3381ebbdfb7c3a11!2sCajamarca%2C%20Mi%20Per%C3%BA%2007056!3m2!1d-11.85413!2d-77.12089!4m3!3m2!1d-11.859558199999999!2d-77.124529!4m3!3m2!1d-11.8754478!2d-77.1269141!4m3!3m2!1d-12.0480583!2d-77.11540509999999!4m5!1s0x9105cb910984762b%3A0x104327c627fa29ad!2sUniversidad%20Nacional%20del%20Callao%2C%20Av.%20Juan%20Pablo%20%E2%85%A1%20306%2C%20Bellavista%2007011!3m2!1d-12.0613052!2d-77.11724869999999!5e1!3m2!1ses-419!2spe!4v1774766502370!5m2!1ses-419!2spe" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </div>
         </div>
     </main>
 
     <footer class="stats">
-        <div class="item-stat"><strong>~35 km</strong><p>Recorrido</p></div>
-        <div class="item-stat"><strong>~55 min</strong><p>Duración</p></div>
-        <div class="item-stat"><strong>Lunes a Viernes</strong><p>Operación</p></div>
-        <div class="item-stat"><strong>Directa</strong><p>Tipo de Ruta</p></div>
+        <div class="item"><strong>~35 km</strong><p>Recorrido</p></div>
+        <div class="item"><strong>~55 min</strong><p>Duración</p></div>
+        <div class="item"><strong>Lunes a Viernes</strong><p>Operación</p></div>
+        <div class="item"><strong>Directa</strong><p>Tipo de Ruta</p></div>
     </footer>
 
 </body>
