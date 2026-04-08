@@ -96,6 +96,33 @@
         .footer-sig { margin-top: 30px; font-weight: bold; color: #ffb400; text-align: right; }
         .thanks-footer { text-align: center; font-weight: bold; font-size: 1.1rem; margin-top: 25px; }
 
+        /* ESTILOS ESPECÍFICOS DEL CALENDARIO */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .cal-day {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+        .cal-day.active { border-color: #ffb400; background: rgba(255, 180, 0, 0.05); }
+        .cal-header { font-size: 0.75rem; color: #ffb400; font-weight: bold; text-transform: uppercase; margin-bottom: 8px; display: block; }
+        .cal-event {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            padding: 5px;
+            margin-bottom: 5px;
+            font-size: 0.8rem;
+            border-left: 3px solid #ffb400;
+            text-align: left;
+        }
+        .cal-empty { font-size: 0.75rem; color: #666; font-style: italic; margin-top: 10px; }
+
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .navbar { 
@@ -140,10 +167,31 @@
             <p>Estimados compañeros, se les informa que, con el objetivo de ampliar el servicio, a partir de la próxima semana se incorporarán turnos adicionales de retorno de manera excepcional y temporal.</p>
 
             <div class="sub-section">
-                <span class="sub-title">🗓️ CRONOGRAMA EXCLUSIVO (Lunes 13 al Viernes 17 de abril):</span>
-                <p>Durante esta semana, los nuevos horarios funcionarán únicamente en los siguientes días:</p>
-                <div class="item"><b>🥤 Turno 02:30 PM (Destino: Inka Cola)</b><br>Disponible solo: Martes y Jueves</div>
-                <div class="item"><b>📞 Turno 10:15 PM (Destino: Teléfono)</b><br>Disponible solo: Lunes y Jueves</div>
+                <span class="sub-title">🗓️ CRONOGRAMA SEMANAL (Lunes 13 al Viernes 17 de abril):</span>
+                
+                <div class="calendar-grid">
+                    <div class="cal-day active">
+                        <span class="cal-header">Lunes 13</span>
+                        <div class="cal-event">📞 10:15 PM<br><small>Destino: Teléfono</small></div>
+                    </div>
+                    <div class="cal-day active">
+                        <span class="cal-header">Martes 14</span>
+                        <div class="cal-event">🥤 02:30 PM<br><small>Destino: Inka Cola</small></div>
+                    </div>
+                    <div class="cal-day">
+                        <span class="cal-header">Miércoles 15</span>
+                        <div class="cal-empty">Sin turnos adicionales</div>
+                    </div>
+                    <div class="cal-day active">
+                        <span class="cal-header">Jueves 16</span>
+                        <div class="cal-event">🥤 02:30 PM<br><small>Destino: Inka Cola</small></div>
+                        <div class="cal-event">📞 10:15 PM<br><small>Destino: Teléfono</small></div>
+                    </div>
+                    <div class="cal-day">
+                        <span class="cal-header">Viernes 17</span>
+                        <div class="cal-empty">Sin turnos adicionales</div>
+                    </div>
+                </div>
             </div>
 
             <div class="sub-section">
@@ -156,6 +204,7 @@
             <p style="margin-top: 15px;">Cualquier modificación adicional será comunicada oportunamente por este medio. Agradecemos su comprensión y colaboración para seguir mejorando el servicio. ✅</p>
             <p class="footer-sig">Atentamente,<br>Delegatura de Movilidad 🎓Ventanilla - UNAC</p>
         </div>
+
         <div class="news-card">
             <span class="news-tag">AVISO DE ÚLTIMO MINUTO</span>
             <h2 class="news-title">📢 Organización de la Movilidad Universitaria (31/03/26) 🚌🎓</h2>
