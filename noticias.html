@@ -111,7 +111,11 @@
             text-align: center;
         }
         .cal-day.active { border-color: #ffb400; background: rgba(255, 180, 0, 0.05); }
+        /* Modificación 1: Color Rojo para Lunes */
+        .cal-day.monday-red { border-color: #f85149; background: rgba(248, 81, 73, 0.15); }
         .cal-header { font-size: 0.75rem; color: #ffb400; font-weight: bold; text-transform: uppercase; margin-bottom: 8px; display: block; }
+        .cal-day.monday-red .cal-header { color: #ffb3b0; }
+        
         .cal-event {
             background: rgba(0, 0, 0, 0.3);
             border-radius: 4px;
@@ -121,6 +125,7 @@
             border-left: 3px solid #ffb400;
             text-align: left;
         }
+        .cal-day.monday-red .cal-event { border-left-color: #f85149; }
         .cal-empty { font-size: 0.75rem; color: #666; font-style: italic; margin-top: 10px; }
 
         /* --- RESPONSIVE --- */
@@ -162,6 +167,28 @@
     <div class="container">
 
         <div class="news-card">
+            <span class="news-tag">AVISO DE ÚLTIMO MINUTO</span>
+            <h2 class="news-title">📢 Organización de la Movilidad Universitaria (09/04/26) 🚌🎓</h2>
+            <p>Estimados compañeros: Buenas tardes. Se les informa que, debido a cambios en la programación para el día de hoy, el punto de encuentro será en la <b>Facultad de Ciencias de la Salud</b>. Nos organizaremos bajo el siguiente esquema:</p>
+            
+            <div class="sub-section">
+                <div class="item"><b>01:30 PM:</b> Se enviará el formulario de registro para los asientos en el grupo de la movilidad. 📝</div>
+                <div class="item"><b>05:20 PM:</b> El DELEGADO iniciará formalmente el ordenamiento en la Facultad de Salud. 👥</div>
+                <div class="item"><b>05:30 PM:</b> Llega la movilidad e inmediatamente se inicia el ingreso a la unidad en orden. 🚍✨</div>
+            </div>
+
+            <div class="sub-section">
+                <span class="sub-title">⚠️ Reglas para el ingreso (Sin excepciones)</span>
+                <div class="item"><b>Prioridad del Formulario:</b> Al llegar el bus, subirán primero los compañeros registrados. Una vez completado este grupo, se habilitará el paso para los alumnos en cola. 📋✅</div>
+                <div class="item"><b>Puntualidad Obligatoria:</b> El ordenamiento comienza puntualmente a las 5:00 PM. Es responsabilidad de cada uno estar presente para mantener su lugar.</div>
+                <div class="item"><b>Pérdida de Cupo:</b> Si llenaste el formulario pero no te encuentras al momento de subir a la unidad, perderás el asiento automáticamente y el espacio se cederá a los compañeros de la cola. 🚫🕒</div>
+            </div>
+            
+            <p style="margin-top: 15px;">Estas medidas son disposiciones oficiales para optimizar nuestra logística y asegurar un traslado ordenado para todos. 🙌</p>
+            <p class="footer-sig">Atentamente, EL DELEGADO 👔</p>
+        </div>
+
+        <div class="news-card">
             <span class="news-tag">COMUNICADO OFICIAL</span>
             <h2 class="news-title">📢 ACTUALIZACIÓN DE HORARIOS (SEMANA DEL 13 AL 17 DE ABRIL) 📢</h2>
             <p>Estimados compañeros 🤝, tras una reciente reunión de coordinación entre los delegados de las distintas rutas 🗣️📋, se han establecido los horarios de retorno para la semana del 13 al 17 de abril 📅.
@@ -172,11 +199,12 @@ Es importante precisar que esta programación es exclusiva para dicha semana ⚠
                 <span class="sub-title">🗓️ CRONOGRAMA SEMANAL (Lunes 13 al Viernes 17 de abril):</span>
                 
                 <div class="calendar-grid">
-                    <div class="cal-day active">
+                    <div class="cal-day monday-red">
                         <span class="cal-header">Lunes 13</span>
                         <div class="cal-event">🏫 05:15 AM<br><small>Destino: UNAC</small></div>
                         <div class="cal-event">🚍 06:00 PM<br><small>Destino: SEDE UNAC</small></div>
                         <div class="cal-event">📞 10:15 PM<br><small>Destino: Teléfono</small></div>
+                        <p style="font-size: 0.7rem; color: #ffb3b0; font-weight: bold; margin-top: 5px;">(SUSPENCION DE CLASES MANERA - VIRTUAL)</p>
                     </div>
                     <div class="cal-day active">
                         <span class="cal-header">Martes 14</span>
@@ -214,29 +242,6 @@ Es importante precisar que esta programación es exclusiva para dicha semana ⚠
             <p style="margin-top: 15px;">Les pido las disculpas del caso si los horarios que se han añadido no son totalmente de su agrado 😔🙏. Como saben, no somos la única ruta que solicita recursos y nos toca coordinar y compartir espacios con otros servicios. 🚌🤝 ✅</p>
             <p style="margin-top: 15px;">Agradezco de corazón su paciencia ante la demora de estas rutas ⏳✨. Lastimosamente, nuestras autoridades a veces hacen caso omiso a nuestros pedidos 🚫🏛️, pero como su delegado, seguiré gestionando con fuerza un servicio que priorice su bienestar y seguridad por encima de todo. 🛡️💪 ¡Saben bien que Ventanilla tiene la mayor demanda y por eso no dejaré de insistir! 🔥📢 ✅</p>
             <p class="footer-sig">Atentamente,<br>Delegado Sebastian 🎓Ventanilla - UNAC</p>
-        </div>
-
-        <div class="news-card">
-            <span class="news-tag">AVISO DE ÚLTIMO MINUTO</span>
-            <h2 class="news-title">📢 Organización de la Movilidad Universitaria (31/03/26) 🚌🎓</h2>
-            <p>Estimados compañeros: Buenas tardes. Se les informa que, debido a cambios en la programación para el día de hoy, el punto de encuentro será en la <b>Facultad de Ciencias de la Salud</b>. Nos organizaremos bajo el siguiente esquema:</p>
-            
-            <div class="sub-section">
-                <div class="item"><b>04:30 PM:</b> Se enviará el formulario de registro para los asientos en el grupo de la movilidad. 📝</div>
-                <div class="item"><b>Minutos antes de las 5:00 PM:</b> El DELEGADO informará por el grupo el lugar exacto donde se formará la cola. 📍</div>
-                <div class="item"><b>05:00 PM:</b> El DELEGADO iniciará formalmente el ordenamiento en la Facultad de Salud. 👥</div>
-                <div class="item"><b>05:30 PM:</b> Llega la movilidad e inmediatamente se inicia el ingreso a la unidad en orden. 🚍✨</div>
-            </div>
-
-            <div class="sub-section">
-                <span class="sub-title">⚠️ Reglas para el ingreso (Sin excepciones)</span>
-                <div class="item"><b>Prioridad del Formulario:</b> Al llegar el bus, subirán primero los compañeros registrados. Una vez completado este grupo, se habilitará el paso para los alumnos en cola. 📋✅</div>
-                <div class="item"><b>Puntualidad Obligatoria:</b> El ordenamiento comienza puntualmente a las 5:00 PM. Es responsabilidad de cada uno estar presente para mantener su lugar.</div>
-                <div class="item"><b>Pérdida de Cupo:</b> Si llenaste el formulario pero no te encuentras al momento de subir a la unidad, perderás el asiento automáticamente y el espacio se cederá a los compañeros de la cola. 🚫🕒</div>
-            </div>
-            
-            <p style="margin-top: 15px;">Estas medidas son disposiciones oficiales para optimizar nuestra logística y asegurar un traslado ordenado para todos. 🙌</p>
-            <p class="footer-sig">Atentamente, EL DELEGADO 👔</p>
         </div>
 
         <div class="news-card">
@@ -304,7 +309,7 @@ Es importante precisar que esta programación es exclusiva para dicha semana ⚠
                     <b>¡VERIFICACIÓN CORRECTA! (Pase Verde):</b> Si tus datos son válidos, recibirás tu correo de confirmación con tu <b>NÚMERO DE ASIENTO OFICIAL</b> (Cupos limitados a 40 asientos). 💺🔢
                 </div>
                 <div class="status-box red">
-                    <b>VERIFICACIÓN INCORRECTA (Aviso Rojo):</b> Si ingresas mal tu DNI o Código, el sistema rechazará la solicitud. <b>IMPORTANTE:</b> Con una verificación incorrecta <strong>NO se te asignará un asiento</strong>, ya que el registro no será válido para el padrón oficial. ❌⚠️
+                    <b>VERIFICACIÓN INCORRECTA (Aviso Rojo):</b> Si ingresas mal tu DNI o Código, el sistema recibirá la solicitud pero <b>IMPORTANTE:</b> Con una verificación incorrecta <strong>NO se te asignará un asiento</strong>, ya que el registro no será válido para el padrón oficial. ❌⚠️
                 </div>
             </div>
 
