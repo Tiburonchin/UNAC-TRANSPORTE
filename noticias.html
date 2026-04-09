@@ -128,6 +128,37 @@
         .cal-day.monday-red .cal-event { border-left-color: #f85149; }
         .cal-empty { font-size: 0.75rem; color: #666; font-style: italic; margin-top: 10px; }
 
+        /* ESTILOS EXCLUSIVOS PARA LA TARJETA DE CUMPLEAÑOS */
+        .birthday-card {
+            background: linear-gradient(135deg, rgba(255, 180, 0, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border: 1px solid rgba(255, 180, 0, 0.4);
+            box-shadow: 0 0 20px rgba(255, 180, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .birthday-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 10%, transparent 40%);
+            animation: rotateGlow 15s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes rotateGlow {
+            100% { transform: rotate(360deg); }
+        }
+        .birthday-title {
+            background: linear-gradient(90deg, #ffb400, #ffea99, #ffb400);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 180, 0, 0.2);
+            padding-bottom: 15px;
+            position: relative;
+        }
+
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .navbar { 
@@ -169,7 +200,7 @@
         <div class="news-card">
             <span class="news-tag">AVISO DE ÚLTIMO MINUTO</span>
             <h2 class="news-title">📢 Organización de la Movilidad Universitaria (09/04/26) 🚌🎓</h2>
-            <p>Estimados compañeros: Buenas tardes. Se les informa que, debido a cambios en la programación para el día de hoy, el punto de encuentro será en la <b>Facultad de Ciencias de la Salud</b>. Nos organizaremos bajo el siguiente esquema:</p>
+            <p>Estimados compañeros: Buenas tardes. Se les informa que, debido a cambios en la programación para el día de hoy, ustedes ya saben que el punto de encuentro será en la <b>Facultad de Ciencias de la Salud</b>. Nos organizaremos bajo el siguiente esquema:</p>
             
             <div class="sub-section">
                 <div class="item"><b>01:30 PM:</b> Se enviará el formulario de registro para los asientos en el grupo de la movilidad. 📝</div>
@@ -179,8 +210,8 @@
 
             <div class="sub-section">
                 <span class="sub-title">⚠️ Reglas para el ingreso (Sin excepciones)</span>
-                <div class="item"><b>Prioridad del Formulario:</b> Al llegar el bus, subirán primero los compañeros registrados. Una vez completado este grupo, se habilitará el paso para los alumnos en cola. 📋✅</div>
-                <div class="item"><b>Puntualidad Obligatoria:</b> El ordenamiento comienza puntualmente a las 5:00 PM. Es responsabilidad de cada uno estar presente para mantener su lugar.</div>
+                <div class="item"><b>Prioridad del Formulario:</b> Al llegar el bus, subirán primero los compañeros registrados (40 CUPOS). Una vez completado este grupo, se habilitará el paso para los alumnos en cola. 📋✅</div>
+                <div class="item"><b>Puntualidad Obligatoria:</b> El ordenamiento comienza puntualmente a las 5:20 PM. Es responsabilidad de cada uno estar presente para mantener su lugar.</div>
                 <div class="item"><b>Pérdida de Cupo:</b> Si llenaste el formulario pero no te encuentras al momento de subir a la unidad, perderás el asiento automáticamente y el espacio se cederá a los compañeros de la cola. 🚫🕒</div>
             </div>
             
@@ -242,6 +273,24 @@ Es importante precisar que esta programación es exclusiva para dicha semana ⚠
             <p style="margin-top: 15px;">Les pido las disculpas del caso si los horarios que se han añadido no son totalmente de su agrado 😔🙏. Como saben, no somos la única ruta que solicita recursos y nos toca coordinar y compartir espacios con otros servicios. 🚌🤝 ✅</p>
             <p style="margin-top: 15px;">Agradezco de corazón su paciencia ante la demora de estas rutas ⏳✨. Lastimosamente, nuestras autoridades a veces hacen caso omiso a nuestros pedidos 🚫🏛️, pero como su delegado, seguiré gestionando con fuerza un servicio que priorice su bienestar y seguridad por encima de todo. 🛡️💪 ¡Saben bien que Ventanilla tiene la mayor demanda y por eso no dejaré de insistir! 🔥📢 ✅</p>
             <p class="footer-sig">Atentamente,<br>Delegado Sebastian 🎓Ventanilla - UNAC</p>
+        </div>
+
+        <div class="news-card birthday-card">
+            <span class="news-tag" style="color: #ffea99; text-shadow: 0 0 8px rgba(255,180,0,0.6);">🎁 BENEFICIO EXCLUSIVO</span>
+            <h2 class="birthday-title">¡FELIZ CUMPLEAÑOS! 🎂🎉✨</h2>
+            <p style="font-size: 1.1rem; position: relative;">¡En tu mes especial, el Delegado te tiene un súper regalo! 🎁 No olvides que por tu día tienes un <b>ASIENTO GARANTIZADO</b> en la movilidad. 🚌💺🔝</p>
+            
+            <div class="sub-section" style="position: relative;">
+                <span class="sub-title">⚠️ Ten en cuenta las siguientes condiciones:</span>
+                <div class="item"><b>🆔 Requisito:</b> Presentar tu DNI para validar tu fecha de nacimiento.</div>
+                <div class="item"><b>⏰ Horarios permitidos:</b> Solo aplica para las rutas de las 6:00 PM y 10:15 PM.</div>
+                <div class="item"><b>🗓️ Vigencia:</b> Tienes una semana para reclamarlo a partir de tu fecha de cumple.</div>
+                <div class="item"><b>☝️ Nota:</b> Solo es válido una única vez en cualquier día de tu semana de cumple.</div>
+            </div>
+            
+            <p style="margin-top: 25px; font-weight: bold; font-size: 1.15rem; color: #a6f3b7; text-align: center; border-top: 1px dashed rgba(255, 255, 255, 0.2); padding-top: 15px; position: relative;">
+                ¡No dejes pasar tu premio y viaja cómodo! 🥳🎈
+            </p>
         </div>
 
         <div class="news-card">
