@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movilidad UNAC | Noticias</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <script src="../assets/js/supabase-config.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="../assets/js/main.js" defer></script>
+</head>
+<body data-page="noticias">
+    <a class="skip-link" href="#content">Saltar al contenido</a>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="../index.html" aria-label="Movilidad UNAC - Ir a página de inicio">
+                <div class="brand-mark">
+                    <img src="../assets/images/logo_unac.png" alt="Logo UNAC">
+                </div>
+                <div class="brand-copy"><strong>Movilidad UNAC</strong><span>Sistema de Transporte Inteligente</span></div>
+            </a>
+            <div class="header-actions">
+                <button class="theme-toggle" type="button" aria-label="Alternar tema" data-theme-toggle>
+                    <svg class="theme-icon theme-icon-light" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="theme-icon theme-icon-dark" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" data-nav-toggle>☰</button>
+            </div>
+            <nav class="site-nav" data-nav role="navigation" aria-label="Navegación principal">
+                <a href="../index.html" data-nav-link="inicio">Inicio</a>
+                <a href="horarios.html" data-nav-link="horarios">Horarios</a>
+                <a href="rutas.html" data-nav-link="rutas">Rutas</a>
+                <a href="noticias.html" data-nav-link="noticias">Noticias</a>
+                <a href="consultas.html" data-nav-link="consultas">Consultas</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page" id="content">
+        <section class="hero reveal" aria-label="Sección de noticias y avisos">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-copy">
+                        <div class="hero-intro">
+                            <span class="eyebrow">Avisos y novedades</span>
+                            <h1>Noticias con <span class="accent">estructura modular</span>.</h1>
+                        </div>
+                        <div class="hero-description">
+                            <p class="lead">En esta nueva base, los comunicados se acomodan como tarjetas independientes. Así el contenido es más fácil de leer, editar y mover sin tocar la maquetación general.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container section reveal" id="main-content">
+            <span class="eyebrow">Actualizaciones</span>
+            <h2 class="section-title">Últimos comunicados</h2>
+            <div class="news-grid">
+                <article class="news-card">
+                    <span class="badge accent">Oficial</span>
+                    <h3>Ajustes de horario para la semana</h3>
+                    <p>Publicación pensada para avisos puntuales. El formato permite destacar fecha, alcance y un resumen corto sin saturar la vista.</p>
+                    <div class="callout">
+                        <p><strong>Estado:</strong> activo</p>
+                        <p><strong>Alcance:</strong> ruta Ventanilla</p>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <span class="badge cyan">Gestión</span>
+                    <h3>Resultados de actualización de datos</h3>
+                    <p>Tarjeta preparada para reportes, cifras y decisiones. Si luego quieres gráficas reales, este bloque ya tiene la jerarquía visual adecuada.</p>
+                    <div class="callout">
+                        <p><strong>Lectura rápida</strong> para pantallas móviles y escritorio.</p>
+                    </div>
+                </article>
+                <article class="news-card">
+                    <span class="badge success">Transparencia</span>
+                    <h3>Seguimiento del servicio</h3>
+                    <p>Sección útil para cambios de ruta, incidencias o notas de mejora continua. Mantiene una estructura neutral y limpia.</p>
+                </article>
+                <article class="news-card">
+                    <span class="badge danger">Alerta</span>
+                    <h3>Recordatorio de cupos</h3>
+                    <p>Bloque corto para notificaciones urgentes. Puede funcionar como aviso superior o tarjeta destacada dentro del flujo general.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="../index.html" aria-label="Movilidad UNAC - Ir a página de inicio">
+                        <img src="../assets/images/logo_unac.png" alt="Logo UNAC" class="footer-logo">
+                        <span>Movilidad UNAC</span>
+                    </a>
+                    <p>Sistema de Transporte Inteligente para la comunidad universitaria.</p>
+                </div>
+                <div class="footer-contact">
+                    <p class="footer-credit">Sistema desarrollado por: <strong>Edgar Ramos</strong> <span class="handle">@Tiburonsin</span></p>
+                    <a href="https://wa.me/51" class="footer-whatsapp" aria-label="Contactar por WhatsApp" title="Contactar por WhatsApp">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a5.505 5.505 0 00-5.487 5.507c0 1.438.413 2.849 1.191 4.077L2.98 21.437l4.526-1.188a5.523 5.523 0 002.079.404h.004c3.032 0 5.5-2.468 5.509-5.502.004-1.473-.574-2.858-1.62-3.907-1.047-1.048-2.433-1.623-3.909-1.623m11.226-1.111c-3.151-3.152-7.355-4.885-11.816-4.885-9.171 0-16.635 7.465-16.635 16.635 0 2.928.761 5.801 2.206 8.354L.513 23.487l8.85-2.318c2.49 1.349 5.278 2.061 8.122 2.061 9.171 0 16.635-7.465 16.635-16.635 0-4.461-1.733-8.665-4.885-11.816"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 UNAC - Movilidad Universitaria. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
