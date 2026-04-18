@@ -6,6 +6,8 @@
     <title>Movilidad UNAC | Inicio</title>
     <meta name="description" content="Landing moderna para la Movilidad Universitaria UNAC, organizada por páginas y recursos compartidos.">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="assets/js/supabase-config.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <script src="assets/js/main.js" defer></script>
 </head>
 <body data-page="inicio">
@@ -44,9 +46,8 @@
                 <a href="index.html" data-nav-link="inicio">Inicio</a>
                 <a href="pages/horarios.html" data-nav-link="horarios">Horarios</a>
                 <a href="pages/rutas.html" data-nav-link="rutas">Rutas</a>
-                <a href="pages/registro.html" data-nav-link="registro">Registro</a>
                 <a href="pages/noticias.html" data-nav-link="noticias">Noticias</a>
-                <a href="pages/consultas.html" data-nav-link="consultas" class="is-cta">Consultas</a>
+                <a href="pages/consultas.html" data-nav-link="consultas">Consultas</a>
             </nav>
         </div>
     </header>
@@ -59,14 +60,15 @@
                     <div class="hero-copy">
                         <div class="hero-intro">
                             <span class="eyebrow">Sistema de Transporte Inteligente</span>
-                            <h1>Bienvenido a <span class="accent">Movilidad UNAC</span>.</h1>
+                            <h1>Bienvenido al portal: <span class="accent" data-home-user-name>Movilidad UNAC</span>.</h1>
                         </div>
                         <div class="hero-description">
                             <p class="lead">Aquí encontrarás todo para planificar tu viaje universitario en un solo lugar: solicitud de cupo, horarios, rutas, noticias y consultas frecuentes. Explora cada sección y accede al sistema con criterios claros de equidad, transparencia y accesibilidad.</p>
                         </div>
                         <div class="hero-cta">
                             <div class="hero-actions">
-                                <a class="btn btn-primary" href="pages/registro.html" aria-label="Solicitar cupo de transporte - Ir a formulario de registro">Solicitar Cupo</a>
+                                <a class="btn btn-primary" href="pages/registro.html" data-requires-auth aria-label="Solicitar cupo de transporte - Ir a formulario de registro">Solicitar Cupo</a>
+                                <a class="btn btn-secondary" href="pages/login.html" data-auth-cta aria-label="Iniciar sesion institucional">Iniciar sesion</a>
                                 <a class="btn btn-secondary" href="pages/horarios.html" aria-label="Ver horarios disponibles de transporte">Ver Horarios</a>
                             </div>
                         </div>

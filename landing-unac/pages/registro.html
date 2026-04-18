@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movilidad UNAC | Registro</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
+    <script src="../assets/js/supabase-config.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <script src="../assets/js/main.js" defer></script>
 </head>
 <body data-page="registro">
@@ -40,9 +42,8 @@
                 <a href="../index.html" data-nav-link="inicio">Inicio</a>
                 <a href="horarios.html" data-nav-link="horarios">Horarios</a>
                 <a href="rutas.html" data-nav-link="rutas">Rutas</a>
-                <a href="registro.html" data-nav-link="registro">Registro</a>
                 <a href="noticias.html" data-nav-link="noticias">Noticias</a>
-                <a href="consultas.html" data-nav-link="consultas" class="is-cta">Consultas</a>
+                <a href="consultas.html" data-nav-link="consultas">Consultas</a>
             </nav>
         </div>
     </header>
@@ -59,11 +60,6 @@
                         <div class="hero-description">
                             <p class="lead">Esta versión no depende de un backend real. Sirve como base visual y funcional para capturar datos, validar campos y simular una respuesta de preinscripción.</p>
                         </div>
-                        <a href="#main-content" class="scroll-indicator" aria-label="Desplazarse hacia el contenido principal">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -88,12 +84,18 @@
                             <label for="facultad">Facultad</label>
                             <select id="facultad">
                                 <option value="">Selecciona una opción</option>
+                                <option>FIIS</option>
+                                <option>FIME</option>
+                                <option>FIPA</option>
+                                <option>FIQ</option>
                                 <option>FIEE</option>
-                                <option>FCC</option>
-                                <option>FCA</option>
-                                <option>FIARN</option>
                                 <option>FCS</option>
-                                <option>Otros</option>
+                                <option>FCC</option>
+                                <option>FCE</option>
+                                <option>FCA</option>
+                                <option>FCDE</option>
+                                <option>FIARN</option>
+                                <option>FCNM</option>
                             </select>
                         </div>
                         <div class="form-row">
@@ -105,6 +107,16 @@
                                 <option>06:00 PM</option>
                                 <option>10:15 PM</option>
                             </select>
+                        </div>
+                        <div class="form-row">
+                            <label for="documentoPdf">Sustento en PDF (máximo 5MB)</label>
+                            <input id="documentoPdf" type="file" accept="application/pdf,.pdf" />
+                        </div>
+                        <div class="form-row form-row-check">
+                            <label for="terms" class="check-label">
+                                <input id="terms" type="checkbox" />
+                                <span>Acepto el tratamiento de datos y términos del registro.</span>
+                            </label>
                         </div>
                         <div class="form-actions">
                             <button class="btn btn-primary" type="submit">Generar preinscripción</button>

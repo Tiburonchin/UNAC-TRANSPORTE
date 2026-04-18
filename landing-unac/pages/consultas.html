@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movilidad UNAC | Consultas</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
+    <script src="../assets/js/supabase-config.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <script src="../assets/js/main.js" defer></script>
 </head>
 <body data-page="consultas">
@@ -40,9 +42,8 @@
                 <a href="../index.html" data-nav-link="inicio">Inicio</a>
                 <a href="horarios.html" data-nav-link="horarios">Horarios</a>
                 <a href="rutas.html" data-nav-link="rutas">Rutas</a>
-                <a href="registro.html" data-nav-link="registro">Registro</a>
                 <a href="noticias.html" data-nav-link="noticias">Noticias</a>
-                <a href="consultas.html" data-nav-link="consultas" class="is-cta">Consultas</a>
+                <a href="consultas.html" data-nav-link="consultas">Consultas</a>
             </nav>
         </div>
     </header>
@@ -59,11 +60,6 @@
                         <div class="hero-description">
                             <p class="lead">La sección está organizada para mostrar contactos, roles y preguntas frecuentes. Todo se puede ampliar después sin rehacer la estructura visual.</p>
                         </div>
-                        <a href="#main-content" class="scroll-indicator" aria-label="Desplazarse hacia el contenido principal">
-                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </a>
                     </div>
                 </div>
             </div>
