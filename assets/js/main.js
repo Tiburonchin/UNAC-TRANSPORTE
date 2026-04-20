@@ -882,10 +882,12 @@ async function initLoginPage() {
             options: {
                 redirectTo: redirectUrl.toString(),
                 queryParams: {
-                    prompt: 'select_account'
+                    prompt: 'select_account consent',
+                    access_type: 'offline'
                 }
             }
         });
+
 
         if (error) {
             loginButton.disabled = false;
