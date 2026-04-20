@@ -74,8 +74,6 @@ function initNavigation() {
     const navToggle = DOM.navToggle();
     const nav = DOM.nav();
     const page = document.body.dataset.page;
-    const canAnimateNav = !PREFERS_REDUCED_MOTION && typeof nav?.animate === 'function';
-    let navAnimation = null;
 
     if (navToggle && nav) {
         // Asegurar que nav tiene role="navigation"
@@ -84,156 +82,35 @@ function initNavigation() {
             nav.setAttribute('aria-label', 'Navegación principal');
         }
 
-        const announceMenuState = (isOpen) => {
-            const announcer = DOM.announcer();
-            if (announcer) {
-                announcer.textContent = isOpen ? 'Menú abierto' : 'Menú cerrado';
-            }
-        };
-
-        const getNavOrigin = () => {
-            const toggleRect = navToggle.getBoundingClientRect();
-            const navRect = nav.getBoundingClientRect();
-            return {
-                x: toggleRect.left + (toggleRect.width / 2) - navRect.left,
-                y: Math.max(0, toggleRect.top + (toggleRect.height / 2) - navRect.top)
-            };
-        };
-
-        const openMenu = () => {
-            nav.classList.add('is-open');
-            navToggle.setAttribute('aria-expanded', 'true');
-
-            if (!canAnimateNav) {
-                announceMenuState(true);
-                return;
-            }
-
-            if (navAnimation) {
-                navAnimation.cancel();
-            }
-
-            const origin = getNavOrigin();
-            nav.style.transformOrigin = `${origin.x}px ${origin.y}px`;
-            navAnimation = nav.animate([
-                {
-                    opacity: 0,
-                    transform: 'translateY(-12px) scale(0.96)',
-                    clipPath: `circle(8% at ${origin.x}px ${origin.y}px)`
-                },
-                {
-                    opacity: 1,
-                    transform: 'translateY(0) scale(1)',
-                    clipPath: `circle(160% at ${origin.x}px ${origin.y}px)`
-                }
-            ], {
-                duration: 340,
-                easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)',
-                fill: 'both'
-            });
-
-            navAnimation.onfinish = () => {
-                navAnimation = null;
-                nav.style.removeProperty('transform-origin');
-                nav.style.removeProperty('clip-path');
-            };
-
-            navAnimation.oncancel = () => {
-                nav.style.removeProperty('transform-origin');
-                nav.style.removeProperty('clip-path');
-            };
-
-            announceMenuState(true);
-        };
-
-        const closeMenu = (focusToggle = false) => {
-            if (!nav.classList.contains('is-open')) {
-                return;
-            }
-
-            if (!canAnimateNav) {
-                nav.classList.remove('is-open');
-                navToggle.setAttribute('aria-expanded', 'false');
-                if (focusToggle) {
-                    navToggle.focus();
-                }
-                announceMenuState(false);
-                return;
-            }
-
-            if (navAnimation) {
-                navAnimation.cancel();
-            }
-
-            const origin = getNavOrigin();
-            nav.style.transformOrigin = `${origin.x}px ${origin.y}px`;
-            navAnimation = nav.animate([
-                {
-                    opacity: 1,
-                    transform: 'translateY(0) scale(1)',
-                    clipPath: `circle(160% at ${origin.x}px ${origin.y}px)`
-                },
-                {
-                    opacity: 0,
-                    transform: 'translateY(-10px) scale(0.97)',
-                    clipPath: `circle(8% at ${origin.x}px ${origin.y}px)`
-                }
-            ], {
-                duration: 260,
-                easing: 'cubic-bezier(0.4, 0, 1, 1)',
-                fill: 'both'
-            });
-
-            navAnimation.onfinish = () => {
-                nav.classList.remove('is-open');
-                navToggle.setAttribute('aria-expanded', 'false');
-                if (focusToggle) {
-                    navToggle.focus();
-                }
-                announceMenuState(false);
-                navAnimation = null;
-                nav.style.removeProperty('transform-origin');
-                nav.style.removeProperty('clip-path');
-            };
-
-            navAnimation.oncancel = () => {
-                nav.style.removeProperty('transform-origin');
-                nav.style.removeProperty('clip-path');
-            };
-        };
-
-        navToggle.addEventListener('click', () => {
+        const toggleMenu = (forceClose = false) => {
             const isOpen = nav.classList.contains('is-open');
-            if (isOpen) {
-                closeMenu();
+            if (isOpen || forceClose) {
+                nav.classList.remove('is-open');
+                navToggle.setAttribute('aria-expanded', 'false');
             } else {
-                openMenu();
+                nav.classList.add('is-open');
+                navToggle.setAttribute('aria-expanded', 'true');
             }
-        });
+        };
+
+        navToggle.addEventListener('click', () => toggleMenu());
 
         document.addEventListener('keydown', event => {
             if (event.key === 'Escape' && nav.classList.contains('is-open')) {
-                closeMenu(true);
+                toggleMenu(true);
+                navToggle.focus();
             }
         });
 
         nav.addEventListener('click', event => {
-            if (event.target.matches('a')) {
-                closeMenu();
-            }
+            if (event.target.matches('a')) toggleMenu(true);
         });
 
         // Evita estados inconsistentes al pasar a desktop.
         window.addEventListener('resize', () => {
             if (window.innerWidth >= 980 && nav.classList.contains('is-open')) {
-                if (navAnimation) {
-                    navAnimation.cancel();
-                    navAnimation = null;
-                }
                 nav.classList.remove('is-open');
                 navToggle.setAttribute('aria-expanded', 'false');
-                nav.style.removeProperty('transform-origin');
-                nav.style.removeProperty('clip-path');
             }
         });
     }
@@ -945,43 +822,69 @@ function syncProtectedLinks() {
 }
 
 function renderNavAuthSlot() {
-    const nav = DOM.nav();
-    if (!nav) {
-        return;
-    }
+    // 1. Apuntamos al contenedor derecho en lugar del menú central
+    const headerActions = document.querySelector('.header-actions');
+    if (!headerActions) return;
 
-    let slot = nav.querySelector('[data-auth-nav-item]');
+    let slot = document.querySelector('[data-auth-nav-item]');
     if (!slot) {
         slot = document.createElement('div');
         slot.className = 'auth-nav-item';
         slot.setAttribute('data-auth-nav-item', '');
-        nav.appendChild(slot);
+        // Lo insertamos justo antes del botón hamburguesa
+        const navToggle = headerActions.querySelector('.nav-toggle');
+        headerActions.insertBefore(slot, navToggle);
     }
 
-    nav.appendChild(slot);
-
     if (!AUTH.session) {
-        slot.innerHTML = `<a class="auth-login-link" href="${getLoginHrefWithNext()}" aria-label="Iniciar sesion institucional">Iniciar sesion</a>`;
+        slot.innerHTML = `<a class="auth-login-link" href="${getLoginHrefWithNext()}" aria-label="Iniciar sesion institucional">Iniciar sesión</a>`;
         return;
     }
 
     const fullName = getDisplayName();
     const initials = getInitials(fullName);
+    
+    // 2. Creamos la estructura HTML del Dropdown
     slot.innerHTML = `
-        <a class="auth-profile-link" href="${getRegistroHref()}" aria-label="Ver mi perfil">
-            <span class="auth-avatar" aria-hidden="true">${initials}</span>
-            <span class="auth-profile-name">${fullName}</span>
-        </a>
-        <button class="auth-logout-link" type="button" data-auth-logout>Cerrar sesion</button>
+        <div class="auth-dropdown-container" id="user-dropdown">
+            <button class="auth-profile-toggle" aria-expanded="false" aria-controls="dropdown-menu">
+                <span class="auth-avatar" aria-hidden="true">${initials}</span>
+                <span class="auth-profile-name">${fullName}</span>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 2px; color: var(--muted);">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+            <div class="auth-dropdown-menu" id="dropdown-menu">
+                <a href="${getRegistroHref()}">Ver mi perfil</a>
+                <button type="button" data-auth-logout>Cerrar sesión</button>
+            </div>
+        </div>
     `;
 
-    const logout = slot.querySelector('[data-auth-logout]');
+    // 3. Lógica de Interacción del Dropdown
+    const dropdownContainer = slot.querySelector('#user-dropdown');
+    const toggleBtn = slot.querySelector('.auth-profile-toggle');
+    const logoutBtn = slot.querySelector('[data-auth-logout]');
 
-    if (logout) {
-        logout.addEventListener('click', async () => {
-            if (!AUTH.client) {
-                return;
-            }
+    // Abrir/Cerrar menú al dar click al nombre
+    toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Evita que se cierre inmediatamente
+        const isActive = dropdownContainer.classList.toggle('is-active');
+        toggleBtn.setAttribute('aria-expanded', isActive);
+    });
+
+    // Cerrar el menú si haces click en cualquier otro lado de la página
+    document.addEventListener('click', (e) => {
+        if (dropdownContainer && !dropdownContainer.contains(e.target)) {
+            dropdownContainer.classList.remove('is-active');
+            toggleBtn.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    // Acción de cerrar sesión
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', async () => {
+            if (!AUTH.client) return;
             await AUTH.client.auth.signOut();
             window.location.href = getIndexHref();
         });
