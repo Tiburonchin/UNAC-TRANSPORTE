@@ -1,4 +1,6 @@
 # Evita subir archivos de configuración y credenciales
+client_secret_*.json
+
 assets/js/supabase-config.js
 .env
 .env.*

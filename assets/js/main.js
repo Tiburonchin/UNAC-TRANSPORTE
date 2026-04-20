@@ -27,7 +27,7 @@ const AUTH_FLASH_KEY = 'unac_auth_flash';
 
 document.addEventListener('DOMContentLoaded', async () => {
     document.documentElement.classList.add('js');
-    initThemeToggle();
+    document.documentElement.setAttribute('data-theme', 'dark');
     initNavigation();
     initRevealAnimations();
     initInteractiveElements();
@@ -46,20 +46,25 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 /**
- * Consolida interacciones de cards, buttons y ripple effects
+ * Maneja interacciones de ripple y dropdown de usuario en una sola función
  */
 function initInteractiveElements() {
     document.addEventListener('click', (e) => {
         const btn = e.target.closest('.btn');
-        const card = e.target.closest('.feature-card, .cta-card, .news-card, .card');
-        
-        if (PREFERS_REDUCED_MOTION) return;
-        
-        if (btn) createRipple(e, btn, 'btn-ripple');
-        if (card) createRipple(e, card, 'ripple');
-        
-        if (btn && !btn.getAttribute('aria-label')) {
-            btn.setAttribute('aria-label', btn.textContent.trim());
+        const card = e.target.closest('.feature-card, .cta-card, .card');
+        const dropdownToggle = e.target.closest('.auth-profile-toggle');
+
+        // Manejo del Dropdown de Usuario
+        if (dropdownToggle) {
+            const container = dropdownToggle.closest('.auth-dropdown-container');
+            const isActive = container.classList.toggle('is-active');
+            dropdownToggle.setAttribute('aria-expanded', isActive);
+        }
+
+        // Ripple Effect para botones y cards
+        if (!PREFERS_REDUCED_MOTION) {
+            if (btn) createRipple(e, btn, 'btn-ripple');
+            if (card) createRipple(e, card, 'ripple');
         }
     });
 }
@@ -525,128 +530,6 @@ function initFaqs() {
     });
 }
 
-function initRegistrationForm() {
-    const form = document.querySelector('[data-register-form]');
-    const message = document.querySelector('[data-register-message]');
-
-    if (!form || !message) {
-        return;
-    }
-
-    if (!AUTH.session) {
-        showMessage(message, 'Debes iniciar sesion con tu correo institucional para continuar con el registro.', 'error');
-        return;
-    }
-
-    const fields = {
-        nombre: form.querySelector('#nombre'),
-        dni: form.querySelector('#dni'),
-        facultad: form.querySelector('#facultad'),
-        horario: form.querySelector('#horario'),
-        documento: form.querySelector('#documentoPdf'),
-        terms: form.querySelector('#terms')
-    };
-
-    if (!fields.nombre || !fields.dni || !fields.facultad || !fields.horario || !fields.documento || !fields.terms) {
-        showMessage(message, 'El formulario no tiene todos los campos requeridos para registro protegido.', 'error');
-        return;
-    }
-
-    form.addEventListener('submit', async event => {
-        event.preventDefault();
-
-        const values = {
-            nombre: fields.nombre.value.trim(),
-            dni: fields.dni.value.trim(),
-            facultad: fields.facultad.value,
-            horario: fields.horario.value,
-            terms: fields.terms.checked,
-            documento: fields.documento.files?.[0]
-        };
-
-        const validFaculty = FACULTIES.includes(values.facultad);
-        const hasPdf = Boolean(values.documento);
-        const isPdf = hasPdf && values.documento.type === 'application/pdf';
-        const validSize = hasPdf && values.documento.size <= 5 * 1024 * 1024;
-
-        const invalid = !values.nombre || values.dni.length < 8 || !validFaculty || !values.horario || !values.terms || !hasPdf || !isPdf || !validSize;
-        if (invalid) {
-            showMessage(message, 'Completa los campos, acepta terminos y sube un PDF valido de hasta 5MB.', 'error');
-            return;
-        }
-
-        if (!AUTH.client || !AUTH.config) {
-            showMessage(message, 'Supabase no esta configurado. Actualiza assets/js/supabase-config.js.', 'error');
-            return;
-        }
-
-        const submitButton = form.querySelector('button[type="submit"]');
-        if (submitButton) {
-            submitButton.disabled = true;
-        }
-        showMessage(message, 'Guardando datos y subiendo PDF...', 'info');
-
-        const filePath = `${AUTH.session.user.id}/${Date.now()}-${sanitizeFileName(values.documento.name)}`;
-
-        const payload = {
-            user_id: AUTH.session.user.id,
-            full_name: values.nombre,
-            dni: values.dni,
-            facultad: values.facultad,
-            horario: values.horario,
-            document_path: filePath,
-            updated_at: new Date().toISOString()
-        };
-
-        const { error: profileError } = await AUTH.client
-            .from(AUTH.config.profileTable)
-            .upsert(payload, { onConflict: 'user_id' });
-
-        if (profileError) {
-            if (submitButton) {
-                submitButton.disabled = false;
-            }
-            showMessage(message, 'No se pudo guardar el perfil. Verifica las politicas RLS y la tabla de perfiles.', 'error');
-            return;
-        }
-
-        const { error: storageError } = await AUTH.client.storage
-            .from(AUTH.config.privateBucket)
-            .upload(filePath, values.documento, {
-                contentType: 'application/pdf',
-                upsert: true
-            });
-
-        if (storageError) {
-            if (submitButton) {
-                submitButton.disabled = false;
-            }
-            showMessage(message, 'No se pudo subir el PDF al bucket privado. Revisa politicas de Storage.', 'error');
-            return;
-        }
-
-        AUTH.profile = {
-            full_name: values.nombre,
-            dni: values.dni,
-            facultad: values.facultad,
-            horario: values.horario,
-            document_path: filePath
-        };
-        initHomeWelcome();
-        initAuthUi();
-
-        showMessage(
-            message,
-            `Registro guardado para ${values.nombre}. Tu documento PDF se almaceno de forma privada y segura.`,
-            'success'
-        );
-        form.reset();
-
-        if (submitButton) {
-            submitButton.disabled = false;
-        }
-    });
-}
 
 function showMessage(element, text, type) {
     element.className = `message is-visible ${type}`;
@@ -693,9 +576,9 @@ function sanitizeFileName(name) {
 }
 
 function getDisplayName() {
-    const profileName = AUTH.profile?.full_name?.trim();
-    if (profileName) {
-        return profileName;
+    const profile = AUTH.profile;
+    if (profile && profile.nombres) {
+        return `${profile.nombres} ${profile.apellidos}`.trim();
     }
 
     const metadata = AUTH.session?.user?.user_metadata || {};
@@ -718,12 +601,13 @@ async function fetchProfileByUserId(userId) {
     }
 
     const { data, error } = await AUTH.client
-        .from(AUTH.config.profileTable)
-        .select('full_name, dni, facultad, horario, document_path')
-        .eq('user_id', userId)
+        .from('student_profiles')
+        .select('*')
+        .eq('id', userId)
         .maybeSingle();
 
     if (error) {
+        console.error('Error al obtener perfil:', error);
         return null;
     }
 
@@ -766,6 +650,10 @@ async function initAuth() {
 
     if (AUTH.session) {
         AUTH.profile = await fetchProfileByUserId(AUTH.session.user.id);
+        if (!AUTH.profile && !window.location.pathname.includes('/pages/registro.html')) {
+            window.location.href = getRegistroHref();
+            return;
+        }
     }
 
     AUTH.client.auth.onAuthStateChange(async (_, session) => {
@@ -778,6 +666,10 @@ async function initAuth() {
             setAuthFlash('Solo se permite acceso con correo institucional @unac.edu.pe.');
         } else if (AUTH.session) {
             AUTH.profile = await fetchProfileByUserId(AUTH.session.user.id);
+            if (!AUTH.profile && !window.location.pathname.includes('/pages/registro.html')) {
+                window.location.href = getRegistroHref();
+                return;
+            }
         } else {
             AUTH.profile = null;
         }
@@ -1005,34 +897,121 @@ async function initLoginPage() {
 }
 
 /**
- * Gestiona tema oscuro/claro
- * - Detecta preferencia del sistema (prefers-color-scheme)
- * - Persiste en localStorage
- * - Iconos se manejan vía CSS (no JavaScript)
+ * Lógica de la página de Registro
  */
-function initThemeToggle() {
-    const html = document.documentElement;
-    const toggle = document.querySelector('[data-theme-toggle]');
-    
-    if (!toggle) return;
+async function initRegistrationForm() {
+    if (document.body.dataset.page !== 'registro') {
+        return;
+    }
 
-    const getPreferredTheme = () => {
-        const stored = localStorage.getItem('theme');
-        if (stored) return stored;
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    };
+    const form = document.querySelector('[data-register-form]');
+    const messageEl = document.querySelector('[data-register-message]');
+    const dniInput = document.getElementById('dni');
 
-    const setTheme = (theme) => {
-        const isDark = theme === 'dark';
-        html.setAttribute('data-theme', isDark ? 'dark' : 'light');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    };
+    if (!form || !dniInput) return;
 
-    const currentTheme = getPreferredTheme();
-    setTheme(currentTheme);
+    // Validación de DNI: Solo 8 dígitos numéricos
+    dniInput.addEventListener('input', (e) => {
+        // Eliminar todo lo que no sea número y truncar a 8
+        e.target.value = e.target.value.replace(/\D/g, '').slice(0, 8);
+    });
 
-    toggle.addEventListener('click', () => {
-        const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        setTheme(newTheme);
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        if (!AUTH.session) {
+            showMessage(messageEl, 'Debes iniciar sesión con Google antes de completar tu registro.', 'error');
+            return;
+        }
+
+        const dniValue = dniInput.value;
+        if (dniValue.length !== 8) {
+            showMessage(messageEl, 'El DNI debe tener exactamente 8 números.', 'error');
+            return;
+        }
+
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.textContent;
+        
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Procesando...';
+        showMessage(messageEl, 'Subiendo documentos y guardando perfil...', 'info');
+
+        try {
+            // Captura de datos básicos
+            const nombres = document.getElementById('nombres').value.trim();
+            const apellidos = document.getElementById('apellidos').value.trim();
+            const edad = parseInt(document.getElementById('edad').value);
+            const genero = document.getElementById('genero').value;
+            const facultad = document.getElementById('facultad').value;
+            
+            // Archivos PDF
+            const filePonderado = document.getElementById('pdfPonderado').files[0];
+            const fileMatricula = document.getElementById('pdfMatricula').files[0];
+
+            if (!filePonderado || !fileMatricula) {
+                throw new Error('Debes seleccionar ambos archivos PDF obligatorios.');
+            }
+
+            // 1. Subir archivos al Storage (Bucket 'documents')
+            const uploadTask = async (file, prefix) => {
+                const timestamp = Date.now();
+                const cleanName = file.name.replace(/[^a-z0-9.]/gi, '_').toLowerCase();
+                const filePath = `user_${AUTH.session.user.id}/${prefix}_${timestamp}_${cleanName}`;
+                
+                const { data, error } = await AUTH.client.storage
+                    .from('documents')
+                    .upload(filePath, file);
+
+                if (error) throw error;
+                return data.path; // Retorna la ruta interna en el bucket
+            };
+
+            const pathPonderado = await uploadTask(filePonderado, 'ponderado');
+            const pathMatricula = await uploadTask(fileMatricula, 'matricula');
+
+            // 2. Guardar/Actualizar Perfil de Estudiante
+            const { error: profileError } = await AUTH.client
+                .from('student_profiles')
+                .upsert({
+                    id: AUTH.session.user.id,
+                    nombres,
+                    apellidos,
+                    dni: dniValue,
+                    edad,
+                    genero,
+                    created_at: new Date().toISOString()
+                });
+
+            if (profileError) throw profileError;
+
+            // 3. Guardar Registro Académico Semestral
+            const { error: academicError } = await AUTH.client
+                .from('academic_records')
+                .insert({
+                    student_id: AUTH.session.user.id,
+                    semester: '2026-I', // Podría ser dinámico en el futuro
+                    facultad: facultad,
+                    file_ponderado: pathPonderado,
+                    file_matricula: pathMatricula
+                });
+
+            if (academicError) throw academicError;
+
+            // Éxito
+            showMessage(messageEl, '¡Registro completado con éxito! Redirigiendo al inicio...', 'success');
+            
+            setTimeout(() => {
+                window.location.href = getIndexHref();
+            }, 2500);
+
+        } catch (error) {
+            console.error('Error durante el registro:', error);
+            showMessage(messageEl, `Error: ${error.message || 'No se pudo completar el registro'}`, 'error');
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalBtnText;
+        }
     });
 }
+
+
