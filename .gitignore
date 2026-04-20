@@ -1,0 +1,58 @@
+# Evita subir archivos de configuración y credenciales
+assets/js/supabase-config.js
+.env
+.env.*
+*.env
+*.key
+*.pem
+*.p12
+*.crt
+*.cert
+*.der
+*.jks
+*.pfx
+*.asc
+*.gpg
+*.keystore
+*.sqlite
+*.db
+*.log
+node_modules/
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.bak
+*.swp
+*.swo
+*.tmp
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Evita subir archivos de sistema
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# Evita subir archivos personales
+*.iml
+*.sublime-workspace
+*.sublime-project
+
+# Evita subir archivos de build
+/dist/
+/build/
+
+# Evita subir archivos de pruebas
+coverage/
+
+# Evita subir archivos de caché
+.cache/
+
+# Evita subir archivos de lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
