@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movilidad UNAC | Mi Cupo</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <script src="../assets/js/supabase-config.js?v=2" defer></script>
+    <link rel="icon" href="assets/images/favicon.ico">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <link rel="preload" as="image" href="../assets/images/logo_unac.png">
+    <script src="../assets/js/main.js?v=2" defer></script>
+</head>
+<body data-page="cupo">
+    <a class="skip-link" href="#content">Saltar al contenido</a>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="../index.html" aria-label="Movilidad UNAC - Ir a página de inicio">
+                <div class="brand-mark">
+                    <img src="../assets/images/logo_unac.png" alt="Logo UNAC">
+                </div>
+                <div class="brand-copy"><strong>Movilidad UNAC</strong><span>Sistema de Transporte Inteligente</span></div>
+            </a>
+            <div class="header-actions">
+                <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" data-nav-toggle>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+            <div class="header-menu-wrapper" data-nav-container>
+                <nav class="site-nav" data-nav role="navigation" aria-label="Navegación principal">
+                    <a href="../index.html" data-nav-link="inicio">Inicio</a>
+                    <a href="horarios.html" data-nav-link="horarios">Horarios</a>
+                    <a href="rutas.html" data-nav-link="rutas">Rutas</a>
+                    <a href="noticias.html" data-nav-link="noticias">Noticias</a>
+                    <a href="consultas.html" data-nav-link="consultas">Consultas</a>
+                </nav>
+                <div class="header-auth" id="auth-section">
+                    <!-- Dynamic auth slot injected here -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="page dashboard-page" id="content">
+        <div class="container">
+            <div class="dashboard-grid reveal">
+                <!-- PANEL IZQUIERDO: Perfil -->
+                <aside class="dashboard-sidebar card glass-panel">
+                    <div class="sidebar-header">
+                        <h2>Mi Perfil</h2>
+                        <span class="badge success">Cuenta Verificada</span>
+                    </div>
+                    <div class="profile-info-list" id="user-profile-data">
+                        <!-- Populated by JS -->
+                        <div class="skeleton skeleton-text" style="width: 80%; height: 24px; margin-bottom: 12px;"></div>
+                        <div class="skeleton skeleton-text" style="width: 60%; height: 16px; margin-bottom: 8px;"></div>
+                        <div class="skeleton skeleton-text" style="width: 70%; height: 16px; margin-bottom: 8px;"></div>
+                    </div>
+                    
+                    <div class="sidebar-actions mt-auto">
+                        <button class="btn btn-secondary w-100" style="margin-top: 2rem;">Reglamento del Servicio</button>
+                    </div>
+                </aside>
+
+                <!-- PANEL CENTRAL: Ticket de Color -->
+                <section class="dashboard-main card glass-panel color-card-container">
+                    <div class="color-header">
+                        <h2>Asignación de Transporte</h2>
+                        <p class="text-muted">El sistema de Machine Learning evalúa tu score y determina la prioridad de abordaje.</p>
+                    </div>
+
+                    <div class="color-ticket-wrapper">
+                        <div class="color-ticket is-analyzing" id="ticket-display">
+                            <div class="ticket-status-icon">
+                                <!-- Animación inicial (Engranajes o similar) -->
+                                <svg viewBox="0 0 24 24" width="48" height="48" stroke="currentColor" stroke-width="1.5" fill="none">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M12 6v6l4 2"></path>
+                                </svg>
+                            </div>
+                            <h3 class="ticket-title">Evaluando Cupo...</h3>
+                            <p class="ticket-desc">Calculando distancia, estado de matrícula y condiciones de prioridad conforme a tu expediente.</p>
+                            
+                            <!-- Acción manual (Opcional, puede dispararse automático) -->
+                            <button class="btn btn-primary btn-large mt-4" id="btn-generate-ticket">Generar Asignación</button>
+                        </div>
+                    </div>
+                    
+                    <div class="ticket-legend">
+                        <h4>Leyenda de Accesos</h4>
+                        <ul class="legend-list">
+                            <li><span class="swatch color-green"></span> <strong>Verde:</strong> Prioridad Alta - Abordaje Inmediato</li>
+                            <li><span class="swatch color-yellow"></span> <strong>Amarillo:</strong> Prioridad Media - Segunda Llamada</li>
+                            <li><span class="swatch color-red"></span> <strong>Rojo:</strong> Sin Cupo Disponible / Lista de Espera</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="../index.html" aria-label="Movilidad UNAC - Ir a página de inicio">
+                        <img src="../assets/images/logo_unac.png" alt="Logo UNAC" class="footer-logo">
+                        <span>Movilidad UNAC</span>
+                    </a>
+                    <p>Sistema Inteligente de Asignación de Cupos para Transporte Universitario, priorizando la equidad y accesibilidad.</p>
+                </div>
+                
+                <div class="footer-links-group">
+                    <h4>Navegación</h4>
+                    <ul>
+                        <li><a href="../index.html">Inicio</a></li>
+                        <li><a href="rutas.html">Rutas y Paraderos</a></li>
+                        <li><a href="horarios.html">Horarios</a></li>
+                        <li><a href="registro.html">Registro</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-group">
+                    <h4>Soporte</h4>
+                    <ul>
+                        <li><a href="consultas.html">Preguntas Frecuentes</a></li>
+                        <li><a href="#">Guía de Usuario</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h4>Contacto</h4>
+                    <p class="footer-credit">Desarrollado por: <strong>Edgar Ramos</strong> <br><span class="handle">@Tiburonsin</span></p>
+                    <div class="social-links">
+                        <a href="https://wa.me/51" class="social-icon" aria-label="Contactar por WhatsApp">
+                            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.004 0C5.385 0 0 5.385 0 12.004c0 2.115.548 4.145 1.591 5.945L.034 23.966l6.16-1.614c1.745.955 3.693 1.458 5.688 1.458h.005c6.617 0 12.004-5.385 12.004-12.004C23.891 5.385 18.506 0 12.004 0z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Universidad Nacional del Callao - Todos los derechos reservados.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacidad</a>
+                    <a href="#">Accesibilidad</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,9 +1,14 @@
 const getBaseUrl = () => {
     const { origin, pathname } = window.location;
-    // Detecta si estamos en GitHub Pages (subcarpeta /UNAC-TRANSPORTE/)
-    const isGitHubPages = pathname.toLowerCase().includes('/unac-transporte');
-    const basePath = isGitHubPages ? '/UNAC-TRANSPORTE' : '';
-    return `${origin}${basePath}`;
+    // Buscamos la posición de /UNAC-TRANSPORTE en el pathname para manejar subcarpetas (Local o GitHub)
+    const folderName = '/UNAC-TRANSPORTE';
+    const index = pathname.toUpperCase().indexOf(folderName);
+    
+    if (index !== -1) {
+        // Capturamos desde el inicio hasta el final de la carpeta del proyecto
+        return origin + pathname.substring(0, index + folderName.length);
+    }
+    return origin;
 };
 
 window.__SUPABASE_CONFIG__ = {
@@ -12,5 +17,5 @@ window.__SUPABASE_CONFIG__ = {
     redirectTo: `${getBaseUrl()}/index.html`,
     allowedEmailDomain: 'unac.edu.pe',
     profileTable: 'student_profiles',
-    privateBucket: 'student-documents'
+    privateBucket: 'documents'
 };

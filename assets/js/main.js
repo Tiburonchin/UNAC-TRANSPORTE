@@ -22,6 +22,102 @@ const FACULTIES = ['FIIS', 'FIME', 'FIPA', 'FIQ', 'FIEE', 'FCS', 'FCC', 'FCE', '
 const AUTH_FLASH_KEY = 'unac_auth_flash';
 
 // ============================================================
+// LOGICA DE CUPO / DASHBOARD
+// ============================================================
+
+function initCupoDashboard() {
+    const page = document.body.dataset.page;
+    if (page !== 'cupo') return;
+
+    const profileDataContainer = document.getElementById('user-profile-data');
+    const btnGenerate = document.getElementById('btn-generate-ticket');
+    const ticketDisplay = document.getElementById('ticket-display');
+
+    // Make sure we have auth data
+    if (!AUTH.session || !AUTH.profile) {
+        if (profileDataContainer) {
+            profileDataContainer.innerHTML = '<p class="text-danger">Error: Perfil no disponible.</p>';
+        }
+        return;
+    }
+
+    // Populate Sidebar Profile
+    if (profileDataContainer) {
+        const { nombres, apellidos, role_type, dni, faculty, email } = AUTH.profile;
+        const nombreCompleto = (nombres || '') + ' ' + (apellidos || '');
+        const mappedRole = role_type === 'student' ? 'Estudiante' : role_type === 'teacher' ? 'Docente' : 'Estudiante'; // Fallback to Estudiante for now
+        
+        profileDataContainer.innerHTML = `
+            <div class="profile-item">
+                <span class="label">Nombres Completos</span>
+                <span class="value">${nombreCompleto.trim() || '-'}</span>
+            </div>
+            <div class="profile-item">
+                <span class="label">Rol en la UNAC</span>
+                <span class="value">${mappedRole}</span>
+            </div>
+            <div class="profile-item">
+                <span class="label">DNI</span>
+                <span class="value">${dni || '-'}</span>
+            </div>
+            <div class="profile-item">
+                <span class="label">Facultad / Escuela</span>
+                <span class="value">${faculty || '-'}</span>
+            </div>
+            <div class="profile-item">
+                <span class="label">Correo Institucional</span>
+                <span class="value">${email || AUTH.session.user.email}</span>
+            </div>
+        `;
+    }
+
+    // Handle Generation (Simulation for now)
+    if (btnGenerate && ticketDisplay) {
+        btnGenerate.addEventListener('click', () => {
+            btnGenerate.disabled = true;
+            btnGenerate.textContent = 'Procesando modelo ML...';
+            
+            setTimeout(() => {
+                // Remove analyzing class
+                ticketDisplay.classList.remove('is-analyzing');
+                
+                // Demo logic: Determine color randomly or by some logic
+                const colors = [
+                    { cls: 'color-green', hex: '#10B981', title: 'Prioridad Alta: Verde', desc: 'Tu expediente avala acceso inmediato. Aborda en el primer grupo.', icon: '<path d="M5 13l4 4L19 7" />' },
+                    { cls: 'color-yellow', hex: '#F59E0B', title: 'Prioridad Media: Amarillo', desc: 'Tendrás acceso en la segunda vuelta o asientos remanentes.', icon: '<path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />' },
+                ];
+                
+                // Just picking Green for happy path demo
+                const result = colors[0]; 
+
+                ticketDisplay.style.borderColor = result.hex;
+                ticketDisplay.style.boxShadow = `0 10px 40px ${result.hex}33`;
+                
+                const iconSvg = ticketDisplay.querySelector('.ticket-status-icon svg');
+                if(iconSvg) {
+                    iconSvg.innerHTML = result.icon;
+                    iconSvg.style.color = result.hex;
+                }
+                
+                const title = ticketDisplay.querySelector('.ticket-title');
+                if(title) {
+                    title.textContent = result.title;
+                    title.style.color = result.hex;
+                }
+                
+                const desc = ticketDisplay.querySelector('.ticket-desc');
+                if(desc) {
+                    desc.textContent = result.desc;
+                }
+
+                btnGenerate.style.display = 'none';
+
+            }, 2500); // simulamos 2.5s de delay del API de ML
+        });
+    }
+}
+
+// ============================================================
 // INICIALIZACIÓN
 // ============================================================
 
@@ -42,6 +138,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initLoginPage();
     applyRouteGuards();
     initRegistrationForm();
+    initCupoDashboard();
     initAccessibilityAnnouncements();
 });
 
@@ -650,10 +747,7 @@ async function initAuth() {
 
     if (AUTH.session) {
         AUTH.profile = await fetchProfileByUserId(AUTH.session.user.id);
-        if (!AUTH.profile && !window.location.pathname.includes('/pages/registro.html')) {
-            window.location.href = getRegistroHref();
-            return;
-        }
+        // We removed the forced redirect to 'registro.html' here, allowing users to stay on 'index.html'.
     }
 
     AUTH.client.auth.onAuthStateChange(async (_, session) => {
@@ -666,10 +760,7 @@ async function initAuth() {
             setAuthFlash('Solo se permite acceso con correo institucional @unac.edu.pe.');
         } else if (AUTH.session) {
             AUTH.profile = await fetchProfileByUserId(AUTH.session.user.id);
-            if (!AUTH.profile && !window.location.pathname.includes('/pages/registro.html')) {
-                window.location.href = getRegistroHref();
-                return;
-            }
+            // We removed the forced redirect to 'registro.html' here.
         } else {
             AUTH.profile = null;
         }
@@ -737,6 +828,9 @@ function renderNavAuthSlot() {
     const initials = getInitials(fullName);
     
     // 2. Creamos la estructura HTML del Dropdown
+    const profileLink = AUTH.profile ? getAppPath('pages/cupo.html') : getRegistroHref();
+    const profileText = AUTH.profile ? 'Mi Cupo de Transporte' : 'Completar mi perfil';
+
     slot.innerHTML = `
         <div class="auth-dropdown-container" id="user-dropdown">
             <button class="auth-profile-toggle" aria-expanded="false" aria-controls="dropdown-menu">
@@ -747,7 +841,7 @@ function renderNavAuthSlot() {
                 </svg>
             </button>
             <div class="auth-dropdown-menu" id="dropdown-menu">
-                <a href="${getRegistroHref()}">Ver mi perfil</a>
+                <a href="${profileLink}">${profileText}</a>
                 <button type="button" data-auth-logout>Cerrar sesión</button>
             </div>
         </div>
@@ -784,18 +878,8 @@ function renderNavAuthSlot() {
 }
 
 function syncHeroAuthActions() {
-    const heroAction = document.querySelector('[data-auth-cta]');
-    if (!heroAction) {
-        return;
-    }
-
-    if (AUTH.session) {
-        heroAction.textContent = 'Ir a mi registro';
-        heroAction.setAttribute('href', getRegistroHref());
-    } else {
-        heroAction.textContent = 'Iniciar sesion';
-        heroAction.setAttribute('href', getLoginHrefWithNext());
-    }
+    // Deprecated with new home widgets design.
+    // Preserved to prevent missing function references if any.
 }
 
 function initAuthUi() {
@@ -803,22 +887,75 @@ function initAuthUi() {
     document.body.dataset.authState = AUTH.client ? state : 'disabled';
     renderNavAuthSlot();
     syncProtectedLinks();
-    syncHeroAuthActions();
 }
 
 function initHomeWelcome() {
-    const welcomeTarget = document.querySelector('[data-home-user-name]');
-    if (!welcomeTarget) {
-        return;
-    }
+    const guestView = document.getElementById('home-guest-view');
+    const authView = document.getElementById('home-auth-view');
 
-    welcomeTarget.textContent = AUTH.session ? getDisplayName() : 'Movilidad UNAC';
+    if (!guestView || !authView) return;
+
+    if (AUTH.session) {
+        guestView.style.display = 'none';
+        authView.style.display = 'block';
+
+        const nameSlot = document.querySelector('[data-home-nombres]');
+        if (nameSlot) {
+            nameSlot.textContent = AUTH.profile ? AUTH.profile.nombres : getDisplayName();
+        }
+
+        if (AUTH.profile) {
+            const dniSlot = document.getElementById('widget-dni');
+            if (dniSlot) dniSlot.textContent = AUTH.profile.dni || '-';
+
+            const actionBtn = document.getElementById('widget-action-btn');
+            const actionTitle = document.getElementById('widget-action-title');
+            const actionDesc = document.getElementById('widget-action-desc');
+
+            if (actionBtn && actionTitle && actionDesc) {
+                actionBtn.textContent = 'Ir al servicio';
+                actionBtn.href = getAppPath('pages/cupo.html');
+                actionTitle.textContent = 'Generar Cupo';
+                actionDesc.textContent = 'Asegura tu abordaje para el próximo viaje.';
+            }
+        } else {
+            const statusSlot = document.getElementById('widget-status');
+            if (statusSlot) {
+               statusSlot.textContent = 'Registro Incompleto';
+               statusSlot.style.color = '#EF4444'; // Rojo claro
+            }
+            
+            const actionBtn = document.getElementById('widget-action-btn');
+            const actionTitle = document.getElementById('widget-action-title');
+            const actionDesc = document.getElementById('widget-action-desc');
+
+            if (actionBtn && actionTitle && actionDesc) {
+                actionBtn.textContent = 'Completar Perfil';
+                actionBtn.href = getRegistroHref();
+                actionTitle.textContent = 'Registro Obligatorio';
+                actionDesc.textContent = 'Completa tus datos para utilizar el transporte UNAC.';
+            }
+        }
+    } else {
+        guestView.style.display = 'block';
+        authView.style.display = 'none';
+    }
 }
 
 function applyRouteGuards() {
     const page = document.body.dataset.page;
     if (page === 'registro' && !AUTH.session) {
         window.location.href = getLoginHrefWithNext();
+    }
+    
+    // Guard for cupo.html
+    if (page === 'cupo') {
+        if (!AUTH.session) {
+            window.location.href = getLoginHrefWithNext();
+        } else if (AUTH.session && !AUTH.profile) {
+            // Require registration before generating cupo
+            window.location.href = getRegistroHref();
+        }
     }
 }
 
@@ -867,6 +1004,7 @@ async function initLoginPage() {
         }
 
         loginButton.disabled = true;
+        loginButton.classList.add('btn-loading');
         if (message) {
             showMessage(message, 'Abriendo Google para autenticar cuenta institucional...', 'info');
         }
@@ -891,6 +1029,7 @@ async function initLoginPage() {
 
         if (error) {
             loginButton.disabled = false;
+            loginButton.classList.remove('btn-loading');
             if (message) {
                 showMessage(message, 'No se pudo iniciar sesion. Revisa configuracion OAuth en Supabase.', 'error');
             }
@@ -911,6 +1050,51 @@ async function initRegistrationForm() {
     const dniInput = document.getElementById('dni');
 
     if (!form || !dniInput) return;
+
+    if (AUTH.session && AUTH.profile) {
+        // User already has a profile. Hide form and show completed view.
+        form.style.display = 'none';
+
+        const { nombres, apellidos, dni } = AUTH.profile;
+        const email = AUTH.session.user.email;
+        const nombreCompleto = (nombres || '') + ' ' + (apellidos || '');
+
+        let completedView = document.createElement('div');
+        completedView.className = 'completed-profile-view glass-panel';
+        completedView.style.padding = '3rem 2rem';
+        completedView.style.textAlign = 'center';
+        completedView.style.marginTop = '2rem';
+        completedView.style.borderRadius = '24px';
+        completedView.style.border = '2px solid var(--primary)';
+        
+        completedView.innerHTML = `
+            <h2 style="margin-bottom: 1rem; color: var(--primary);">¡Tu Perfil está completo!</h2>
+            <p style="color: var(--text-color); margin-bottom: 2rem;">Ya has registrado tu información y no es necesario volver a llenarla.</p>
+            
+            <div class="profile-info-list" style="text-align: left; max-width: 400px; margin: 0 auto 2rem; background: var(--bg-color); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                <div class="profile-item" style="margin-bottom: 1rem;">
+                    <span class="label">Nombres Completos</span>
+                    <span class="value">${nombreCompleto.trim()}</span>
+                </div>
+                <div class="profile-item" style="margin-bottom: 1rem;">
+                    <span class="label">DNI</span>
+                    <span class="value">${dni || '-'}</span>
+                </div>
+                <div class="profile-item">
+                    <span class="label">Correo Institucional</span>
+                    <span class="value">${email}</span>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="${getAppPath('pages/cupo.html')}" class="btn btn-primary">Ver mi Cupo</a>
+                <a href="${getIndexHref()}" class="btn btn-secondary">Ir al Inicio</a>
+            </div>
+        `;
+        
+        form.parentElement.appendChild(completedView);
+        return;
+    }
 
     // Validación de DNI: Solo 8 dígitos numéricos
     dniInput.addEventListener('input', (e) => {
@@ -933,10 +1117,16 @@ async function initRegistrationForm() {
         }
 
         const submitBtn = form.querySelector('button[type="submit"]');
-        const originalBtnText = submitBtn.textContent;
         
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Procesando...';
+        // Animacion SVG giratoria
+        submitBtn.innerHTML = `
+            <svg viewBox="0 0 50 50" style="width: 24px; height: 24px; margin-right: 8px; animation: spin 1s linear infinite; vertical-align: middle; display: inline-block;">
+                <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" stroke-width="5" style="opacity: 0.3;"></circle>
+                <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" stroke-width="5" stroke-dasharray="31.4 100" stroke-linecap="round"></circle>
+            </svg> 
+            Procesando e indexando...
+        `;
         showMessage(messageEl, 'Subiendo documentos y guardando perfil...', 'info');
 
         try {
@@ -947,12 +1137,12 @@ async function initRegistrationForm() {
             const genero = document.getElementById('genero').value;
             const facultad = document.getElementById('facultad').value;
             
-            // Archivos PDF
-            const filePonderado = document.getElementById('pdfPonderado').files[0];
+            // Archivos (Ponderado: Imagen, Matrícula: PDF)
+            const filePonderado = document.getElementById('imgPonderado').files[0];
             const fileMatricula = document.getElementById('pdfMatricula').files[0];
 
             if (!filePonderado || !fileMatricula) {
-                throw new Error('Debes seleccionar ambos archivos PDF obligatorios.');
+                throw new Error('Debes seleccionar ambos archivos obligatorios.');
             }
 
             // 1. Subir archivos al Storage (Bucket 'documents')
@@ -961,17 +1151,31 @@ async function initRegistrationForm() {
                 const cleanName = file.name.replace(/[^a-z0-9.]/gi, '_').toLowerCase();
                 const filePath = `user_${AUTH.session.user.id}/${prefix}_${timestamp}_${cleanName}`;
                 
-                const { data, error } = await AUTH.client.storage
-                    .from('documents')
+                console.log(`[Registro] Initiating upload for ${prefix}...`);
+                
+                // Add a 15-second timeout for the upload
+                const uploadPromise = AUTH.client.storage
+                    .from(AUTH.config.privateBucket)
                     .upload(filePath, file);
 
-                if (error) throw error;
+                const timeoutPromise = new Promise((_, reject) => 
+                    setTimeout(() => reject(new Error(`Timeout al subir archivo: ${prefix}`)), 15000)
+                );
+
+                const { data, error } = await Promise.race([uploadPromise, timeoutPromise]);
+
+                if (error) {
+                    console.error(`[Registro] Error uploading ${prefix}:`, error);
+                    throw error;
+                }
+                console.log(`[Registro] Successfully uploaded ${prefix} to ${data.path}`);
                 return data.path; // Retorna la ruta interna en el bucket
             };
 
             const pathPonderado = await uploadTask(filePonderado, 'ponderado');
             const pathMatricula = await uploadTask(fileMatricula, 'matricula');
 
+            console.log(`[Registro] Updating student_profiles...`);
             // 2. Guardar/Actualizar Perfil de Estudiante
             const { error: profileError } = await AUTH.client
                 .from('student_profiles')
@@ -985,8 +1189,12 @@ async function initRegistrationForm() {
                     created_at: new Date().toISOString()
                 });
 
-            if (profileError) throw profileError;
+            if (profileError) {
+                console.error(`[Registro] Error in student_profiles:`, profileError);
+                throw profileError;
+            }
 
+            console.log(`[Registro] Inserting into academic_records...`);
             // 3. Guardar Registro Académico Semestral
             const { error: academicError } = await AUTH.client
                 .from('academic_records')
@@ -998,8 +1206,12 @@ async function initRegistrationForm() {
                     file_matricula: pathMatricula
                 });
 
-            if (academicError) throw academicError;
+            if (academicError) {
+                console.error(`[Registro] Error in academic_records:`, academicError);
+                throw academicError;
+            }
 
+            console.log(`[Registro] Complete. Redirecting...`);
             // Éxito
             showMessage(messageEl, '¡Registro completado con éxito! Redirigiendo al inicio...', 'success');
             
@@ -1011,7 +1223,8 @@ async function initRegistrationForm() {
             console.error('Error durante el registro:', error);
             showMessage(messageEl, `Error: ${error.message || 'No se pudo completar el registro'}`, 'error');
             submitBtn.disabled = false;
-            submitBtn.textContent = originalBtnText;
+            submitBtn.innerHTML = 'Guardar y Completar Perfil';
+            submitBtn.classList.remove('btn-loading');
         }
     });
 }

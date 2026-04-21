@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="icon" href="assets/images/favicon.ico">
     <link rel="preload" as="image" href="assets/images/logo_unac.png">
-    <script src="assets/js/supabase-config.js" defer></script>
+    <script src="assets/js/supabase-config.js?v=2" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/main.js?v=3" defer></script>
 </head>
 <body data-page="inicio">
     <a class="skip-link" href="#content">Saltar al contenido</a>
@@ -50,21 +50,66 @@
         </div>
     </header>
     <main class="page" id="content">
-        <!-- SECCIÓN 1: HERO - Descripción del Servicio -->
-        <section class="hero reveal" aria-label="Sección principal del servicio de transporte">
-            <div class="container hero-container">
-                <div class="hero-content">
-                    <span class="eyebrow">Movilidad Universitaria</span>
-                    <h1 class="hero-title">Tu viaje seguro, <span class="accent">inteligente y equitativo</span></h1>
-                    <p class="hero-subtitle">
-                        Sistema exclusivo para estudiantes UNAC. <span data-home-user-name>Identifícate</span> para reservar cupos, revisar horarios y abordar rápidamente usando tu QR.
+        <!-- SECCIÓN 1: INICIO CENTRADO Y WIDGETS -->
+        <section class="home-center-hero reveal" aria-label="Sección principal del servicio de transporte">
+            <div class="container" style="max-width: 800px; margin: 0 auto; text-align: center; padding: 4rem 1rem;">
+                
+                <!-- Vista Invitado (No autenticado) -->
+                <div class="guest-view" id="home-guest-view">
+                    <span class="eyebrow" style="justify-content: center;">Movilidad Universitaria</span>
+                    <h1 class="hero-title" style="font-size: 3rem;">Tu viaje más <span class="accent">inteligente y equitativo</span></h1>
+                    <p class="hero-subtitle" style="margin: 1.5rem auto 3rem; max-width: 600px;">
+                        Sistema exclusivo para estudiantes y docentes UNAC. Priorizamos tu comodidad, seguridad y tiempo.
                     </p>
-                    <div class="hero-actions">
-                        <a class="btn btn-primary" href="pages/registro.html" data-requires-auth aria-label="Solicitar cupo">Solicitar Cupo</a>
-                        <a class="btn btn-secondary" href="pages/horarios.html" aria-label="Ver horarios disponibles">Ver Horarios</a>
-                        <a class="btn btn-secondary auth-hide" href="pages/login.html" data-auth-cta aria-label="Iniciar sesión">Iniciar sesión</a>
+                    <div class="hero-actions" style="justify-content: center;">
+                        <a class="btn btn-primary btn-large" href="pages/login.html">Iniciar Sesión con Google</a>
+                        <a class="btn btn-secondary btn-large" href="pages/horarios.html">Explorar Rutas</a>
                     </div>
                 </div>
+
+                <!-- Vista Autenticado (Widgets) -->
+                <div class="auth-view" id="home-auth-view" style="display: none;">
+                    <div style="margin-bottom: 2.5rem;">
+                        <h1 class="hero-title" style="font-size: 2.5rem; margin-bottom: 0.5rem;">¡Hola, <span class="accent" data-home-nombres>Estudiante</span>!</h1>
+                        <p class="text-muted">Nos alegra verte. ¿Qué deseas hacer hoy?</p>
+                    </div>
+
+                    <div class="home-widgets-grid">
+                        
+                        <!-- Widget 1: Generar Cupo (Acción Principal) -->
+                        <div class="widget-card primary-widget">
+                            <div class="widget-icon" style="color: var(--primary);">
+                                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                            </div>
+                            <h3 id="widget-action-title">Generar Cupo</h3>
+                            <p class="text-muted" style="font-size: 0.85rem;" id="widget-action-desc">Asegura tu abordaje para el próximo viaje.</p>
+                            <a href="pages/cupo.html" class="btn btn-primary w-100" style="margin-top: 1rem;" id="widget-action-btn">Ir al servicio</a>
+                        </div>
+
+                        <!-- Widget 2: Estado del Perfil -->
+                        <div class="widget-card">
+                            <div class="widget-icon" style="color: #10B981;">
+                                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            </div>
+                            <h3>Mi Perfil</h3>
+                            <div class="widget-details" style="font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem;">
+                                DNI: <strong id="widget-dni" style="color: var(--text-color);">-</strong><br>
+                                Estatus: <strong id="widget-status" style="color: #10B981;">Verificado</strong>
+                            </div>
+                        </div>
+
+                        <!-- Widget 3: Horarios / Vehiculos -->
+                        <div class="widget-card">
+                            <div class="widget-icon" style="color: #F59E0B;">
+                                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            </div>
+                            <h3>Próxima Ruta</h3>
+                            <p class="text-muted" style="font-size: 0.85rem;">Consulta los paraderos y horarios actualizados del día.</p>
+                            <a href="pages/horarios.html" class="btn btn-secondary w-100" style="margin-top: auto;">Ver Horarios</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
