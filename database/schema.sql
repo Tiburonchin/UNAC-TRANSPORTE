@@ -3,8 +3,7 @@
 -- 1. Enable UUID Extension (usually enabled by default in Supabase)
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
--- LIMPIEZA PREVIA: Ejecutar esto borra las tablas previamente creadas con este mismo nombre (y sus datos).
--- Si tienes datos importantes, ten cuidado. Si es una instalación fresca, adelante.
+
 DROP TABLE IF EXISTS public.boarding_passes CASCADE;
 DROP TABLE IF EXISTS public.daily_requests CASCADE;
 DROP TABLE IF EXISTS public.schedules CASCADE;

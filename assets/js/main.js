@@ -830,6 +830,7 @@ function renderNavAuthSlot() {
     // 2. Creamos la estructura HTML del Dropdown
     const profileLink = AUTH.profile ? getAppPath('pages/cupo.html') : getRegistroHref();
     const profileText = AUTH.profile ? 'Mi Cupo de Transporte' : 'Completar mi perfil';
+    const configLinkHtml = AUTH.profile ? `<a href="${getRegistroHref()}">Configuración de Perfil</a>` : '';
 
     slot.innerHTML = `
         <div class="auth-dropdown-container" id="user-dropdown">
@@ -842,6 +843,7 @@ function renderNavAuthSlot() {
             </button>
             <div class="auth-dropdown-menu" id="dropdown-menu">
                 <a href="${profileLink}">${profileText}</a>
+                ${configLinkHtml}
                 <button type="button" data-auth-logout>Cerrar sesión</button>
             </div>
         </div>

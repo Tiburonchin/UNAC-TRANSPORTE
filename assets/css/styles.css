@@ -136,14 +136,87 @@ button { touch-action: manipulation; }
     transition: all 0.3s ease;
 }
 
+/* =========================================================
+   DASHBOARD / HERO
+   ========================================================= */
+.home-center-hero {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.home-widgets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1100px;
+    margin-top: 2rem;
+}
+
+.widget-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 1.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: var(--transition);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    position: relative;
+    overflow: hidden;
+}
+
+.widget-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(0, 212, 255, 0.05), transparent);
+    pointer-events: none;
+}
+
+.widget-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+}
+
+.primary-widget {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(10, 15, 31, 1) 100%);
+    border-color: rgba(0, 212, 255, 0.3);
+}
+
+.widget-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.widget-card:hover .widget-icon {
+    transform: scale(1.1) rotate(5deg);
+    background: rgba(0, 212, 255, 0.1);
+}
+
 .site-header a {
     color: var(--header-fg);
 }
 
 .site-header .container {
     width: 100%;
-    max-width: none;
-    margin: 0;
+    /* max-width: none; */
+    /* margin: 0; */
     padding-inline: clamp(0.75rem, 3vw, 2.5rem);
 }
 
@@ -152,7 +225,6 @@ button { touch-action: manipulation; }
     align-items: center;
     justify-content: space-between;
     padding: 0.75rem 1.25rem;
-    flex-wrap: wrap; /* Permite que el wrapper baje en móvil */
     position: relative;
 }
 
@@ -198,6 +270,50 @@ button { touch-action: manipulation; }
     display: flex;
     align-items: center;
     gap: clamp(0.35rem, 1.5vw, 0.75rem);
+    margin-left: auto;
+}
+
+/* =========================================================
+   NAV TOGGLE (HAMBURGER)
+   ========================================================= */
+.nav-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    cursor: pointer;
+    padding: 0;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.nav-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.hamburger-line {
+    width: 20px;
+    height: 2px;
+    background-color: var(--text);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Animación de la hamburguesa cuando está abierto */
+[aria-expanded="true"] .hamburger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+[aria-expanded="true"] .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+[aria-expanded="true"] .hamburger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
     order: 3; /* Asegura que siempre esté al final a la derecha */
 }
 
@@ -470,15 +586,16 @@ button { touch-action: manipulation; }
     background-color: var(--text);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+/* =========================================================
+   NAVIGATION (CONSOLIDATED)
+   ========================================================= */
 .site-nav {
     display: grid;
     gap: 0.25rem;
-    padding: 0.6rem 0;
+    padding: 0.6rem 1rem;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    border-radius: 14px;
-
-
+    border-radius: 12px;
 }
 
 .js .site-nav {
@@ -486,61 +603,28 @@ button { touch-action: manipulation; }
     top: calc(100% + 0.5rem);
     left: 1.25rem;
     right: 1.25rem;
-    z-index: 90;
+    z-index: 1000;
     opacity: 0;
     transform: translateY(-8px);
     pointer-events: none;
     visibility: hidden;
-    transition: opacity 200ms ease, transform 200ms ease, visibility 200ms;
-}
-
-@media (min-width: 980px) {
-    .nav-toggle {
-        display: none;
-    }
-    
-    .header-menu-wrapper {
-        display: contents; 
-    }
-    
-    .site-nav, .js .site-nav {
-        position: static;
-        display: flex;
-        gap: 0.5rem;
-        padding: 0;
-        background: transparent;
-        border: none;
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-        transform: none;
-        flex-direction: row;
-    }
-    
-    .site-nav a {
-        padding: 0.5rem 1rem;
-        border-radius: 8px;
-    }
-    
-    .header-actions {
-        order: 2; /* Put login button at the end */
-    }
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .js .site-nav.is-open {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
     pointer-events: auto;
     visibility: visible;
 }
 
 .site-nav a {
-    padding: 0.8rem 1rem;
-    border-radius: 0;
-    color: var(--muted);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    color: var(--text-muted);
     font-size: 0.94rem;
     font-weight: 600;
-    transition: color 200ms ease, background 200ms ease;
+    transition: var(--transition);
 }
 
 .site-nav a:hover,
@@ -552,8 +636,38 @@ button { touch-action: manipulation; }
 .site-nav a.is-active {
     color: var(--accent);
     background: rgba(0, 212, 255, 0.15);
-    border-left-color: var(--accent);
 }
+
+/* Desktop Navigation Centering */
+@media (min-width: 980px) {
+    .site-nav {
+        position: absolute !important;
+        left: 50% !important;
+        top: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 0.35rem !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        width: auto !important;
+        z-index: 1001;
+    }
+
+    .site-nav a {
+        padding: 0.55rem 0.85rem;
+        font-size: 0.88rem;
+    }
+
+    .nav-toggle {
+        display: none !important;
+    }
+}
+
 
 /* Consultas: usa los mismos estilos que los demás nav links */
 
@@ -2110,37 +2224,8 @@ body.keyboard-nav button:focus-visible {
         display: none;
     }
 
-    .site-nav {
-        position: absolute; /* Centrado absoluto respecto al header */
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        display: flex;
-        gap: 0.5rem;
-        background: transparent;
-        border: 0;
-        box-shadow: none;
-        padding: 0;
-    }
+    /* Nav styles consolidated above */
 
-    .js .site-nav,
-    .js .site-nav.is-open {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        opacity: 1;
-        pointer-events: auto;
-        visibility: visible;
-    }
-
-    .site-nav a {
-        padding: 0.66rem 0.72rem;
-        border-radius: 8px;
-        white-space: nowrap;
-        font-size: 0.88rem;
-        flex-shrink: 0;
-    }
 
     .auth-nav-item {
         margin: 0;
@@ -2758,9 +2843,10 @@ body.keyboard-nav button:focus-visible {
    ========================================================================== */
 
 .home-center-hero {
-    min-height: 80vh;
+    min-height: calc(100vh - 80px);
     display: flex;
     align-items: center;
+    justify-content: center;
     background: radial-gradient(circle at 50% 30%, rgba(14, 165, 233, 0.08) 0%, transparent 60%);
 }
 
@@ -2818,3 +2904,112 @@ body.keyboard-nav button:focus-visible {
     font-size: 1.15rem;
     font-weight: 600;
 }
+
+/* ==========================================================================
+   RESPONSIVIDAD: DASHBOARD WIDGETS
+   ========================================================================== */
+@media (max-width: 600px) {
+    .home-center-hero {
+        min-height: auto;
+        padding-top: 4rem;
+        padding-bottom: 3rem;
+    }
+
+@media (max-width: 650px) {
+    .home-center-hero {
+        min-height: auto;
+        padding-top: 3.5rem;
+        padding-bottom: 2.5rem;
+    }
+
+    .home-widgets-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.85rem;
+        margin-top: 1.5rem;
+    }
+
+    /* Generar Cupo occupies full width and goes horizontal */
+    .primary-widget {
+        grid-column: span 2;
+        flex-direction: row !important;
+        align-items: center !important;
+        text-align: left !important;
+        padding: 1.25rem !important;
+        gap: 1.25rem !important;
+    }
+
+    .primary-widget .widget-icon {
+        width: 3.5rem;
+        height: 3.5rem;
+        margin-bottom: 0;
+        background: rgba(0, 212, 255, 0.1);
+        color: var(--accent);
+    }
+
+    .primary-widget .widget-content {
+        flex: 1;
+    }
+
+    .primary-widget h3 {
+        font-size: 1.15rem;
+        margin-bottom: 0.25rem;
+        color: #fff;
+    }
+
+    .primary-widget p {
+        font-size: 0.82rem !important;
+        margin-bottom: 0 !important;
+        opacity: 0.8;
+    }
+
+    .primary-widget .btn {
+        width: auto !important;
+        min-width: 100px;
+        margin-top: 0 !important;
+        margin-left: auto;
+        padding: 0.6rem 1rem !important;
+        font-size: 0.85rem;
+    }
+
+    /* Secondary widgets: more compact */
+    .widget-card:not(.primary-widget) {
+        padding: 1.25rem 1rem;
+        align-items: center;
+        text-align: center;
+    }
+
+    .widget-card:not(.primary-widget) .widget-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .widget-card:not(.primary-widget) h3 {
+        font-size: 0.94rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .widget-details, 
+    .widget-card:not(.primary-widget) p {
+        font-size: 0.78rem !important;
+        margin-bottom: 0.75rem !important;
+    }
+
+    .widget-card:not(.primary-widget) .btn {
+        margin-top: auto !important;
+        width: 100%;
+        padding: 0.6rem;
+        font-size: 0.8rem;
+    }
+}
+
+
+/* Sharp Hamburger */
+.hamburger-line {
+    width: 22px;
+    height: 1.5px;
+    background-color: var(--text);
+    border-radius: 1px;
+}
+
+
